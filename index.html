@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moon & Muse | Luxury Spiritual Directory</title>
+    <meta
+      name="description"
+      content="Luxury spiritual directory for tarot readers, witches, astrologers, and practitioners."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0d0d12;
+        --bg-deep: #09090d;
+        --panel: #14151d;
+        --panel-soft: #1b1d2b;
+        --ink: #f4efe9;
+        --muted: #b7adbb;
+        --line: rgba(221, 211, 255, 0.14);
+        --primary: #dcb1ff;
+        --primary-bright: #f0d7ff;
+        --primary-deep: #8f5ee0;
+        --gold: #f5d88e;
+        --success: #7de1b8;
+        --danger: #ff8a8a;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(circle at top, rgba(143, 94, 224, 0.22), transparent 34%), var(--bg);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      button, input, textarea, select { font: inherit; }
+      img { max-width: 100%; display: block; }
+      h1, h2, h3 { margin: 0; font-weight: 700; font-family: "Cormorant Garamond", serif; }
+      h1 { font-size: clamp(2.7rem, 5vw, 4.5rem); line-height: 0.95; letter-spacing: -0.04em; }
+      h2 { font-size: clamp(2.3rem, 3vw, 3.4rem); }
+      h3 { font-size: 1.6rem; }
+
+      .container { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+      .hidden { display: none !important; }
+      .muted { color: var(--muted); }
+
+      .site-header {
+        background: rgba(15, 15, 20, 0.8);
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav {
+        min-height: 82px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+        color: var(--bg);
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 22px;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .nav-list button {
+        background: none;
+        border: none;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 12px;
+        padding: 0.95rem 1.5rem;
+        font-weight: 700;
+        transition: 0.2s ease;
+        cursor: pointer;
+      }
+
+      .btn:hover { transform: translateY(-1px); }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+        color: var(--bg-deep);
+        box-shadow: var(--shadow);
+      }
+      .btn-secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+      .btn-danger {
+        background: rgba(255,138,138,0.12);
+        color: var(--danger);
+        border: 1px solid rgba(255,138,138,0.2);
+      }
+
+      .hero { padding: 88px 0 64px; }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 36px;
+        align-items: center;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        margin: 0 0 12px;
+        color: var(--primary-bright);
+        font-weight: 700;
+      }
+      .subtext {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        max-width: 650px;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 30px;
+      }
+      .hero-card {
+        background: linear-gradient(135deg, rgba(143, 94, 224, 0.18), rgba(245, 216, 142, 0.08));
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+        gap: 18px;
+      }
+      .mini-card {
+        border-radius: 18px;
+        padding: 18px 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .section { padding: 84px 0; }
+      .alt {
+        background: rgba(255, 255, 255, 0.02);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .section-heading { margin-bottom: 28px; }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .feature-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 26px 20px;
+        box-shadow: var(--shadow);
+      }
+      .feature-card p { color: var(--muted); margin: 0; }
+      .icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        background: rgba(143, 94, 224, 0.12);
+        border: 1px solid rgba(220, 177, 255, 0.3);
+        margin-bottom: 14px;
+      }
+      .category-grid { display: flex; flex-wrap: wrap; gap: 14px; }
+      .category-pill {
+        border-radius: 999px;
+        padding: 12px 18px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        font-weight: 600;
+      }
+
+      .page-header { padding: 72px 0 18px; }
+      .filter-bar {
+        display: grid;
+        grid-template-columns: 2fr 1.2fr 1.2fr 1fr auto auto;
+        gap: 14px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+      .filter-bar input, .filter-bar select,
+      .verify-form input, .verify-form textarea, .verify-form select,
+      .submission-form input, .submission-form textarea, .submission-form select,
+      #leadForm input, #leadForm textarea, #reviewForm input, #reviewForm textarea, #reviewForm select {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+      }
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .directory-grid {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .listing-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+      .listing-card.featured {
+        border-color: rgba(220, 177, 255, 0.35);
+        background: linear-gradient(180deg, rgba(20,21,29,1), rgba(30,22,41,1));
+      }
+      .listing-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+      .listing-top h3 { margin-bottom: 4px; }
+      .tagline { color: var(--muted); margin: 0; font-size: 0.96rem; }
+      .pill {
+        border-radius: 999px;
+        padding: 0.35rem 0.7rem;
+        background: rgba(220, 177, 255, 0.12);
+        border: 1px solid rgba(220, 177, 255, 0.22);
+        color: var(--primary-bright);
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+      .meta-list {
+        list-style: none;
+        padding: 0;
+        margin: 18px 0 0;
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+      }
+      .listing-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 18px;
+      }
+      .rating { font-weight: 700; color: var(--gold); }
+      .link-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid var(--line);
+        color: var(--ink);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .verify-shell, .form-page, .profile-page, .admin-page { padding: 72px 0 80px; }
+      .verify-layout { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 36px; align-items: start; }
+      .verify-copy, .verify-form-wrap, .profile-card, .admin-card, .dashboard-box, .business-modal-content {
+        background: rgba(20,21,29,0.95);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+      .verify-copy, .verify-form-wrap, .dashboard-box, .business-modal-content {
+        border-radius: 26px;
+      }
+      .verify-copy { padding: 28px; }
+      .info-box {
+        background: rgba(220, 177, 255, 0.06);
+        border: 1px solid rgba(220, 177, 255, 0.2);
+        border-radius: 18px;
+        padding: 20px;
+        margin-top: 24px;
+      }
+      .price { font-size: 2.2rem; font-weight: 800; margin: 10px 0; color: var(--primary-bright); }
+      .requirements-list ul { padding-left: 18px; margin: 12px 0 0; color: var(--muted); }
+      .verify-form-wrap { padding: 24px; }
+      .verify-form { display: grid; gap: 18px; }
+      .form-step { display: none; gap: 16px; }
+      .form-step.is-active { display: grid; }
+      .verify-form label, .submission-form label { display: grid; gap: 8px; font-weight: 600; }
+      .form-navigation { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; }
+      .payment-box { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: rgba(255,255,255,0.02); font-weight: 700; }
+      .form-status { min-height: 22px; font-size: 0.95rem; color: var(--muted); }
+
+      .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+      .profile-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .badge.verified {
+        background: rgba(125, 225, 184, 0.12);
+        color: var(--success);
+        border: 1px solid rgba(125,225,184,0.2);
+      }
+      .badge.featured {
+        background: rgba(220, 177, 255, 0.12);
+        color: var(--primary-bright);
+        border: 1px solid rgba(220,177,255,0.2);
+      }
+      .profile-layout {
+        display: grid;
+        grid-template-columns: 1.5fr 0.8fr;
+        gap: 24px;
+      }
+      .profile-card { border-radius: 22px; padding: 24px; }
+      .profile-main, .profile-sidebar { display: grid; gap: 22px; }
+      .detail-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; color: var(--muted); }
+      .review { padding-top: 16px; border-top: 1px solid var(--line); margin-top: 16px; }
+      .review:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+      .review-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+      #leadForm, #reviewForm, .submission-form { display: grid; gap: 14px; }
+
+      .page-intro { margin-bottom: 28px; }
+      .page-intro.narrow { max-width: 700px; }
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .form-card {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 22px;
+        display: grid;
+        gap: 16px;
+      }
+      .form-card.wide { margin-top: 22px; }
+      .category-picker { display: flex; flex-wrap: wrap; gap: 12px; }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .chip input { accent-color: var(--primary); }
+      .submit-actions { display: flex; align-items: center; gap: 16px; padding-top: 10px; }
+      .field-row { display: grid; gap: 8px; margin-bottom: 18px; }
+
+      .admin-header { margin-bottom: 18px; }
+      .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      .admin-card { border-radius: 22px; padding: 22px; }
+      .admin-card.wide { grid-column: 1 / -1; }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .row:last-child { border-bottom: none; }
+      .row-group { display: grid; gap: 8px; }
+      .action-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .small-btn {
+        padding: 0.45rem 0.8rem;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .small-btn.success { border-color: rgba(125,225,184,0.2); color: var(--success); }
+      .small-btn.warn { border-color: rgba(245,216,142,0.2); color: var(--gold); }
+      .small-btn.danger { border-color: rgba(255,138,138,0.2); color: var(--danger); }
+      .admin-toolbar {
+        display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;
+      }
+      .admin-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+      .admin-table th, .admin-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      .admin-table thead th {
+        color: var(--muted);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.72rem;
+      }
+      .transaction-box {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255,255,255,0.02);
+        padding: 18px;
+        margin-top: 14px;
+      }
+      .feature-upgrade {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .feature-upgrade:last-child { border-bottom: none; }
+
+      .checkout-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.72);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+      }
+      .checkout-modal.active { display: flex; }
+      .checkout-modal-content {
+        max-width: 480px;
+        width: min(90vw, 480px);
+        padding: 28px;
+      }
+      .checkout-amount {
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: var(--primary-bright);
+        margin: 10px 0 16px;
+      }
+
+      .site-footer {
+        border-top: 1px solid var(--line);
+        background: rgba(0,0,0,0.12);
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 72px;
+        color: var(--muted);
+      }
+      .footer-links { display: flex; gap: 18px; }
+      .full-width { width: 100%; }
+
+      @media (max-width: 980px) {
+        .hero-inner, .verify-layout, .profile-layout, .admin-grid, .form-grid { grid-template-columns: 1fr; }
+        .feature-grid, .directory-grid { grid-template-columns: 1fr 1fr; }
+        .filter-bar { grid-template-columns: 1fr 1fr; }
+      }
+
+      @media (max-width: 640px) {
+        .nav-list { display: none; }
+        .feature-grid, .directory-grid, .filter-bar { grid-template-columns: 1fr; }
+        .cta-row { flex-direction: column; align-items: stretch; }
+        .btn { width: 100%; }
+        .profile-header { flex-direction: column; align-items: flex-start; }
+        .submit-actions { flex-direction: column; align-items: flex-start; }
+        .feature-upgrade { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark">✦</span>
+          <span>Moon & Muse</span>
+        </div>
+
+        <nav class="nav-list">
+          <button type="button" data-target="home">Home</button>
+          <button type="button" data-target="directory">Directory</button>
+          <button type="button" data-target="submit">Submit</button>
+          <button type="button" data-target="verify">Verify</button>
+          <button type="button" data-target="settings">Settings</button>
+          <button type="button" data-target="admin">Admin</button>
+        </nav>
+
+        <button class="btn btn-primary" type="button" data-target="directory">Browse Directory</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="view-panel">
+        <section class="hero">
+          <div class="container hero-inner">
+            <div class="hero-copy">
+              <p class="eyebrow">CURATED SPIRITUAL DIRECTORY</p>
+              <h1>Luxury, private, and professionally reviewed.</h1>
+              <p class="subtext">
+                Discover trusted tarot readers, witches, astrologers, and spiritual practitioners
+                with premium placement, discretionary location controls, and verified professional trust.
+              </p>
+
+              <div class="cta-row">
+                <button class="btn btn-primary" type="button" data-target="directory">Browse Directory</button>
+                <button class="btn btn-secondary" type="button" data-target="verify">Apply for Verification</button>
+              </div>
+            </div>
+
+            <div class="hero-card">
+              <div class="mini-grid">
+                <div class="mini-card">Tarot</div>
+                <div class="mini-card">Witchcraft</div>
+                <div class="mini-card">Astrology</div>
+                <div class="mini-card">Energy Healing</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-heading">
+              <p class="eyebrow">WHY PEOPLE USE THIS DIRECTORY</p>
+              <h2>Professional, premium, and intentionally discreet.</h2>
+            </div>
+
+            <div class="feature-grid">
+              <article class="feature-card">
+                <div class="icon">✓</div>
+                <h3>Verified professionals</h3>
+                <p>Every listing is reviewed for identity, work history, and public trust.</p>
+              </article>
+
+              <article class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Fast response ranking</h3>
+                <p>Faster response times improve listing visibility and ranking.</p>
+              </article>
+
+              <article class="feature-card">
+                <div class="icon">◎</div>
+                <h3>Location controls</h3>
+                <p>Businesses choose whether to expose their city/location on their own listing.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section alt">
+          <div class="container">
+            <div class="section-heading">
+              <p class="eyebrow">TOP CATEGORIES</p>
+              <h2>Find your perfect spiritual fit</h2>
+            </div>
+
+            <div class="category-grid">
+              <div class="category-pill">Tarot Reader</div>
+              <div class="category-pill">Psychic Medium</div>
+              <div class="category-pill">Witchcraft</div>
+              <div class="category-pill">Astrology</div>
+              <div class="category-pill">Crystal Healing</div>
+              <div class="category-pill">Energy Healing</div>
+              <div class="category-pill">Spiritual Coaching</div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="directory" class="view-panel hidden">
+        <section class="page-header">
+          <div class="container">
+            <p class="eyebrow">CURATED DIRECTORY</p>
+            <h1>Find trusted spiritual professionals</h1>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="filter-bar">
+              <input id="searchInput" type="text" placeholder="Search tarot, witches, readings..." />
+
+              <select id="categoryFilter">
+                <option value="all">All categories</option>
+                <option value="tarot-reader">Tarot Reader</option>
+                <option value="psychic-medium">Psychic Medium</option>
+                <option value="witchcraft">Witchcraft</option>
+                <option value="astrology">Astrology</option>
+                <option value="crystal-healing">Crystal Healing</option>
+                <option value="energy-healing">Energy Healing</option>
+                <option value="spiritual-coaching">Spiritual Coaching</option>
+              </select>
+
+              <input id="locationSearch" type="text" placeholder="City, country, or region" />
+
+              <select id="responseFilter">
+                <option value="9999">Any response time</option>
+                <option value="24">Responds within 24h</option>
+                <option value="48">Within 48h</option>
+                <option value="72">Within 72h</option>
+              </select>
+
+              <label class="checkbox-row">
+                <input type="checkbox" id="featuredOnly" />
+                <span>Featured</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" id="verifiedOnly" />
+                <span>Verified</span>
+              </label>
+            </div>
+
+            <div id="directoryGrid" class="directory-grid"></div>
+          </div>
+        </section>
+      </section>
+
+      <section id="submit" class="view-panel hidden">
+        <div class="container form-page">
+          <section class="page-intro">
+            <p class="eyebrow">JOIN THE DIRECTORY</p>
+            <h1>Submit your spiritual business</h1>
+            <p class="muted">
+              Share your practice, choose your visibility, and control whether your exact location is shown.
+              Location is never shown unless you explicitly enable it.
+            </p>
+          </section>
+
+          <form id="submitBusinessForm" class="submission-form">
+            <div class="form-grid">
+              <div class="form-card">
+                <h3>Profile basics</h3>
+
+                <label>
+                  Business name
+                  <input type="text" id="listingName" required />
+                </label>
+
+                <label>
+                  Tagline
+                  <input type="text" id="listingTagline" placeholder="Short, memorable summary" />
+                </label>
+
+                <label>
+                  Bio
+                  <textarea id="listingBio" rows="5" required></textarea>
+                </label>
+
+                <label>
+                  Email
+                  <input type="email" id="listingEmail" required />
+                </label>
+
+                <label>
+                  Website
+                  <input type="url" id="listingWebsite" placeholder="https://..." />
+                </label>
+
+                <label>
+                  Instagram
+                  <input type="text" id="listingInstagram" placeholder="@handle" />
+                </label>
+              </div>
+
+              <div class="form-card">
+                <h3>Location & visibility</h3>
+
+                <label>
+                  City
+                  <input type="text" id="listingCity" placeholder="London" />
+                </label>
+
+                <label>
+                  Country
+                  <input type="text" id="listingCountry" placeholder="United Kingdom" />
+                </label>
+
+                <label>
+                  Service region
+                  <input type="text" id="listingServiceRegion" value="Online worldwide" />
+                </label>
+
+                <label class="checkbox-row">
+                  <input type="checkbox" id="listingShowLocation" />
+                  <span>Display my city/location publicly on my profile</span>
+                </label>
+
+                <label>
+                  Service mode
+                  <select id="listingServiceMode">
+                    <option value="online">Online only</option>
+                    <option value="remote">Remote only</option>
+                    <option value="hybrid">Hybrid</option>
+                  </select>
+                </label>
+
+                <label>
+                  Response time target
+                  <select id="listingResponseTime">
+                    <option value="24">Within 24 hours</option>
+                    <option value="48">Within 48 hours</option>
+                    <option value="72">Within 72 hours</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-card wide">
+              <h3>Category selection</h3>
+              <div class="category-picker" id="categoryPicker">
+                <label class="chip"><input type="checkbox" value="tarot-reader" /><span>Tarot Reader</span></label>
+                <label class="chip"><input type="checkbox" value="psychic-medium" /><span>Psychic Medium</span></label>
+                <label class="chip"><input type="checkbox" value="witchcraft" /><span>Witchcraft</span></label>
+                <label class="chip"><input type="checkbox" value="astrology" /><span>Astrology</span></label>
+                <label class="chip"><input type="checkbox" value="crystal-healing" /><span>Crystal Healing</span></label>
+                <label class="chip"><input type="checkbox" value="energy-healing" /><span>Energy Healing</span></label>
+                <label class="chip"><input type="checkbox" value="spiritual-coaching" /><span>Spiritual Coaching</span></label>
+              </div>
+            </div>
+
+            <div class="form-card wide">
+              <h3>Lead and visibility settings</h3>
+
+              <label>
+                Pricing
+                <input type="text" id="listingPricing" placeholder="£35 per reading" />
+              </label>
+
+              <label>
+                Lead inquiry fee (£)
+                <input type="number" id="listingLeadFee" min="0" step="0.01" value="8.00" />
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" id="listingFeaturedRequest" />
+                <span>Request featured placement</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" id="listingVerifiedRequest" />
+                <span>Request professional verification</span>
+              </label>
+            </div>
+
+            <div class="submit-actions">
+              <button type="submit" class="btn btn-primary">Submit Listing</button>
+              <div id="submitStatus" class="form-status"></div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="verify" class="view-panel hidden">
+        <main class="verify-shell">
+          <section class="container verify-layout">
+            <div class="verify-copy">
+              <p class="eyebrow">VERIFICATION PROCESS</p>
+              <h1>Professional verification for trusted practitioners.</h1>
+              <p class="muted">
+                We manually review every application. Verification is a paid process and helps
+                establish trust, professionalism, and reliability within the directory.
+              </p>
+
+              <div class="info-box">
+                <h3>Verification fee</h3>
+                <p class="price">£25.00</p>
+                <p>Paid once per application. This fee covers manual review and screening.</p>
+              </div>
+
+              <div class="requirements-list">
+                <h3>Required documentation</h3>
+                <ul>
+                  <li>Yoti or equivalent secure identity verification</li>
+                  <li>Proof of previous work: event photos, portfolio, workshop examples</li>
+                  <li>Professional references: website, guilds, community profiles, social proof</li>
+                  <li>Client review references that are not screenshots</li>
+                  <li>Evidence of remote or in-person work</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="verify-form-wrap">
+              <form id="verificationForm" class="verify-form">
+                <div class="form-step is-active">
+                  <h3>Business details</h3>
+
+                  <label>
+                    Business name
+                    <input type="text" id="businessName" required />
+                  </label>
+
+                  <label>
+                    Business email
+                    <input type="email" id="businessEmail" required />
+                  </label>
+
+                  <label>
+                    City
+                    <input type="text" id="city" placeholder="Example: London" />
+                  </label>
+
+                  <label>
+                    Country
+                    <input type="text" id="country" placeholder="Example: United Kingdom" />
+                  </label>
+
+                  <label>
+                    Service model
+                    <select id="serviceModel">
+                      <option value="online">Online only</option>
+                      <option value="remote">Remote only</option>
+                      <option value="hybrid">Hybrid</option>
+                    </select>
+                  </label>
+
+                  <label class="checkbox-row">
+                    <input type="checkbox" id="showLocation" />
+                    <span>Publicly display my location on my listing</span>
+                  </label>
+                </div>
+
+                <div class="form-step">
+                  <h3>Identity & proof</h3>
+
+                  <label>
+                    Yoti reference or secure ID verification reference
+                    <input type="text" id="yotiReference" />
+                  </label>
+
+                  <label>
+                    Yoti link or secure verification link
+                    <input type="url" id="yotiLink" placeholder="https://..." />
+                  </label>
+
+                  <label>
+                    Event photos / previous work links
+                    <textarea id="workProof" rows="3" placeholder="Paste links or describe prior work"></textarea>
+                  </label>
+
+                  <label>
+                    Professional links
+                    <textarea id="professionalLinks" rows="3" placeholder="Website, guilds, event listings, community profiles"></textarea>
+                  </label>
+                </div>
+
+                <div class="form-step">
+                  <h3>Client proof & references</h3>
+
+                  <label>
+                    Client review references
+                    <textarea id="clientReviews" rows="3" placeholder="Review pages or references, not screenshots"></textarea>
+                  </label>
+
+                  <label>
+                    Additional proof
+                    <textarea id="additionalProof" rows="3" placeholder="Any extra professional proof or context"></textarea>
+                  </label>
+
+                  <label>
+                    Notes for review
+                    <textarea id="reviewNotes" rows="3" placeholder="Anything else the review team should know?"></textarea>
+                  </label>
+                </div>
+
+                <div class="form-step">
+                  <h3>Payment & review</h3>
+
+                  <div class="payment-box">
+                    <p>Verification review fee</p>
+                    <strong>£25.00</strong>
+                  </div>
+
+                  <label class="checkbox-row">
+                    <input type="checkbox" id="agreeTerms" required />
+                    <span>I confirm the information provided is true and accurate.</span>
+                  </label>
+
+                  <button type="submit" class="btn btn-primary full-width">Submit for Manual Review</button>
+                </div>
+
+                <div class="form-navigation">
+                  <button type="button" class="btn btn-secondary" id="prevBtn">Previous</button>
+                  <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+                </div>
+
+                <div id="formStatus" class="form-status" aria-live="polite"></div>
+              </form>
+            </div>
+          </section>
+        </main>
+      </section>
+
+      <section id="settings" class="view-panel hidden">
+        <div class="container form-page">
+          <section class="page-intro">
+            <p class="eyebrow">BUSINESS SETTINGS</p>
+            <h1>Manage your profile visibility</h1>
+          </section>
+
+          <div class="dashboard-box">
+            <div class="field-row">
+              <label>Choose your business</label>
+              <select id="settingsBusinessSelect"></select>
+            </div>
+
+            <form id="businessSettingsForm" class="submission-form">
+              <div class="form-grid">
+                <div class="form-card">
+                  <h3>Profile details</h3>
+
+                  <label>
+                    Business name
+                    <input type="text" id="settingsName" required />
+                  </label>
+
+                  <label>
+                    Tagline
+                    <input type="text" id="settingsTagline" />
+                  </label>
+
+                  <label>
+                    Bio
+                    <textarea id="settingsBio" rows="5" required></textarea>
+                  </label>
+
+                  <label>
+                    Email
+                    <input type="email" id="settingsEmail" required />
+                  </label>
+
+                  <label>
+                    Website
+                    <input type="url" id="settingsWebsite" />
+                  </label>
+
+                  <label>
+                    Instagram
+                    <input type="text" id="settingsInstagram" />
+                  </label>
+                </div>
+
+                <div class="form-card">
+                  <h3>Visibility & trust</h3>
+
+                  <label>
+                    City
+                    <input type="text" id="settingsCity" />
+                  </label>
+
+                  <label>
+                    Country
+                    <input type="text" id="settingsCountry" />
+                  </label>
+
+                  <label>
+                    Service region
+                    <input type="text" id="settingsServiceRegion" />
+                  </label>
+
+                  <label class="checkbox-row">
+                    <input type="checkbox" id="settingsShowLocation" />
+                    <span>Display my city/location publicly</span>
+                  </label>
+
+                  <label>
+                    Response target
+                    <select id="settingsResponseTime">
+                      <option value="24">Within 24 hours</option>
+                      <option value="48">Within 48 hours</option>
+                      <option value="72">Within 72 hours</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Lead fee (£)
+                    <input type="number" id="settingsLeadFee" min="0" step="0.01" />
+                  </label>
+
+                  <label class="checkbox-row">
+                    <input type="checkbox" id="settingsFeatured" />
+                    <span>Enable featured listing</span>
+                  </label>
+
+                  <label class="checkbox-row">
+                    <input type="checkbox" id="settingsVerified" />
+                    <span>Mark as verified</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-card wide">
+                <h3>Categories</h3>
+                <div class="category-picker">
+                  <label class="chip"><input type="checkbox" value="tarot-reader" class="settingsCategory" /><span>Tarot Reader</span></label>
+                  <label class="chip"><input type="checkbox" value="psychic-medium" class="settingsCategory" /><span>Psychic Medium</span></label>
+                  <label class="chip"><input type="checkbox" value="witchcraft" class="settingsCategory" /><span>Witchcraft</span></label>
+                  <label class="chip"><input type="checkbox" value="astrology" class="settingsCategory" /><span>Astrology</span></label>
+                  <label class="chip"><input type="checkbox" value="crystal-healing" class="settingsCategory" /><span>Crystal Healing</span></label>
+                  <label class="chip"><input type="checkbox" value="energy-healing" class="settingsCategory" /><span>Energy Healing</span></label>
+                  <label class="chip"><input type="checkbox" value="spiritual-coaching" class="settingsCategory" /><span>Spiritual Coaching</span></label>
+                </div>
+              </div>
+
+              <div class="submit-actions">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <div id="settingsStatus" class="form-status"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="admin" class="view-panel hidden">
+        <div class="container admin-page">
+          <div id="adminLoginBox" class="dashboard-box small">
+            <section class="page-intro narrow">
+              <p class="eyebrow">ADMIN ACCESS</p>
+              <h1>Login</h1>
+            </section>
+
+            <form id="adminLoginForm" class="submission-form">
+              <label>
+                Admin password
+                <input type="password" id="adminPassword" required />
+              </label>
+
+              <button type="submit" class="btn btn-primary full-width">Enter Admin Dashboard</button>
+              <div id="loginStatus" class="form-status"></div>
+            </form>
+          </div>
+
+          <div id="adminDashboard" class="hidden">
+            <div class="admin-toolbar">
+              <button id="exportDataBtn" class="small-btn">Export data</button>
+              <button id="importDataBtn" class="small-btn">Import data</button>
+              <input type="file" id="importFileInput" accept=".json" hidden />
+              <button id="logoutBtn" class="small-btn danger">Logout</button>
+            </div>
+
+            <section class="admin-header">
+              <div>
+                <p class="eyebrow">ADMIN DASHBOARD</p>
+                <h1>Review queue and listing management</h1>
+              </div>
+            </section>
+
+            <section class="admin-grid">
+              <div class="admin-card">
+                <h3>Pending businesses</h3>
+                <div id="pendingBusinesses"></div>
+              </div>
+
+              <div class="admin-card">
+                <h3>Pending reviews</h3>
+                <div id="pendingReviews"></div>
+              </div>
+
+              <div class="admin-card wide">
+                <h3>Directory profile controls</h3>
+                <div id="businessTable"></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2026 Moon & Muse</p>
+        <div class="footer-links">
+          <button class="link-btn" type="button" data-target="directory">Directory</button>
+          <button class="link-btn" type="button" data-target="verify">Verification</button>
+          <button class="link-btn" type="button" data-target="admin">Admin</button>
+        </div>
+      </div>
+    </footer>
+
+    <div id="checkoutModal" class="checkout-modal">
+      <div class="checkout-modal-content">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 id="checkoutTitle">Premium listing</h3>
+          <button id="closeCheckoutModal" class="small-btn">Close</button>
+        </div>
+
+        <div class="checkout-amount" id="checkoutAmount">£49.00</div>
+        <p class="muted">This is a static front-end demo of a premium purchase flow.</p>
+
+        <div class="form-grid">
+          <div class="form-card">
+            <label>
+              Cardholder name
+              <input type="text" placeholder="Name on card" />
+            </label>
+            <label>
+              Card number
+              <input type="text" placeholder="4242 4242 4242 4242" />
+            </label>
+            <label>
+              Expiry
+              <input type="text" placeholder="MM / YY" />
+            </label>
+            <label>
+              CVC
+              <input type="text" placeholder="123" />
+            </label>
+          </div>
+        </div>
+
+        <div class="submit-actions">
+          <button class="btn btn-primary full-width" id="payNowBtn">Pay now</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEYS = {
+        businesses: "moon_muse_businesses",
+        reviews: "moon_muse_reviews",
+        verificationRequests: "moon_muse_verification_requests"
+      };
+
+      const categoryMap = {
+        "tarot-reader": "Tarot Reader",
+        "psychic-medium": "Psychic Medium",
+        "witchcraft": "Witchcraft",
+        astrology: "Astrology",
+        "crystal-healing": "Crystal Healing",
+        "energy-healing": "Energy Healing",
+        "spiritual-coaching": "Spiritual Coaching"
+      };
+
+      function getStored(key, fallback) {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        try { return JSON.parse(raw); } catch (error) { return fallback; }
+      }
+
+      function setStored(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+
+      function getDefaultBusinesses() {
+        return [
+          {
+            id: "biz-1",
+            name: "Selene Tarot",
+            slug: "selene-tarot",
+            tagline: "Intuitive guidance and spiritual clarity sessions.",
+            bio: "Selene Tarot offers online intuitive readings focused on emotional clarity, relationship guidance, and spiritual direction.",
+            email: "selene@example.com",
+            website: "https://example.com",
+            instagram: "@selenetarot",
+            city: "London",
+            country: "United Kingdom",
+            showLocation: true,
+            serviceRegion: "London / UK",
+            serviceMode: "online",
+            responseTimeHours: 24,
+            leadFeeCents: 800,
+            featured: true,
+            verified: true,
+            approved: true,
+            rating: 4.9,
+            reviewCount: 24,
+            categories: ["tarot-reader"]
+          },
+          {
+            id: "biz-2",
+            name: "Moon Witch Collective",
+            slug: "moon-witch-collective",
+            tagline: "Witchcraft rituals, spell guidance, and spiritual practice support.",
+            bio: "Moon Witch Collective provides ritual guidance, spell support, and spiritual coaching for clients seeking deeper connection and intention setting.",
+            email: "moonwitch@example.com",
+            website: "https://example.com",
+            instagram: "@moonwitchcollective",
+            city: "Manchester",
+            country: "United Kingdom",
+            showLocation: false,
+            serviceRegion: "Online worldwide",
+            serviceMode: "online",
+            responseTimeHours: 48,
+            leadFeeCents: 900,
+            featured: false,
+            verified: true,
+            approved: true,
+            rating: 4.8,
+            reviewCount: 16,
+            categories: ["witchcraft"]
+          },
+          {
+            id: "biz-3",
+            name: "Starlight Oracle",
+            slug: "starlight-oracle",
+            tagline: "Divination, tarot insight, and intuitive coaching.",
+            bio: "Starlight Oracle blends tarot and astrology for thoughtful, grounded spiritual guidance and intuitive reflection.",
+            email: "starlight@example.com",
+            website: "https://example.com",
+            instagram: "@starlightoracle",
+            city: "Paris",
+            country: "France",
+            showLocation: true,
+            serviceRegion: "Paris / Europe",
+            serviceMode: "online",
+            responseTimeHours: 72,
+            leadFeeCents: 700,
+            featured: false,
+            verified: false,
+            approved: true,
+            rating: 4.7,
+            reviewCount: 11,
+            categories: ["tarot-reader", "astrology"]
+          },
+          {
+            id: "biz-4",
+            name: "Raven & Rose",
+            slug: "raven-and-rose",
+            tagline: "Energy healing and emotional support sessions.",
+            bio: "Raven & Rose blends energy healing and spiritual coaching to help clients feel calmer, clearer, and more centered.",
+            email: "ravenrose@example.com",
+            website: "https://example.com",
+            instagram: "@ravenandrose",
+            city: "Bristol",
+            country: "United Kingdom",
+            showLocation: false,
+            serviceRegion: "Online worldwide",
+            serviceMode: "online",
+            responseTimeHours: 24,
+            leadFeeCents: 850,
+            featured: true,
+            verified: true,
+            approved: true,
+            rating: 5.0,
+            reviewCount: 18,
+            categories: ["energy-healing", "spiritual-coaching"]
+          }
+        ];
+      }
+
+      function getBusinesses() {
+        return getStored(STORAGE_KEYS.businesses, getDefaultBusinesses());
+      }
+      function saveBusinesses(data) { setStored(STORAGE_KEYS.businesses, data); }
+      function getReviews() { return getStored(STORAGE_KEYS.reviews, []); }
+      function saveReviews(data) { setStored(STORAGE_KEYS.reviews, data); }
+      function getVerificationRequests() { return getStored(STORAGE_KEYS.verificationRequests, []); }
+      function saveVerificationRequests(data) { setStored(STORAGE_KEYS.verificationRequests, data); }
+
+      function ensureAdminPassword() {
+        if (!localStorage.getItem("moon_muse_admin_password")) {
+          localStorage.setItem("moon_muse_admin_password", "moonmuseadmin");
+        }
+      }
+
+      function adminIsLoggedIn() {
+        return localStorage.getItem("moon_muse_admin_authed") === "true";
+      }
+
+      function setAdminLoggedIn(value) {
+        localStorage.setItem("moon_muse_admin_authed", value ? "true" : "false");
+      }
+
+      function buildSlug(value) {
+        return (value || "")
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      function getNextBusinessId() {
+        const businesses = getBusinesses();
+        const max = businesses.reduce((highest, business) => {
+          const digits = Number(String(business.id).replace(/\D/g, "")) || 0;
+          return Math.max(highest, digits);
+        }, 0);
+        return `biz-${max + 1}`;
+      }
+
+      function createReviewEntry({ businessId, reviewerName, rating, comment }) {
+        return {
+          id: `review-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+          businessId,
+          reviewerName,
+          rating: Number(rating),
+          comment,
+          approved: false,
+          status: "pending",
+          createdAt: new Date().toISOString()
+        };
+      }
+
+      function initDefaultData() {
+        if (!localStorage.getItem(STORAGE_KEYS.businesses)) saveBusinesses(getDefaultBusinesses());
+        if (!localStorage.getItem(STORAGE_KEYS.reviews)) {
+          saveReviews([
+            {
+              id: "r-1",
+              businessId: "biz-1",
+              reviewerName: "Rina M.",
+              rating: 5,
+              comment: "Beautiful, warm, and deeply insightful.",
+              approved: true,
+              status: "approved",
+              createdAt: new Date().toISOString()
+            },
+            {
+              id: "r-2",
+              businessId: "biz-2",
+              reviewerName: "Sophie D.",
+              rating: 4,
+              comment: "Supportive and grounding. Felt deeply seen.",
+              approved: true,
+              status: "approved",
+              createdAt: new Date().toISOString()
+            }
+          ]);
+        }
+        if (!localStorage.getItem(STORAGE_KEYS.verificationRequests)) saveVerificationRequests([]);
+      }
+
+      function showSection(targetId) {
+        document.querySelectorAll(".view-panel").forEach((panel) => {
+          panel.classList.toggle("hidden", panel.id !== targetId);
+        });
+      }
+
+      function bindNavButtons() {
+        document.querySelectorAll("[data-target]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const target = button.dataset.target;
+            if (target === "admin") {
+              const dashboard = document.getElementById("adminDashboard");
+              const loginBox = document.getElementById("adminLoginBox");
+              if (adminIsLoggedIn()) {
+                loginBox.classList.add("hidden");
+                dashboard.classList.remove("hidden");
+              } else {
+                loginBox.classList.remove("hidden");
+                dashboard.classList.add("hidden");
+              }
+            }
+            if (target === "directory") renderDirectory();
+            if (target === "settings") populateBusinessSettingsSelect();
+            showSection(target);
+          });
+        });
+      }
+
+      function renderDirectory() {
+        const directoryGrid = document.getElementById("directoryGrid");
+        if (!directoryGrid) return;
+
+        const businesses = getBusinesses();
+        const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const locationSearch = document.getElementById("locationSearch");
+        const responseFilter = document.getElementById("responseFilter");
+        const featuredOnly = document.getElementById("featuredOnly");
+        const verifiedOnly = document.getElementById("verifiedOnly");
+
+        const searchTerm = (searchInput?.value || "").trim().toLowerCase();
+        const categoryValue = categoryFilter?.value || "all";
+        const locationTerm = (locationSearch?.value || "").trim().toLowerCase();
+        const responseLimit = Number(responseFilter?.value || 9999);
+        const featured = featuredOnly?.checked || false;
+        const verified = verifiedOnly?.checked || false;
+
+        const filtered = businesses.filter((business) => {
+          if (!business.approved) return false;
+
+          const matchesSearch =
+            !searchTerm ||
+            business.name.toLowerCase().includes(searchTerm) ||
+            (business.tagline || "").toLowerCase().includes(searchTerm) ||
+            (business.bio || "").toLowerCase().includes(searchTerm);
+
+          const matchesCategory = categoryValue === "all" || (business.categories || []).includes(categoryValue);
+
+          const locationText = [business.city || "", business.country || "", business.serviceRegion || ""].join(" ").toLowerCase();
+          const matchesLocation = !locationTerm || locationText.includes(locationTerm);
+
+          const matchesResponse = Number(business.responseTimeHours || 9999) <= responseLimit;
+          const matchesFeatured = !featured || business.featured;
+          const matchesVerified = !verified || business.verified;
+
+          return matchesSearch && matchesCategory && matchesLocation && matchesResponse && matchesFeatured && matchesVerified;
+        });
+
+        const sorted = [...filtered].sort((a, b) => {
+          if (a.featured && !b.featured) return -1;
+          if (!a.featured && b.featured) return 1;
+          return Number(a.responseTimeHours || 9999) - Number(b.responseTimeHours || 9999);
+        });
+
+        directoryGrid.innerHTML = sorted.map((business) => {
+          const categoryLabels = (business.categories || []).map((cat) => categoryMap[cat] || cat).join(" • ");
+          const locationLine = business.showLocation ? `${business.city || "Remote"}, ${business.country || "Online"}` : "Location hidden by practitioner";
+
+          return `
+            <article class="listing-card ${business.featured ? "featured" : ""}">
+              <div class="listing-top">
+                <div>
+                  <h3>${business.name}</h3>
+                  <p class="tagline">${business.tagline || ""}</p>
+                </div>
+                ${business.featured ? '<span class="pill">Featured</span>' : ""}
+              </div>
+
+              <ul class="meta-list">
+                <li>Location: ${locationLine}</li>
+                <li>Service: ${business.serviceRegion || "Online worldwide"}</li>
+                <li>Response: within ${business.responseTimeHours || 24}h</li>
+                <li>Categories: ${categoryLabels || "General"}</li>
+              </ul>
+
+              <div class="listing-footer">
+                <span class="rating">★ ${business.rating || "New"}</span>
+                <span>${business.reviewCount || 0} reviews</span>
+              </div>
+
+              <div class="listing-footer">
+                ${business.verified ? '<span class="pill">Verified</span>' : '<span class="pill">Pending</span>'}
+                <button class="link-btn" type="button" data-business-view="${business.slug}">View profile</button>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        if (!sorted.length) {
+          directoryGrid.innerHTML = `
+            <div class="listing-card">
+              <h3>No businesses match your filters.</h3>
+              <p class="tagline">Try broadening your search or clearing a filter.</p>
+            </div>
+          `;
+        }
+
+        document.querySelectorAll("[data-business-view]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const slug = button.dataset.businessView;
+            openBusinessModal(slug);
+          });
+        });
+      }
+
+      function bindDirectoryFilters() {
+        [
+          document.getElementById("searchInput"),
+          document.getElementById("categoryFilter"),
+          document.getElementById("locationSearch"),
+          document.getElementById("responseFilter"),
+          document.getElementById("featuredOnly"),
+          document.getElementById("verifiedOnly")
+        ].forEach((el) => {
+          if (!el) return;
+          el.addEventListener("input", renderDirectory);
+          el.addEventListener("change", renderDirectory);
+        });
+      }
+
+      function openBusinessModal(slug) {
+        const business = getBusinesses().find((item) => item.slug === slug) || getBusinesses()[0];
+        if (!business) return;
+
+        const modal = document.getElementById("businessModal");
+        if (!modal) {
+          const box = document.createElement("div");
+          box.className = "checkout-modal active";
+          box.id = "businessModal";
+          box.innerHTML = `
+            <div class="business-modal-content">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+                <h3>${business.name}</h3>
+                <button class="small-btn" type="button" data-close-business-modal>Close</button>
+              </div>
+              <div class="muted">${business.tagline || ""}</div>
+              <div style="margin-top:16px;">
+                <p>${business.bio || ""}</p>
+                <ul class="detail-list">
+                  <li>Location: ${business.showLocation ? `${business.city || "Remote"}, ${business.country || "Online"}` : "Location hidden by practitioner"}</li>
+                  <li>Service: ${business.serviceRegion || "Online worldwide"}</li>
+                  <li>Response: within ${business.responseTimeHours || 24}h</li>
+                  <li>Lead fee: £${((business.leadFeeCents || 800) / 100).toFixed(2)}</li>
+                </ul>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(box);
+
+          box.querySelector("[data-close-business-modal]").addEventListener("click", () => box.remove());
+          return;
+        }
+
+        modal.innerHTML = `
+          <div class="business-modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+              <h3>${business.name}</h3>
+              <button class="small-btn" type="button" data-close-business-modal>Close</button>
+            </div>
+            <div class="muted">${business.tagline || ""}</div>
+            <div style="margin-top:16px;">
+              <p>${business.bio || ""}</p>
+              <ul class="detail-list">
+                <li>Location: ${business.showLocation ? `${business.city || "Remote"}, ${business.country || "Online"}` : "Location hidden by practitioner"}</li>
+                <li>Service: ${business.serviceRegion || "Online worldwide"}</li>
+                <li>Response: within ${business.responseTimeHours || 24}h</li>
+                <li>Lead fee: £${((business.leadFeeCents || 800) / 100).toFixed(2)}</li>
+              </ul>
+            </div>
+          </div>
+        `;
+        modal.classList.add("active");
+        modal.querySelector("[data-close-business-modal]").addEventListener("click", () => modal.classList.remove("active"));
+      }
+
+      function initSubmitBusinessForm() {
+        const form = document.getElementById("submitBusinessForm");
+        if (!form) return;
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const name = document.getElementById("listingName").value.trim();
+          const bio = document.getElementById("listingBio").value.trim();
+          const email = document.getElementById("listingEmail").value.trim();
+
+          if (!name || !bio || !email) {
+            document.getElementById("submitStatus").textContent = "Please complete the required fields.";
+            document.getElementById("submitStatus").style.color = "#ff8a8a";
+            return;
+          }
+
+          const newBusiness = {
+            id: getNextBusinessId(),
+            name,
+            slug: buildSlug(name) || `business-${Date.now()}`,
+            tagline: document.getElementById("listingTagline").value.trim(),
+            bio,
+            email,
+            website: document.getElementById("listingWebsite").value.trim(),
+            instagram: document.getElementById("listingInstagram").value.trim(),
+            city: document.getElementById("listingCity").value.trim(),
+            country: document.getElementById("listingCountry").value.trim(),
+            serviceRegion: document.getElementById("listingServiceRegion").value.trim() || "Online worldwide",
+            serviceMode: document.getElementById("listingServiceMode").value,
+            showLocation: document.getElementById("listingShowLocation").checked,
+            responseTimeHours: Number(document.getElementById("listingResponseTime").value || 24),
+            leadFeeCents: Math.round((Number(document.getElementById("listingLeadFee").value || 8) * 100)),
+            featured: document.getElementById("listingFeaturedRequest").checked,
+            verified: document.getElementById("listingVerifiedRequest").checked,
+            approved: false,
+            rating: 0,
+            reviewCount: 0,
+            categories: Array.from(document.querySelectorAll("#categoryPicker input[type='checkbox']:checked")).map((box) => box.value),
+            createdAt: new Date().toISOString()
+          };
+
+          const businesses = getBusinesses();
+          businesses.unshift(newBusiness);
+          saveBusinesses(businesses);
+
+          document.getElementById("submitStatus").textContent = "Submitted for review. It will appear after approval.";
+          document.getElementById("submitStatus").style.color = "#7de1b8";
+          form.reset();
+        });
+      }
+
+      function initVerificationForm() {
+        const form = document.getElementById("verificationForm");
+        if (!form) return;
+
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+        const steps = Array.from(document.querySelectorAll(".form-step"));
+        const statusEl = document.getElementById("formStatus");
+        let activeStep = 0;
+
+        function showStep(index) {
+          steps.forEach((step, i) => step.classList.toggle("is-active", i === index));
+          prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
+          nextBtn.textContent = index === steps.length - 1 ? "Review" : "Next";
+        }
+
+        nextBtn.addEventListener("click", () => {
+          const currentStep = steps[activeStep];
+          const requiredInputs = currentStep.querySelectorAll("[required]");
+          const valid = Array.from(requiredInputs).every((input) => input.type === "checkbox" ? input.checked : input.value.trim() !== "");
+          if (!valid) {
+            statusEl.textContent = "Please complete the required fields before moving on.";
+            statusEl.style.color = "#ff8a8a";
+            return;
+          }
+          if (activeStep < steps.length - 1) {
+            activeStep += 1;
+            showStep(activeStep);
+            statusEl.textContent = "";
+          }
+        });
+
+        prevBtn.addEventListener("click", () => {
+          if (activeStep > 0) {
+            activeStep -= 1;
+            showStep(activeStep);
+            statusEl.textContent = "";
+          }
+        });
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const businessName = document.getElementById("businessName").value.trim();
+          const businessEmail = document.getElementById("businessEmail").value.trim();
+          if (!businessName || !businessEmail || !document.getElementById("agreeTerms").checked) {
+            statusEl.textContent = "Please complete all required fields and agree to the terms.";
+            statusEl.style.color = "#ff8a8a";
+            return;
+          }
+
+          const requests = getVerificationRequests();
+          requests.unshift({
+            id: `verification-${Date.now()}`,
+            businessName,
+            businessEmail,
+            city: document.getElementById("city").value.trim(),
+            country: document.getElementById("country").value.trim(),
+            serviceModel: document.getElementById("serviceModel").value,
+            showLocation: document.getElementById("showLocation").checked,
+            yotiReference: document.getElementById("yotiReference").value.trim(),
+            yotiLink: document.getElementById("yotiLink").value.trim(),
+            workProof: document.getElementById("workProof").value.trim(),
+            professionalLinks: document.getElementById("professionalLinks").value.trim(),
+            clientReviews: document.getElementById("clientReviews").value.trim(),
+            additionalProof: document.getElementById("additionalProof").value.trim(),
+            reviewNotes: document.getElementById("reviewNotes").value.trim(),
+            status: "pending",
+            createdAt: new Date().toISOString()
+          });
+
+          saveVerificationRequests(requests);
+          statusEl.textContent = "Your verification application has been submitted for manual review.";
+          statusEl.style.color = "#7de1b8";
+          form.reset();
+          activeStep = 0;
+          showStep(activeStep);
+        });
+
+        showStep(activeStep);
+        prevBtn.style.visibility = "hidden";
+      }
+
+      function populateBusinessSettingsSelect() {
+        const select = document.getElementById("settingsBusinessSelect");
+        if (!select) return;
+        const businesses = getBusinesses();
+        select.innerHTML = businesses.map((business) => `<option value="${business.id}">${business.name}</option>`).join("");
+        populateSettingsForm(select.value);
+      }
+
+      function populateSettingsForm(businessId) {
+        const business = getBusinesses().find((item) => item.id === businessId);
+        if (!business) return;
+
+        document.getElementById("settingsName").value = business.name || "";
+        document.getElementById("settingsTagline").value = business.tagline || "";
+        document.getElementById("settingsBio").value = business.bio || "";
+        document.getElementById("settingsEmail").value = business.email || "";
+        document.getElementById("settingsWebsite").value = business.website || "";
+        document.getElementById("settingsInstagram").value = business.instagram || "";
+        document.getElementById("settingsCity").value = business.city || "";
+        document.getElementById("settingsCountry").value = business.country || "";
+        document.getElementById("settingsServiceRegion").value = business.serviceRegion || "";
+        document.getElementById("settingsShowLocation").checked = !!business.showLocation;
+        document.getElementById("settingsResponseTime").value = String(business.responseTimeHours || 24);
+        document.getElementById("settingsLeadFee").value = ((business.leadFeeCents || 800) / 100).toFixed(2);
+        document.getElementById("settingsFeatured").checked = !!business.featured;
+        document.getElementById("settingsVerified").checked = !!business.verified;
+
+        document.querySelectorAll(".settingsCategory").forEach((box) => {
+          box.checked = (business.categories || []).includes(box.value);
+        });
+      }
+
+      function initBusinessSettingsForm() {
+        const form = document.getElementById("businessSettingsForm");
+        if (!form) return;
+
+        const select = document.getElementById("settingsBusinessSelect");
+        if (select) {
+          select.addEventListener("change", (event) => populateSettingsForm(event.target.value));
+          populateBusinessSettingsSelect();
+        }
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const businesses = getBusinesses();
+          const selectedId = document.getElementById("settingsBusinessSelect").value;
+          const index = businesses.findIndex((item) => item.id === selectedId);
+          if (index < 0) return;
+
+          businesses[index] = {
+            ...businesses[index],
+            name: document.getElementById("settingsName").value.trim(),
+            tagline: document.getElementById("settingsTagline").value.trim(),
+            bio: document.getElementById("settingsBio").value.trim(),
+            email: document.getElementById("settingsEmail").value.trim(),
+            website: document.getElementById("settingsWebsite").value.trim(),
+            instagram: document.getElementById("settingsInstagram").value.trim(),
+            city: document.getElementById("settingsCity").value.trim(),
+            country: document.getElementById("settingsCountry").value.trim(),
+            serviceRegion: document.getElementById("settingsServiceRegion").value.trim() || "Online worldwide",
+            showLocation: document.getElementById("settingsShowLocation").checked,
+            responseTimeHours: Number(document.getElementById("settingsResponseTime").value || 24),
+            leadFeeCents: Math.round((Number(document.getElementById("settingsLeadFee").value || 8) * 100)),
+            featured: document.getElementById("settingsFeatured").checked,
+            verified: document.getElementById("settingsVerified").checked,
+            categories: Array.from(document.querySelectorAll(".settingsCategory:checked")).map((box) => box.value),
+            slug: buildSlug(document.getElementById("settingsName").value.trim()) || businesses[index].slug
+          };
+
+          saveBusinesses(businesses);
+          document.getElementById("settingsStatus").textContent = "Profile updated successfully.";
+          document.getElementById("settingsStatus").style.color = "#7de1b8";
+          renderDirectory();
+        });
+      }
+
+      function renderAdminDashboard() {
+        const dashboard = document.getElementById("adminDashboard");
+        const loginBox = document.getElementById("adminLoginBox");
+        if (!dashboard) return;
+
+        if (!adminIsLoggedIn()) {
+          loginBox.classList.remove("hidden");
+          dashboard.classList.add("hidden");
+          return;
+        }
+
+        loginBox.classList.add("hidden");
+        dashboard.classList.remove("hidden");
+
+        const businesses = getBusinesses();
+        const pendingBusinessList = businesses.filter((business) => !business.approved || !business.verified);
+        const reviewQueue = getReviews().filter((review) => !review.approved);
+
+        document.getElementById("pendingBusinesses").innerHTML = pendingBusinessList.length
+          ? pendingBusinessList.map((business) => `
+              <div class="row">
+                <div class="row-group">
+                  <strong>${business.name}</strong>
+                  <span class="muted">${business.approved ? "Pending verification" : "Pending approval"}</span>
+                </div>
+                <div class="action-row">
+                  <button class="small-btn success" data-action="approve-business" data-id="${business.id}">Approve</button>
+                  <button class="small-btn danger" data-action="reject-business" data-id="${business.id}">Reject</button>
+                  <button class="small-btn warn" data-action="toggle-featured" data-id="${business.id}">${business.featured ? "Unfeature" : "Feature"}</button>
+                  <button class="small-btn warn" data-action="toggle-verified" data-id="${business.id}">${business.verified ? "Unverify" : "Verify"}</button>
+                </div>
+              </div>
+            `).join("")
+          : '<div class="row"><span class="muted">No pending businesses.</span></div>';
+
+        document.getElementById("pendingReviews").innerHTML = reviewQueue.length
+          ? reviewQueue.map((review) => `
+              <div class="row">
+                <div class="row-group">
+                  <strong>${review.reviewerName}</strong>
+                  <span class="muted">${"★".repeat(Number(review.rating))} • ${review.comment.slice(0, 90)}</span>
+                </div>
+                <div class="action-row">
+                  <button class="small-btn success" data-action="approve-review" data-id="${review.id}">Approve</button>
+                  <button class="small-btn danger" data-action="reject-review" data-id="${review.id}">Reject</button>
+                </div>
+              </div>
+            `).join("")
+          : '<div class="row"><span class="muted">No pending reviews.</span></div>';
+
+        document.getElementById("businessTable").innerHTML = `
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Business</th>
+                <th>Location visible</th>
+                <th>Verified</th>
+                <th>Featured</th>
+                <th>Approved</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${businesses.map((business) => `
+                <tr>
+                  <td>${business.name}</td>
+                  <td>
+                    <label class="checkbox-row">
+                      <input type="checkbox" data-action="toggle-location" data-id="${business.id}" ${business.showLocation ? "checked" : ""} />
+                      <span>Show</span>
+                    </label>
+                  </td>
+                  <td>${business.verified ? "Yes" : "No"}</td>
+                  <td>${business.featured ? "Yes" : "No"}</td>
+                  <td>${business.approved ? "Yes" : "No"}</td>
+                  <td>
+                    <button class="small-btn" data-action="toggle-business-approval" data-id="${business.id}">
+                      ${business.approved ? "Unapprove" : "Approve"}
+                    </button>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+
+        document.querySelectorAll("[data-action]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const action = button.dataset.action;
+            const id = button.dataset.id;
+            if (action === "approve-business") approveBusiness(id);
+            if (action === "reject-business") rejectBusiness(id);
+            if (action === "toggle-featured") toggleFeatured(id);
+            if (action === "toggle-verified") toggleVerified(id);
+            if (action === "approve-review") approveReview(id);
+            if (action === "reject-review") rejectReview(id);
+            if (action === "toggle-business-approval") toggleBusinessApproval(id);
+          });
+        });
+
+        document.querySelectorAll("[data-action='toggle-location']").forEach((checkbox) => {
+          checkbox.addEventListener("change", (event) => {
+            toggleLocationVisibility(event.target.dataset.id, event.target.checked);
+          });
+        });
+
+        const upgradeBox = document.getElementById("pendingBusinesses");
+        if (upgradeBox && !upgradeBox.innerHTML.includes("feature-upgrade")) {
+          upgradeBox.insertAdjacentHTML("beforeend", `
+            <div class="transaction-box">
+              <div class="feature-upgrade">
+                <div>
+                  <strong>Featured listing</strong>
+                  <p class="muted">Raised placement in the directory</p>
+                </div>
+                <button class="btn btn-primary" type="button" data-premium="featured">Pay £49</button>
+              </div>
+              <div class="feature-upgrade">
+                <div>
+                  <strong>Verification review</strong>
+                  <p class="muted">Manual trust check and professional approval</p>
+                </div>
+                <button class="btn btn-secondary" type="button" data-premium="verification">Pay £25</button>
+              </div>
+              <div class="feature-upgrade">
+                <div>
+                  <strong>Priority placement</strong>
+                  <p class="muted">Higher ranking for faster response times</p>
+                </div>
+                <button class="btn btn-secondary" type="button" data-premium="priority">Pay £39</button>
+              </div>
+            </div>
+          `);
+
+          document.querySelectorAll("[data-premium]").forEach((btn) => {
+            btn.addEventListener("click", () => openCheckoutModal(btn.dataset.premium));
+          });
+        }
+      }
+
+      function openCheckoutModal(type) {
+        const modal = document.getElementById("checkoutModal");
+        const title = document.getElementById("checkoutTitle");
+        const amount = document.getElementById("checkoutAmount");
+        const label = type === "featured" ? "Featured listing" : type === "verification" ? "Verification review" : "Priority placement";
+        const money = type === "featured" ? "£49.00" : type === "verification" ? "£25.00" : "£39.00";
+        title.textContent = label;
+        amount.textContent = money;
+        modal.classList.add("active");
+      }
+
+      function attachCheckoutModalHandlers() {
+        const modal = document.getElementById("checkoutModal");
+        document.getElementById("closeCheckoutModal").addEventListener("click", () => modal.classList.remove("active"));
+        document.getElementById("payNowBtn").addEventListener("click", () => {
+          alert("This is a demo checkout flow. Replace with Stripe or real payment processing in production.");
+          modal.classList.remove("active");
+        });
+      }
+
+      function approveBusiness(id) {
+        const businesses = getBusinesses();
+        const index = businesses.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          businesses[index].approved = true;
+          businesses[index].verified = true;
+          saveBusinesses(businesses);
+          renderAdminDashboard();
+          renderDirectory();
+        }
+      }
+
+      function rejectBusiness(id) {
+        const businesses = getBusinesses();
+        const index = businesses.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          businesses[index].approved = false;
+          businesses[index].verified = false;
+          saveBusinesses(businesses);
+          renderAdminDashboard();
+          renderDirectory();
+        }
+      }
+
+      function toggleBusinessApproval(id) {
+        const businesses = getBusinesses();
+        const index = businesses.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          businesses[index].approved = !businesses[index].approved;
+          saveBusinesses(businesses);
+          renderAdminDashboard();
+          renderDirectory();
+        }
+      }
+
+      function toggleFeatured(id) {
+        const businesses = getBusinesses();
+        const index = businesses.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          businesses[index].featured = !businesses[index].featured;
+          saveBusinesses(businesses);
+          renderAdminDashboard();
+          renderDirectory();
+        }
+      }
+
+      function toggleVerified(id) {
+        const businesses = getBusinesses();
+        const index = businesses.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          businesses[index].verified = !businesses[index].verified;
+          saveBusinesses(businesses);
+          renderAdminDashboard();
+          renderDirectory();
+        }
+      }
+
+      function toggleLocationVisibility(id, checked) {
+        const businesses = getBusinesses();
+        const index = businesses.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          businesses[index].showLocation = !!checked;
+          saveBusinesses(businesses);
+          renderAdminDashboard();
+          renderDirectory();
+        }
+      }
+
+      function approveReview(id) {
+        const reviews = getReviews();
+        const index = reviews.findIndex((item) => item.id === id);
+        if (index >= 0) {
+          reviews[index].approved = true;
+          reviews[index].status = "approved";
+          saveReviews(reviews);
+
+          const businesses = getBusinesses();
+          const business = businesses.find((item) => item.id === reviews[index].businessId);
+          if (business) {
+            const approvedReviews = reviews.filter((review) => review.businessId === business.id && review.approved);
+            const total = approvedReviews.reduce((sum, review) => sum + Number(review.rating), 0);
+            business.rating = approvedReviews.length ? Number((total / approvedReviews.length).toFixed(1)) : 0;
+            business.reviewCount = approvedReviews.length;
+            saveBusinesses(businesses);
+          }
+
+          renderAdminDashboard();
+          renderDirectory();
+        }
+      }
+
+      function rejectReview(id) {
+        const reviews = getReviews();
+        saveReviews(reviews.filter((item) => item.id !== id));
+        renderAdminDashboard();
+      }
+
+      function exportData() {
+        const payload = {
+          businesses: getBusinesses(),
+          reviews: getReviews(),
+          verificationRequests: getVerificationRequests()
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "moon-muse-export.json";
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function importData(file) {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            if (data.businesses) saveBusinesses(data.businesses);
+            if (data.reviews) saveReviews(data.reviews);
+            if (data.verificationRequests) saveVerificationRequests(data.verificationRequests);
+            renderAdminDashboard();
+            renderDirectory();
+            alert("Import complete.");
+          } catch (error) {
+            alert("Import failed.");
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      function initAdminPage() {
+        const adminDashboard = document.getElementById("adminDashboard");
+        const loginBox = document.getElementById("adminLoginBox");
+        if (!adminDashboard) return;
+
+        ensureAdminPassword();
+
+        const loginForm = document.getElementById("adminLoginForm");
+        loginForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const password = document.getElementById("adminPassword").value;
+          const expected = localStorage.getItem("moon_muse_admin_password") || "moonmuseadmin";
+          if (password === expected) {
+            setAdminLoggedIn(true);
+            loginBox.classList.add("hidden");
+            adminDashboard.classList.remove("hidden");
+            renderAdminDashboard();
+            return;
+          }
+          document.getElementById("loginStatus").textContent = "Incorrect password.";
+          document.getElementById("loginStatus").style.color = "#ff8a8a";
+        });
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+          setAdminLoggedIn(false);
+          loginBox.classList.remove("hidden");
+          adminDashboard.classList.add("hidden");
+        });
+
+        document.getElementById("exportDataBtn").addEventListener("click", exportData);
+        document.getElementById("importDataBtn").addEventListener("click", () => document.getElementById("importFileInput").click());
+        document.getElementById("importFileInput").addEventListener("change", (event) => importData(event.target.files[0]));
+
+        if (adminIsLoggedIn()) {
+          loginBox.classList.add("hidden");
+          adminDashboard.classList.remove("hidden");
+        }
+
+        renderAdminDashboard();
+      }
+
+      function init() {
+        initDefaultData();
+        bindNavButtons();
+        bindDirectoryFilters();
+        initSubmitBusinessForm();
+        initVerificationForm();
+        initBusinessSettingsForm();
+        initAdminPage();
+        renderDirectory();
+        attachCheckoutModalHandlers();
+        showSection("home");
+      }
+
+      document.addEventListener("DOMContentLoaded", init);
+    </script>
+  </body>
+</html>
