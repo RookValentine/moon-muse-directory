@@ -18,18 +18,18 @@
       :root {
         --bg: #0d0d12;
         --bg-deep: #09090d;
-        --panel: #14151d;
-        --panel-soft: #1b1d2b;
+        --panel: rgba(20, 21, 29, 0.96);
+        --panel-soft: rgba(30, 32, 45, 0.96);
         --ink: #f4efe9;
         --muted: #b7adbb;
-        --line: rgba(221, 211, 255, 0.14);
+        --line: rgba(221, 211, 255, 0.18);
         --primary: #dcb1ff;
         --primary-bright: #f0d7ff;
         --primary-deep: #8f5ee0;
         --gold: #f5d88e;
         --success: #7de1b8;
         --danger: #ff8a8a;
-        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+        --shadow: 0 20px 54px rgba(0, 0, 0, 0.42);
       }
 
       * { box-sizing: border-box; }
@@ -37,129 +37,107 @@
       body {
         margin: 0;
         font-family: "Inter", sans-serif;
-        background: radial-gradient(circle at top, rgba(143, 94, 224, 0.22), transparent 34%), var(--bg);
+        background:
+          radial-gradient(circle at top, rgba(143, 94, 224, 0.22), transparent 30%),
+          var(--bg);
         color: var(--ink);
         line-height: 1.6;
       }
 
       a { color: inherit; text-decoration: none; }
-      button, input, textarea, select { font: inherit; }
-      img { max-width: 100%; display: block; }
-      h1, h2, h3 { margin: 0; font-weight: 700; font-family: "Cormorant Garamond", serif; }
-      h1 { font-size: clamp(2.7rem, 5vw, 4.5rem); line-height: 0.95; letter-spacing: -0.04em; }
-      h2 { font-size: clamp(2.3rem, 3vw, 3.4rem); }
-      h3 { font-size: 1.6rem; }
+      button, input, select, textarea { font: inherit; }
+      img { display: block; max-width: 100%; }
+      h1, h2, h3 {
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+      }
+      h1 { font-size: clamp(2.8rem, 5vw, 4.6rem); line-height: 0.92; letter-spacing: -0.04em; }
+      h2 { font-size: clamp(2.2rem, 3vw, 3.2rem); }
+      h3 { font-size: 1.5rem; }
       p { margin: 0; }
 
-      .container { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+      .container {
+        width: min(1180px, calc(100% - 36px));
+        margin: 0 auto;
+      }
       .hidden { display: none !important; }
       .muted { color: var(--muted); }
       .full-width { width: 100%; }
 
       .site-header {
-        background: rgba(15, 15, 20, 0.8);
-        border-bottom: 1px solid var(--line);
         position: sticky;
         top: 0;
-        z-index: 40;
-        backdrop-filter: blur(12px);
+        z-index: 50;
+        border-bottom: 1px solid var(--line);
+        background: rgba(15, 15, 20, 0.8);
+        backdrop-filter: blur(16px);
       }
-
       .nav {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        gap: 18px;
+        justify-content: space-between;
         min-height: 82px;
       }
-
       .brand {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 10px;
+        border: none;
+        background: none;
+        color: var(--ink);
+        padding: 0;
+        cursor: pointer;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        background: none;
-        border: none;
-        color: var(--ink);
-        cursor: pointer;
-        padding: 0;
       }
-
       .brand-mark {
         width: 28px;
         height: 28px;
+        border-radius: 50%;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border-radius: 50%;
         background: linear-gradient(135deg, var(--primary), var(--primary-deep));
-        color: var(--bg);
-      }
-
-      .nav-list {
-        display: flex;
-        gap: 22px;
-        align-items: center;
-        color: var(--muted);
-        font-weight: 500;
-      }
-
-      .nav-list button, .menu-panel button, .sidebar button, .secondary-link, .ghost-btn {
-        background: none;
-        border: none;
-        color: inherit;
-        font: inherit;
-        cursor: pointer;
+        color: var(--bg-deep);
+        font-size: 0.9rem;
       }
 
       .menu-toggle {
-        display: none;
-        width: 46px;
-        height: 46px;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
         border: 1px solid var(--line);
-        background: rgba(255,255,255,0.02);
-        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.02);
         color: var(--ink);
-        font-size: 1.5rem;
-      }
-
-      .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border: none;
-        border-radius: 12px;
-        padding: 0.95rem 1.5rem;
-        font-weight: 700;
-        transition: 0.2s ease;
+        font-size: 1.6rem;
         cursor: pointer;
+        transition: all 0.2s ease;
       }
-      .btn:hover { transform: translateY(-1px); }
-      .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
-        color: var(--bg-deep);
-        box-shadow: var(--shadow);
+      .menu-toggle:hover {
+        border-color: rgba(220, 177, 255, 0.4);
+        background: rgba(220, 177, 255, 0.08);
       }
-      .btn-secondary {
-        background: transparent;
-        color: var(--ink);
-        border: 1px solid var(--line);
-      }
-      .btn-danger {
-        background: rgba(255,138,138,0.12);
-        color: var(--danger);
-        border: 1px solid rgba(255,138,138,0.2);
+      .menu-toggle:focus-visible,
+      .menu-item:focus-visible,
+      .menu-cta:focus-visible,
+      .brand:focus-visible,
+      .btn:focus-visible {
+        outline: 2px solid var(--primary-bright);
+        outline-offset: 2px;
       }
 
       .sidebar-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(7, 7, 10, 0.5);
+        background: rgba(7, 7, 10, 0.52);
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.22s ease;
         z-index: 80;
       }
       .sidebar-overlay.open {
@@ -171,156 +149,249 @@
         position: fixed;
         top: 0;
         right: 0;
-        width: min(320px, 86vw);
+        width: min(360px, 88vw);
         height: 100vh;
         background: rgba(13, 13, 18, 0.96);
         border-left: 1px solid var(--line);
         box-shadow: var(--shadow);
-        transform: translateX(105%);
+        transform: translateX(110%);
         transition: transform 0.25s ease;
         z-index: 90;
         display: flex;
         flex-direction: column;
       }
       .menu-panel.open { transform: translateX(0); }
+
       .menu-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 20px 18px;
+        padding: 18px 18px 16px;
         border-bottom: 1px solid var(--line);
       }
-      .menu-panel .menu-body {
-        padding: 18px;
+      .menu-close {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .menu-body {
         display: grid;
         gap: 10px;
+        padding: 18px;
       }
-      .menu-panel .menu-body button {
-        display: block;
+      .menu-item {
         width: 100%;
-        text-align: left;
-        padding: 12px 14px;
-        border-radius: 12px;
-        background: rgba(255,255,255,0.02);
         border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
         color: var(--ink);
+        border-radius: 14px;
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
       }
-      .menu-panel .menu-footer {
+      .menu-item:hover {
+        border-color: rgba(220, 177, 255, 0.42);
+        background: rgba(220, 177, 255, 0.08);
+        transform: translateX(1px);
+      }
+      .menu-item.profile-item {
+        background: rgba(220, 177, 255, 0.06);
+      }
+
+      .menu-footer {
         margin-top: auto;
         padding: 18px;
         border-top: 1px solid var(--line);
         display: grid;
-        gap: 10px;
+        gap: 12px;
+      }
+      .menu-cta {
+        width: 100%;
+        border-radius: 16px;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.95rem 1.2rem;
+        font-weight: 800;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .menu-cta:hover { transform: translateY(-1px); }
+      .menu-cta.primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+        color: var(--bg-deep);
+        box-shadow: var(--shadow);
+      }
+      .menu-cta.secondary {
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
       }
 
-      .hero { padding: 88px 0 64px; }
+      main { min-height: 80vh; }
+      .view-panel {
+        display: none;
+      }
+      .view-panel.active {
+        display: block;
+      }
+
+      .hero {
+        padding: 80px 0 66px;
+      }
       .hero-inner {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 36px;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 34px;
         align-items: center;
       }
       .eyebrow {
+        margin: 0 0 12px;
+        color: var(--primary-bright);
         font-size: 12px;
         letter-spacing: 0.24em;
         text-transform: uppercase;
-        margin: 0 0 12px;
-        color: var(--primary-bright);
         font-weight: 700;
       }
       .subtext {
         margin-top: 18px;
+        font-size: 1.06rem;
         color: var(--muted);
-        font-size: 1.08rem;
-        max-width: 650px;
+        max-width: 640px;
       }
       .cta-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 15px;
-        margin-top: 30px;
+        gap: 14px;
+        margin-top: 28px;
       }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 14px;
+        padding: 0.95rem 1.35rem;
+        cursor: pointer;
+        font-weight: 700;
+        transition: transform 0.2s ease;
+      }
+      .btn:hover { transform: translateY(-1px); }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+        color: var(--bg-deep);
+        box-shadow: var(--shadow);
+      }
+      .btn-secondary {
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+
       .hero-card {
         background: linear-gradient(135deg, rgba(143, 94, 224, 0.18), rgba(245, 216, 142, 0.08));
         border: 1px solid var(--line);
-        border-radius: 30px;
-        padding: 28px;
+        border-radius: 28px;
+        padding: 24px;
         box-shadow: var(--shadow);
       }
       .mini-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(140px, 1fr));
-        gap: 18px;
+        gap: 16px;
       }
       .mini-card {
-        border-radius: 18px;
-        padding: 18px 14px;
-        background: rgba(255, 255, 255, 0.03);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 110px;
         border: 1px solid var(--line);
-        text-align: center;
+        background: rgba(255,255,255,0.02);
+        border-radius: 18px;
         font-weight: 700;
       }
 
-      .section { padding: 84px 0; }
+      .section {
+        padding: 72px 0;
+      }
       .alt {
-        background: rgba(255, 255, 255, 0.02);
+        background: rgba(255,255,255,0.02);
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
       }
-      .section-heading { margin-bottom: 28px; }
-      .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-      .feature-card {
+      .section-heading { margin-bottom: 24px; }
+      .feature-grid,
+      .pricing-grid,
+      .directory-grid {
+        display: grid;
+        gap: 22px;
+      }
+      .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .feature-card,
+      .pricing-card,
+      .listing-card,
+      .form-card,
+      .profile-card {
         background: var(--panel);
         border: 1px solid var(--line);
         border-radius: 22px;
-        padding: 26px 20px;
         box-shadow: var(--shadow);
       }
-      .feature-card p { color: var(--muted); margin: 0; }
+      .feature-card { padding: 22px 18px; }
+      .feature-card p { color: var(--muted); }
       .icon {
         width: 54px;
         height: 54px;
-        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.4rem;
-        background: rgba(143, 94, 224, 0.12);
-        border: 1px solid rgba(220, 177, 255, 0.3);
+        border-radius: 16px;
         margin-bottom: 14px;
+        border: 1px solid rgba(220, 177, 255, 0.3);
+        background: rgba(143, 94, 224, 0.12);
       }
-      .category-grid { display: flex; flex-wrap: wrap; gap: 14px; }
+
+      .category-grid { display: flex; flex-wrap: wrap; gap: 12px; }
       .category-pill {
-        border-radius: 999px;
-        padding: 12px 18px;
-        background: rgba(255,255,255,0.02);
+        padding: 12px 16px;
         border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        border-radius: 999px;
         font-weight: 600;
       }
 
-      .page-header { padding: 72px 0 18px; }
       .filter-bar {
         display: grid;
         grid-template-columns: 2fr 1.2fr 1.2fr 1fr auto auto;
         gap: 14px;
-        background: rgba(255,255,255,0.02);
         border: 1px solid var(--line);
         border-radius: 18px;
+        background: rgba(255,255,255,0.02);
         padding: 18px;
         box-shadow: var(--shadow);
       }
-      .filter-bar input, .filter-bar select,
-      .verify-form input, .verify-form textarea, .verify-form select,
-      .submission-form input, .submission-form textarea, .submission-form select,
-      .comment-box,
-      #leadForm input, #leadForm textarea, #reviewForm input, #reviewForm textarea, #reviewForm select,
-      .login-card input, .login-card select {
+      .filter-bar input,
+      .filter-bar select,
+      .submit-form input,
+      .submit-form textarea,
+      .submit-form select {
         width: 100%;
-        padding: 0.9rem 1rem;
         border-radius: 12px;
         border: 1px solid var(--line);
         background: rgba(255,255,255,0.02);
         color: var(--ink);
+        padding: 0.9rem 1rem;
       }
       .checkbox-row {
         display: flex;
@@ -330,375 +401,155 @@
         font-weight: 500;
       }
 
-      .directory-grid {
-        margin-top: 30px;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 24px;
-      }
-      .listing-card {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 22px;
-        box-shadow: var(--shadow);
-      }
+      .directory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 30px; }
+      .listing-card { padding: 20px; }
       .listing-card.featured {
-        border-color: rgba(220, 177, 255, 0.35);
         background: linear-gradient(180deg, rgba(20,21,29,1), rgba(30,22,41,1));
+        border-color: rgba(220, 177, 255, 0.4);
       }
-      .listing-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-      .listing-top h3 { margin-bottom: 4px; }
-      .tagline { color: var(--muted); margin: 0; font-size: 0.96rem; }
+      .listing-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
       .pill {
         border-radius: 999px;
-        padding: 0.35rem 0.7rem;
-        background: rgba(220, 177, 255, 0.12);
-        border: 1px solid rgba(220, 177, 255, 0.22);
-        color: var(--primary-bright);
+        padding: 0.38rem 0.7rem;
         font-size: 0.72rem;
         font-weight: 700;
+        color: var(--primary-bright);
+        background: rgba(220, 177, 255, 0.12);
+        border: 1px solid rgba(220, 177, 255, 0.2);
       }
-      .meta-list {
-        list-style: none;
-        padding: 0;
-        margin: 18px 0 0;
-        display: grid;
-        gap: 8px;
-        color: var(--muted);
-      }
+      .meta-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 8px; color: var(--muted); }
       .listing-footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-top: 18px;
       }
-      .rating { font-weight: 700; color: var(--gold); }
       .link-btn {
         display: inline-flex;
-        align-items: center;
         justify-content: center;
-        background: rgba(255,255,255,0.06);
+        align-items: center;
         border: 1px solid var(--line);
+        background: rgba(255,255,255,0.04);
         color: var(--ink);
         border-radius: 12px;
-        padding: 0.75rem 1rem;
-        font-weight: 600;
+        padding: 0.72rem 0.9rem;
+        font-weight: 700;
         cursor: pointer;
       }
 
-      .verify-shell, .form-page, .profile-page, .admin-page, .pricing-page, .dashboard-page { padding: 72px 0 80px; }
-      .verify-layout { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 36px; align-items: start; }
-      .verify-copy, .verify-form-wrap, .profile-card, .admin-card, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel, .login-card {
-        background: rgba(20,21,29,0.95);
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow);
-      }
-      .verify-copy, .verify-form-wrap, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel, .login-card { border-radius: 26px; }
-      .verify-copy { padding: 28px; }
-      .info-box {
-        background: rgba(220, 177, 255, 0.06);
-        border: 1px solid rgba(220, 177, 255, 0.2);
-        border-radius: 18px;
-        padding: 20px;
-        margin-top: 24px;
-      }
-      .price { font-size: 2.2rem; font-weight: 800; margin: 10px 0; color: var(--primary-bright); }
-      .requirements-list ul { padding-left: 18px; margin: 12px 0 0; color: var(--muted); }
-      .verify-form-wrap { padding: 24px; }
-      .verify-form { display: grid; gap: 18px; }
-      .form-step { display: none; gap: 16px; }
-      .form-step.is-active { display: grid; }
-      .verify-form label, .submission-form label, .login-card label { display: grid; gap: 8px; font-weight: 600; }
-      .form-navigation { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; }
-      .payment-box { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: rgba(255,255,255,0.02); }
-      .form-status { min-height: 22px; font-size: 0.95rem; color: var(--muted); }
-
-      .profile-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        gap: 18px;
-        margin-bottom: 28px;
-      }
-      .profile-badges { display: flex; gap: 12px; flex-wrap: wrap; }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem 0.8rem;
-        border-radius: 999px;
-        font-size: 0.75rem;
-        font-weight: 800;
-        text-transform: uppercase;
-      }
-      .badge.verified {
-        background: rgba(125, 225, 184, 0.12);
-        color: var(--success);
-        border: 1px solid rgba(125,225,184,0.2);
-      }
-      .badge.featured {
-        background: rgba(220, 177, 255, 0.12);
-        color: var(--primary-bright);
-        border: 1px solid rgba(220,177,255,0.2);
-      }
-      .profile-layout { display: grid; grid-template-columns: 1.5fr 0.8fr; gap: 24px; }
-      .profile-card { border-radius: 22px; padding: 24px; }
-      .profile-main, .profile-sidebar { display: grid; gap: 22px; }
-      .detail-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; color: var(--muted); }
-      .review { padding-top: 16px; border-top: 1px solid var(--line); margin-top: 16px; }
-      .review:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
-      .review-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-      #leadForm, #reviewForm, .submission-form, .login-form { display: grid; gap: 14px; }
-
-      .comment-card {
-        padding: 22px;
-      }
-      .compliment-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-      .compliment-btn {
-        background: rgba(255,255,255,0.03);
-        color: var(--ink);
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        padding: 0.7rem 1rem;
-        cursor: pointer;
-      }
-      .compliment-btn.selected {
-        border-color: rgba(220,177,255,0.5);
-        background: rgba(220,177,255,0.09);
-      }
-      .comment-box {
-        min-height: 110px;
-        resize: vertical;
-        margin-top: 14px;
-      }
-      .comment-submit { margin-top: 14px; }
-
-      .page-intro { margin-bottom: 28px; }
-      .page-intro.narrow { max-width: 700px; }
-      .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-      .form-card {
-        background: rgba(255,255,255,0.02);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 22px;
-        display: grid;
-        gap: 16px;
-      }
-      .form-card.wide { margin-top: 22px; }
-      .category-picker { display: flex; flex-wrap: wrap; gap: 12px; }
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.02);
-        border: 1px solid var(--line);
-        color: var(--ink);
-        cursor: pointer;
-      }
-      .chip input { accent-color: var(--primary); }
-      .submit-actions { display: flex; align-items: center; gap: 16px; padding-top: 10px; }
-      .field-row { display: grid; gap: 8px; margin-bottom: 18px; }
-
-      .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 22px;
-        margin-top: 30px;
-      }
-      .pricing-card {
-        padding: 24px;
-        display: grid;
-        gap: 18px;
-      }
+      .pricing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .pricing-card { padding: 24px; }
       .pricing-card.featured {
-        border-color: rgba(220,177,255,0.4);
         background: linear-gradient(180deg, rgba(20,21,29,1), rgba(35,26,46,1));
+        border-color: rgba(220, 177, 255, 0.45);
       }
       .price-tag {
         font-size: 2.5rem;
         font-weight: 800;
         color: var(--primary-bright);
       }
-      .price-features { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; color: var(--muted); }
-
-      .admin-header { margin-bottom: 18px; }
-      .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-      .admin-card { border-radius: 22px; padding: 22px; }
-      .admin-card.wide { grid-column: 1 / -1; }
-      .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
-      .row:last-child { border-bottom: none; }
-      .row-group { display: grid; gap: 8px; }
-      .action-row { display: flex; flex-wrap: wrap; gap: 8px; }
-      .small-btn {
-        padding: 0.45rem 0.8rem;
-        border-radius: 10px;
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.02);
-        color: var(--ink);
-        cursor: pointer;
-      }
-      .small-btn.success { border-color: rgba(125,225,184,0.2); color: var(--success); }
-      .small-btn.warn { border-color: rgba(245,216,142,0.2); color: var(--gold); }
-      .small-btn.danger { border-color: rgba(255,138,138,0.2); color: var(--danger); }
-      .admin-toolbar { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
-      .admin-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
-      .admin-table th, .admin-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-      .admin-table thead th {
-        color: var(--muted);
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.72rem;
-      }
-      .transaction-box {
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: rgba(255,255,255,0.02);
-        padding: 18px;
-        margin-top: 14px;
-      }
-      .feature-upgrade {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-        padding: 18px 0;
-        border-bottom: 1px solid var(--line);
-      }
-      .feature-upgrade:last-child { border-bottom: none; }
-
-      .owner-panel {
-        padding: 24px;
+      .price-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
         display: grid;
-        gap: 20px;
-      }
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 16px;
-      }
-      .stat-card {
-        padding: 18px;
-        border-radius: 18px;
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.02);
-      }
-      .stat-number {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--primary-bright);
-      }
-
-      .checkout-modal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.72);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 100;
-      }
-      .checkout-modal.active { display: flex; }
-      .checkout-modal-content {
-        max-width: 480px;
-        width: min(90vw, 480px);
-        padding: 28px;
-      }
-      .checkout-amount {
-        font-size: 2.1rem;
-        font-weight: 800;
-        color: var(--primary-bright);
-        margin: 10px 0 16px;
-      }
-
-      .site-footer {
-        border-top: 1px solid var(--line);
-        background: rgba(0,0,0,0.12);
-      }
-      .footer-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        min-height: 72px;
+        gap: 10px;
         color: var(--muted);
       }
-      .footer-links { display: flex; gap: 18px; }
 
-      .login-shell {
-        padding: 72px 0 80px;
+      .form-wrap,
+      .profile-wrap {
+        max-width: 960px;
+        margin: 0 auto;
       }
-      .login-layout {
+      .submit-form {
         display: grid;
-        grid-template-columns: 1fr 1.1fr;
-        gap: 30px;
-        align-items: center;
+        gap: 18px;
       }
-      .login-card {
-        padding: 28px;
-      }
-      .login-role-row {
+      .form-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-bottom: 14px;
+        gap: 22px;
       }
-      .role-option {
+      .form-card {
+        padding: 22px;
+        display: grid;
+        gap: 16px;
+      }
+      .submit-form label {
+        display: grid;
+        gap: 8px;
+        font-weight: 600;
+      }
+      .submit-actions {
         display: flex;
+        gap: 14px;
+        align-items: center;
+        margin-top: 6px;
+      }
+
+      .profile-card {
+        padding: 24px;
+        display: grid;
+        gap: 18px;
+      }
+      .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 18px;
+      }
+      .profile-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+      .badge {
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        padding: 12px 14px;
-        border-radius: 12px;
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.02);
-        color: var(--ink);
-        cursor: pointer;
+        border-radius: 999px;
+        padding: 0.46rem 0.75rem;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
-      .role-option.active {
-        background: rgba(220,177,255,0.08);
-        border-color: rgba(220,177,255,0.3);
+      .badge.verified {
+        background: rgba(125, 225, 184, 0.12);
+        border: 1px solid rgba(125,225,184,0.2);
+        color: var(--success);
       }
-      .role-option input {
-        display: none;
-      }
-      .login-meta {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin: 8px 0 18px;
-      }
-      .link-btn-light {
-        background: none;
-        border: none;
+      .badge.featured {
+        background: rgba(220, 177, 255, 0.12);
+        border: 1px solid rgba(220,177,255,0.2);
         color: var(--primary-bright);
-        cursor: pointer;
-        padding: 0;
       }
-      .guest-btn {
-        margin-top: 10px;
+      .detail-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+        color: var(--muted);
       }
 
       @media (max-width: 980px) {
-        .hero-inner, .verify-layout, .profile-layout, .admin-grid, .form-grid, .pricing-grid, .login-layout { grid-template-columns: 1fr; }
-        .feature-grid, .directory-grid { grid-template-columns: 1fr 1fr; }
-        .filter-bar { grid-template-columns: 1fr 1fr; }
-        .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .hero-inner,
+        .feature-grid,
+        .pricing-grid,
+        .directory-grid,
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .filter-bar {
+          grid-template-columns: 1fr 1fr;
+        }
       }
 
       @media (max-width: 640px) {
-        .nav-list { display: none; }
-        .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
-        .feature-grid, .directory-grid, .filter-bar, .stats-grid { grid-template-columns: 1fr; }
+        .menu-footer { display: none; }
+        .filter-bar { grid-template-columns: 1fr; }
         .cta-row { flex-direction: column; align-items: stretch; }
         .btn { width: 100%; }
         .profile-header { flex-direction: column; align-items: flex-start; }
-        .submit-actions { flex-direction: column; align-items: flex-start; }
-        .feature-upgrade { flex-direction: column; align-items: flex-start; }
-        .login-role-row { grid-template-columns: 1fr; }
+        .submit-actions { flex-direction: column; align-items: stretch; }
       }
     </style>
   </head>
@@ -710,65 +561,55 @@
           <span>Moon & Muse</span>
         </button>
 
-        <nav class="nav-list" aria-label="Main navigation">
-          <button type="button" data-target="home">Home</button>
-          <button type="button" data-target="directory">Directory</button>
-          <button type="button" data-target="pricing">Pricing</button>
-          <button type="button" data-target="submit">Submit</button>
-          <button type="button" data-target="profile">Profile</button>
-          <button type="button" data-target="dashboard" class="owner-only hidden">Dashboard</button>
-          <button type="button" data-target="admin" class="admin-only hidden">Admin</button>
-          <button type="button" data-target="verify" class="verify-only hidden">Verify</button>
-          <button type="button" data-target="login" id="loginNavButton">Login</button>
-        </nav>
-
-        <button class="menu-toggle" type="button" aria-label="Open menu">☰</button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
+          ☰
+        </button>
       </div>
     </header>
 
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <aside class="menu-panel" id="sidebarMenu" aria-label="Sidebar menu">
       <div class="menu-header">
-        <div class="brand">
+        <div class="brand" style="pointer-events:none;">
           <span class="brand-mark">✦</span>
           <span>Moon & Muse</span>
         </div>
-        <button type="button" id="closeSidebar" aria-label="Close menu">✕</button>
+        <button class="menu-close" type="button" id="closeSidebar" aria-label="Close menu">✕</button>
       </div>
+
       <div class="menu-body">
-        <button type="button" data-target="home">Home</button>
-        <button type="button" data-target="directory">Directory</button>
-        <button type="button" data-target="pricing">Pricing</button>
-        <button type="button" data-target="submit">Submit your business</button>
-        <button type="button" data-target="profile">Business Profile</button>
-        <button type="button" data-target="dashboard" class="owner-only hidden">Business Owner Dashboard</button>
-        <button type="button" data-target="admin" class="admin-only hidden">Admin Portal</button>
-        <button type="button" data-target="verify" class="verify-only hidden">Verification</button>
-        <button type="button" data-target="settings">Settings</button>
-        <button type="button" data-target="login" id="loginSidebarButton">Login</button>
+        <button class="menu-item" type="button" data-target="home">Home</button>
+        <button class="menu-item" type="button" data-target="directory">Directory</button>
+        <button class="menu-item" type="button" data-target="pricing">Pricing</button>
+        <button class="menu-item" type="button" data-target="submit">Submit your business</button>
+        <button class="menu-item profile-item require-auth hidden" type="button" data-target="profile">Profile</button>
+        <button class="menu-item require-auth hidden" type="button" data-target="dashboard">Dashboard</button>
+        <button class="menu-item require-auth hidden" type="button" data-target="verify">Verification</button>
+        <button class="menu-item require-auth hidden" type="button" data-target="admin">Admin</button>
+        <button class="menu-item" type="button" data-target="settings">Settings</button>
+        <button class="menu-item auth-toggle" id="loginButton" type="button">Login</button>
       </div>
+
       <div class="menu-footer">
-        <button class="btn btn-primary" type="button" data-target="submit">Submit your business</button>
-        <button class="btn btn-secondary" type="button" data-target="directory">Browse Directory</button>
+        <button class="menu-cta primary" type="button" data-target="submit">Submit your business</button>
+        <button class="menu-cta secondary" type="button" data-target="directory">Browse Directory</button>
       </div>
     </aside>
 
     <main>
-      <section id="home" class="view-panel">
+      <section id="home" class="view-panel active">
         <section class="hero">
           <div class="container hero-inner">
             <div class="hero-copy">
-              <p class="eyebrow">CURATED SPIRITUAL DIRECTORY</p>
+              <p class="eyebrow">Curated spiritual directory</p>
               <h1>Luxury, private, and professionally reviewed.</h1>
               <p class="subtext">
                 Discover trusted tarot readers, witches, astrologers, and spiritual practitioners
-                with premium placement, discretionary location controls, and verified professional trust.
+                with premium placement, discreet location controls, and verified trust.
               </p>
-
               <div class="cta-row">
                 <button class="btn btn-primary" type="button" data-target="directory">Browse Directory</button>
-                <button class="btn btn-secondary submit-btn" type="button" data-target="submit">Submit your business</button>
-                <button class="btn btn-secondary verify-only hidden" type="button" data-target="verify">Apply for Verification</button>
+                <button class="btn btn-secondary" type="button" data-target="submit">Submit your business</button>
               </div>
             </div>
 
@@ -786,7 +627,7 @@
         <section class="section">
           <div class="container">
             <div class="section-heading">
-              <p class="eyebrow">WHY PEOPLE USE THIS DIRECTORY</p>
+              <p class="eyebrow">Why people choose us</p>
               <h2>Professional, premium, and intentionally discreet.</h2>
             </div>
 
@@ -806,7 +647,7 @@
               <article class="feature-card">
                 <div class="icon">◎</div>
                 <h3>Location controls</h3>
-                <p>Businesses choose whether to expose their city/location on their own listing.</p>
+                <p>Businesses choose whether to expose their city or exact location.</p>
               </article>
             </div>
           </div>
@@ -815,10 +656,9 @@
         <section class="section alt">
           <div class="container">
             <div class="section-heading">
-              <p class="eyebrow">TOP CATEGORIES</p>
+              <p class="eyebrow">Top categories</p>
               <h2>Find your perfect spiritual fit</h2>
             </div>
-
             <div class="category-grid">
               <div class="category-pill">Tarot Reader</div>
               <div class="category-pill">Psychic Medium</div>
@@ -832,62 +672,102 @@
         </section>
       </section>
 
-      <section id="directory" class="view-panel hidden">
-        <section class="page-header">
-          <div class="container">
-            <p class="eyebrow">CURATED DIRECTORY</p>
-            <h1>Find trusted spiritual professionals</h1>
-          </div>
-        </section>
-
+      <section id="directory" class="view-panel">
         <section class="section">
           <div class="container">
-            <div class="filter-bar">
-              <input id="searchInput" type="text" placeholder="Search tarot, witches, readings..." />
-
-              <select id="categoryFilter">
-                <option value="all">All categories</option>
-                <option value="tarot-reader">Tarot Reader</option>
-                <option value="psychic-medium">Psychic Medium</option>
-                <option value="witchcraft">Witchcraft</option>
-                <option value="astrology">Astrology</option>
-                <option value="crystal-healing">Crystal Healing</option>
-                <option value="energy-healing">Energy Healing</option>
-                <option value="spiritual-coaching">Spiritual Coaching</option>
-              </select>
-
-              <input id="locationSearch" type="text" placeholder="City, country, or region" />
-
-              <select id="responseFilter">
-                <option value="9999">Any response time</option>
-                <option value="24">Responds within 24h</option>
-                <option value="48">Within 48h</option>
-                <option value="72">Within 72h</option>
-              </select>
-
-              <label class="checkbox-row">
-                <input type="checkbox" id="featuredOnly" />
-                <span>Featured</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" id="verifiedOnly" />
-                <span>Verified</span>
-              </label>
+            <div class="section-heading">
+              <p class="eyebrow">Curated directory</p>
+              <h2>Find trusted spiritual professionals</h2>
             </div>
 
-            <div id="directoryGrid" class="directory-grid"></div>
+            <div class="filter-bar">
+              <input type="text" placeholder="Search tarot, witches, readings..." />
+              <select>
+                <option>All categories</option>
+                <option>Tarot Reader</option>
+                <option>Witchcraft</option>
+                <option>Astrology</option>
+                <option>Crystal Healing</option>
+              </select>
+              <input type="text" placeholder="City, country, or region" />
+              <select>
+                <option>Any response time</option>
+                <option>Within 24h</option>
+                <option>Within 48h</option>
+                <option>Within 72h</option>
+              </select>
+              <label class="checkbox-row"><input type="checkbox" /> <span>Featured</span></label>
+              <label class="checkbox-row"><input type="checkbox" /> <span>Verified</span></label>
+            </div>
+
+            <div class="directory-grid">
+              <article class="listing-card featured">
+                <div class="listing-top">
+                  <div>
+                    <h3>Velvet Moon Tarot</h3>
+                    <p class="muted">Private readings & ritual guidance</p>
+                  </div>
+                  <span class="pill">Featured</span>
+                </div>
+                <ul class="meta-list">
+                  <li>London, UK</li>
+                  <li>Tarot Reader</li>
+                  <li>Response time: 2 hours</li>
+                </ul>
+                <div class="listing-footer">
+                  <span class="muted">★★★★★</span>
+                  <button class="link-btn" type="button">View profile</button>
+                </div>
+              </article>
+
+              <article class="listing-card">
+                <div class="listing-top">
+                  <div>
+                    <h3>Rose & Rune Studio</h3>
+                    <p class="muted">Astrology and soul rituals</p>
+                  </div>
+                  <span class="pill">Verified</span>
+                </div>
+                <ul class="meta-list">
+                  <li>Manchester, UK</li>
+                  <li>Astrology</li>
+                  <li>Response time: 10 hours</li>
+                </ul>
+                <div class="listing-footer">
+                  <span class="muted">★★★★★</span>
+                  <button class="link-btn" type="button">View profile</button>
+                </div>
+              </article>
+
+              <article class="listing-card">
+                <div class="listing-top">
+                  <div>
+                    <h3>Golden Hollow</h3>
+                    <p class="muted">Crystal healing & intuitive coaching</p>
+                  </div>
+                  <span class="pill">New</span>
+                </div>
+                <ul class="meta-list">
+                  <li>Edinburgh, UK</li>
+                  <li>Crystal Healing</li>
+                  <li>Response time: 1 day</li>
+                </ul>
+                <div class="listing-footer">
+                  <span class="muted">★★★★★</span>
+                  <button class="link-btn" type="button">View profile</button>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
       </section>
 
-      <section id="pricing" class="view-panel hidden">
-        <div class="container pricing-page">
-          <section class="page-intro narrow">
-            <p class="eyebrow">PRICING</p>
-            <h1>Simple plans for growing your spiritual business</h1>
-            <p class="muted">Choose a free setup or upgrade for premium placement, automation, and measured visibility.</p>
-          </section>
+      <section id="pricing" class="view-panel">
+        <div class="container section">
+          <div class="section-heading">
+            <p class="eyebrow">Pricing</p>
+            <h2>Simple plans for growing your spiritual business</h2>
+          </div>
 
           <div class="pricing-grid">
             <article class="pricing-card">
@@ -915,7 +795,7 @@
                 <li>✓ Everything in Free</li>
                 <li>✓ Featured placement</li>
                 <li>✓ Priority ranking</li>
-                <li>✓ Displayed verification badge</li>
+                <li>✓ Verification badge</li>
               </ul>
               <button class="btn btn-primary full-width" type="button" data-target="submit">Choose featured</button>
             </article>
@@ -928,8 +808,8 @@
               <p class="muted">For premium, multi-service, or high-touch spiritual practices.</p>
               <ul class="price-features">
                 <li>✓ Everything in Featured</li>
-                <li>✓ Concierge review setup</li>
-                <li>✓ Lead heatmap insights</li>
+                <li>✓ Concierge setup</li>
+                <li>✓ Lead insights</li>
                 <li>✓ Top-of-page exposure</li>
               </ul>
               <button class="btn btn-secondary full-width" type="button" data-target="submit">Upgrade</button>
@@ -938,864 +818,174 @@
         </div>
       </section>
 
-      <section id="submit" class="view-panel hidden">
-        <div class="container form-page">
-          <section class="page-intro">
-            <p class="eyebrow">JOIN THE DIRECTORY</p>
-            <h1>Submit your spiritual business</h1>
-            <p class="muted">
-              Share your practice, choose your visibility, and control whether your exact location is shown.
-              Location is never shown unless you explicitly enable it.
-            </p>
-          </section>
+      <section id="submit" class="view-panel">
+        <div class="container section form-wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Join the directory</p>
+            <h2>Submit your spiritual business</h2>
+          </div>
 
-          <form id="submitBusinessForm" class="submission-form">
+          <form class="submit-form">
             <div class="form-grid">
               <div class="form-card">
                 <h3>Profile basics</h3>
 
                 <label>
                   Business name
-                  <input type="text" id="listingName" required />
+                  <input type="text" required />
                 </label>
 
                 <label>
                   Tagline
-                  <input type="text" id="listingTagline" placeholder="Short, memorable summary" />
+                  <input type="text" placeholder="Short memorable summary" />
                 </label>
 
                 <label>
                   Bio
-                  <textarea id="listingBio" rows="5" required></textarea>
-                </label>
-
-                <label>
-                  Email
-                  <input type="email" id="listingEmail" required />
-                </label>
-
-                <label>
-                  Website
-                  <input type="url" id="listingWebsite" placeholder="https://..." />
-                </label>
-
-                <label>
-                  Instagram
-                  <input type="text" id="listingInstagram" placeholder="@handle" />
+                  <textarea rows="5" required></textarea>
                 </label>
               </div>
 
               <div class="form-card">
-                <h3>Location & visibility</h3>
+                <h3>Contact & visibility</h3>
+
+                <label>
+                  Email
+                  <input type="email" required />
+                </label>
+
+                <label>
+                  Website
+                  <input type="url" placeholder="https://..." />
+                </label>
+
+                <label>
+                  Instagram
+                  <input type="text" placeholder="@handle" />
+                </label>
 
                 <label>
                   City
-                  <input type="text" id="listingCity" placeholder="London" />
-                </label>
-
-                <label>
-                  Country
-                  <input type="text" id="listingCountry" placeholder="United Kingdom" />
-                </label>
-
-                <label>
-                  Service region
-                  <input type="text" id="listingServiceRegion" value="Online worldwide" />
-                </label>
-
-                <label class="checkbox-row">
-                  <input type="checkbox" id="listingShowLocation" />
-                  <span>Display my city/location publicly on my profile</span>
-                </label>
-
-                <label>
-                  Service mode
-                  <select id="listingServiceMode">
-                    <option value="online">Online only</option>
-                    <option value="remote">Remote only</option>
-                    <option value="hybrid">Hybrid</option>
-                  </select>
-                </label>
-
-                <label>
-                  Response time target
-                  <select id="listingResponseTime">
-                    <option value="24">Within 24 hours</option>
-                    <option value="48">Within 48 hours</option>
-                    <option value="72">Within 72 hours</option>
-                  </select>
+                  <input type="text" placeholder="London" />
                 </label>
               </div>
-            </div>
-
-            <div class="form-card wide">
-              <h3>Category selection</h3>
-              <div class="category-picker" id="categoryPicker">
-                <label class="chip"><input type="checkbox" value="tarot-reader" /><span>Tarot Reader</span></label>
-                <label class="chip"><input type="checkbox" value="psychic-medium" /><span>Psychic Medium</span></label>
-                <label class="chip"><input type="checkbox" value="witchcraft" /><span>Witchcraft</span></label>
-                <label class="chip"><input type="checkbox" value="astrology" /><span>Astrology</span></label>
-                <label class="chip"><input type="checkbox" value="crystal-healing" /><span>Crystal Healing</span></label>
-                <label class="chip"><input type="checkbox" value="energy-healing" /><span>Energy Healing</span></label>
-                <label class="chip"><input type="checkbox" value="spiritual-coaching" /><span>Spiritual Coaching</span></label>
-              </div>
-            </div>
-
-            <div class="form-card wide">
-              <h3>Lead and visibility settings</h3>
-
-              <label>
-                Pricing
-                <input type="text" id="listingPricing" placeholder="£35 per reading" />
-              </label>
-
-              <label>
-                Lead inquiry fee (£)
-                <input type="number" id="listingLeadFee" min="0" step="0.01" value="8.00" />
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" id="listingFeaturedRequest" />
-                <span>Request featured placement</span>
-              </label>
-
-              <label class="checkbox-row">
-                <input type="checkbox" id="listingVerifiedRequest" />
-                <span>Request professional verification</span>
-              </label>
             </div>
 
             <div class="submit-actions">
-              <button type="submit" class="btn btn-primary">Submit Listing</button>
-              <div id="submitStatus" class="form-status"></div>
+              <button class="btn btn-primary" type="submit">Submit listing</button>
+              <button class="btn btn-secondary" type="button" data-target="directory">Cancel</button>
             </div>
           </form>
         </div>
       </section>
 
-      <section id="verify" class="view-panel hidden">
-        <main class="verify-shell">
-          <section class="container verify-layout">
-            <div class="verify-copy">
-              <p class="eyebrow">VERIFICATION PROCESS</p>
-              <h1>Professional verification for trusted practitioners.</h1>
-              <p class="muted">
-                We manually review every application. Verification is a paid process and helps
-                establish trust, professionalism, and reliability within the directory.
-              </p>
-
-              <div class="info-box">
-                <h3>Verification fee</h3>
-                <p class="price">£25.00</p>
-                <p>Paid once per application. This fee covers manual review and screening.</p>
+      <section id="profile" class="view-panel">
+        <div class="container section profile-wrap">
+          <div class="profile-card">
+            <div class="profile-header">
+              <div>
+                <p class="eyebrow">Business profile</p>
+                <h2>Velvet Moon Tarot</h2>
               </div>
-
-              <div class="requirements-list">
-                <h3>Required documentation</h3>
-                <ul>
-                  <li>Yoti or equivalent secure identity verification</li>
-                  <li>Proof of previous work: event photos, portfolio, workshop examples</li>
-                  <li>Professional references: website, guilds, community profiles, social proof</li>
-                  <li>Client review references that are not screenshots</li>
-                  <li>Evidence of remote or in-person work</li>
-                </ul>
+              <div class="profile-badges">
+                <span class="badge verified">Verified</span>
+                <span class="badge featured">Featured</span>
               </div>
             </div>
 
-            <div class="verify-form-wrap">
-              <form id="verificationForm" class="verify-form">
-                <div class="form-step is-active">
-                  <h3>Business details</h3>
+            <ul class="detail-list">
+              <li>Specialty: Tarot readings, spiritual guidance, ritual support</li>
+              <li>Location: London, United Kingdom</li>
+              <li>Email: hello@velvetmoontarot.com</li>
+              <li>Availability: Tues–Sun, 11am–9pm</li>
+            </ul>
 
-                  <label>
-                    Business name
-                    <input type="text" id="businessName" required />
-                  </label>
-
-                  <label>
-                    Business email
-                    <input type="email" id="businessEmail" required />
-                  </label>
-
-                  <label>
-                    City
-                    <input type="text" id="city" placeholder="Example: London" />
-                  </label>
-
-                  <label>
-                    Country
-                    <input type="text" id="country" placeholder="Example: United Kingdom" />
-                  </label>
-
-                  <label>
-                    Service model
-                    <select id="serviceModel">
-                      <option value="online">Online only</option>
-                      <option value="remote">Remote only</option>
-                      <option value="hybrid">Hybrid</option>
-                    </select>
-                  </label>
-
-                  <label class="checkbox-row">
-                    <input type="checkbox" id="showLocation" />
-                    <span>Publicly display my location on my listing</span>
-                  </label>
-                </div>
-
-                <div class="form-step">
-                  <h3>Identity & proof</h3>
-
-                  <label>
-                    Yoti reference or secure ID verification reference
-                    <input type="text" id="yotiReference" />
-                  </label>
-
-                  <label>
-                    Yoti link or secure verification link
-                    <input type="url" id="yotiLink" placeholder="https://..." />
-                  </label>
-
-                  <label>
-                    Event photos / previous work links
-                    <textarea id="workProof" rows="3" placeholder="Paste links or describe prior work"></textarea>
-                  </label>
-
-                  <label>
-                    Professional links
-                    <textarea id="professionalLinks" rows="3" placeholder="Website, guilds, event listings, community profiles"></textarea>
-                  </label>
-                </div>
-
-                <div class="form-step">
-                  <h3>Client proof & references</h3>
-
-                  <label>
-                    Client review references
-                    <textarea id="clientReviews" rows="3" placeholder="Review pages or references, not screenshots"></textarea>
-                  </label>
-
-                  <label>
-                    Additional proof
-                    <textarea id="additionalProof" rows="3" placeholder="Any extra professional proof or context"></textarea>
-                  </label>
-
-                  <label>
-                    Notes for review
-                    <textarea id="reviewNotes" rows="3" placeholder="Anything else the review team should know?"></textarea>
-                  </label>
-                </div>
-
-                <div class="form-step">
-                  <h3>Payment & review</h3>
-
-                  <div class="payment-box">
-                    <p>Verification review fee</p>
-                    <strong>£25.00</strong>
-                  </div>
-
-                  <label class="checkbox-row">
-                    <input type="checkbox" id="agreeTerms" required />
-                    <span>I confirm the information provided is true and accurate.</span>
-                  </label>
-
-                  <button type="submit" class="btn btn-primary full-width">Submit for Manual Review</button>
-                </div>
-
-                <div class="form-navigation">
-                  <button type="button" class="btn btn-secondary" id="prevBtn">Previous</button>
-                  <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
-                </div>
-
-                <div id="formStatus" class="form-status" aria-live="polite"></div>
-              </form>
-            </div>
-          </section>
-        </main>
-      </section>
-
-      <section id="profile" class="view-panel hidden">
-        <div class="container profile-page">
-          <section class="profile-header">
-            <div>
-              <p class="eyebrow">BUSINESS PROFILE</p>
-              <h1>Moonlight Tarot Atelier</h1>
-            </div>
-            <div class="profile-badges">
-              <span class="badge verified">Verified</span>
-              <span class="badge featured">Featured</span>
-            </div>
-          </section>
-
-          <div class="profile-layout">
-            <div class="profile-main">
-              <article class="profile-card">
-                <h3>About</h3>
-                <p class="muted">Intuitive tarot consultations, ritual guidance, and holistic spiritual coaching for modern life transitions.</p>
-                <ul class="detail-list">
-                  <li>📍 Online worldwide</li>
-                  <li>💬 Responds within 24 hours</li>
-                  <li>⭐ 4.9 average rating</li>
-                  <li>💸 From £35 per reading</li>
-                </ul>
-              </article>
-
-              <article class="profile-card">
-                <h3>Client reviews</h3>
-                <div class="review">
-                  <div class="review-head">
-                    <strong>Jasmine P.</strong>
-                    <span class="rating">★★★★★</span>
-                  </div>
-                  <p class="muted">Clear, compassionate and deeply intuitive — I felt truly seen during my reading.</p>
-                </div>
-                <div class="review">
-                  <div class="review-head">
-                    <strong>Emmett R.</strong>
-                    <span class="rating">★★★★★</span>
-                  </div>
-                  <p class="muted">The ritual guidance helped me move through a difficult transition with calm clarity.</p>
-                </div>
-              </article>
-            </div>
-
-            <aside class="profile-sidebar">
-              <article class="profile-card">
-                <h3>Contact</h3>
-                <ul class="detail-list">
-                  <li>hello@moonlighttarot.co</li>
-                  <li>@moonlight.tarot</li>
-                  <li>https://moonlighttarot.co</li>
-                </ul>
-                <div class="cta-row">
-                  <button class="btn btn-primary" type="button">Book a reading</button>
-                  <button class="btn btn-secondary verify-only hidden" type="button" data-target="verify">Verification</button>
-                </div>
-              </article>
-
-              <article class="comment-card">
-                <h3>Compliments</h3>
-                <div class="compliment-actions">
-                  <button type="button" class="compliment-btn">✨ Insightful</button>
-                  <button type="button" class="compliment-btn">💜 Warm</button>
-                  <button type="button" class="compliment-btn">🕯️ Reassuring</button>
-                </div>
-                <textarea class="comment-box" placeholder="Leave a thoughtful comment for this business..."></textarea>
-                <button class="btn btn-primary comment-submit" type="button">Post comment</button>
-              </article>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section id="settings" class="view-panel hidden">
-        <div class="container form-page">
-          <section class="page-intro">
-            <p class="eyebrow">BUSINESS SETTINGS</p>
-            <h1>Manage your profile visibility</h1>
-          </section>
-
-          <div class="dashboard-box">
-            <div class="field-row">
-              <label>Choose your business</label>
-              <select id="settingsBusinessSelect"></select>
-            </div>
-
-            <form id="businessSettingsForm" class="submission-form">
-              <div class="form-grid">
-                <div class="form-card">
-                  <h3>Profile details</h3>
-
-                  <label>
-                    Business name
-                    <input type="text" id="settingsName" required />
-                  </label>
-
-                  <label>
-                    Tagline
-                    <input type="text" id="settingsTagline" />
-                  </label>
-
-                  <label>
-                    Bio
-                    <textarea id="settingsBio" rows="5" required></textarea>
-                  </label>
-
-                  <label>
-                    Email
-                    <input type="email" id="settingsEmail" required />
-                  </label>
-
-                  <label>
-                    Website
-                    <input type="url" id="settingsWebsite" />
-                  </label>
-
-                  <label>
-                    Instagram
-                    <input type="text" id="settingsInstagram" />
-                  </label>
-                </div>
-
-                <div class="form-card">
-                  <h3>Visibility & trust</h3>
-
-                  <label>
-                    Choose your city
-                    <input type="text" id="settingsCity" />
-                  </label>
-
-                  <label>
-                    Display on public listing
-                    <select id="settingsDisplayLocation">
-                      <option value="yes">Yes</option>
-                      <option value="no">No</option>
-                    </select>
-                  </label>
-
-                  <label>
-                    Response target
-                    <select id="settingsResponseTarget">
-                      <option value="24">Within 24 hours</option>
-                      <option value="48">Within 48 hours</option>
-                      <option value="72">Within 72 hours</option>
-                    </select>
-                  </label>
-
-                  <label class="checkbox-row">
-                    <input type="checkbox" id="settingsFeatured" />
-                    <span>Enable featured listing</span>
-                  </label>
-
-                  <label class="checkbox-row">
-                    <input type="checkbox" id="settingsVerified" />
-                    <span>Public verification badge</span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="submit-actions">
-                <button type="submit" class="btn btn-primary">Save settings</button>
-                <div id="settingsStatus" class="form-status"></div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <section id="dashboard" class="view-panel hidden">
-        <div class="container dashboard-page">
-          <section class="page-intro">
-            <p class="eyebrow">BUSINESS OWNER DASHBOARD</p>
-            <h1>Welcome back, Moonlight Tarot Atelier</h1>
-          </section>
-
-          <div class="owner-panel">
-            <div class="stats-grid">
-              <div class="stat-card">
-                <p class="muted">Profile views</p>
-                <div class="stat-number">2,480</div>
-              </div>
-              <div class="stat-card">
-                <p class="muted">New leads</p>
-                <div class="stat-number">76</div>
-              </div>
-              <div class="stat-card">
-                <p class="muted">Response rate</p>
-                <div class="stat-number">89%</div>
-              </div>
-              <div class="stat-card">
-                <p class="muted">Avg. rating</p>
-                <div class="stat-number">4.9</div>
-              </div>
-            </div>
-
-            <div class="admin-grid">
-              <article class="admin-card">
-                <h3>Recent lead activity</h3>
-                <div class="row"><span>New inquiry — Tarot reading</span><span class="muted">2m ago</span></div>
-                <div class="row"><span>Follow-up request — Ritual support</span><span class="muted">19m ago</span></div>
-                <div class="row"><span>Website booking click</span><span class="muted">1h ago</span></div>
-              </article>
-
-              <article class="admin-card">
-                <h3>Listing health</h3>
-                <div class="row"><span>Featured placement</span><span class="muted">Active</span></div>
-                <div class="row"><span>Verification status</span><span class="muted">Approved</span></div>
-                <div class="row"><span>Lead inquiry fee</span><span class="muted">£8</span></div>
-              </article>
-            </div>
-
-            <article class="admin-card wide">
-              <h3>Performance overview</h3>
-              <table class="admin-table">
-                <thead>
-                  <tr><th>Channel</th><th>Visits</th><th>Conversion</th><th>Revenue</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Directory</td><td>1,345</td><td>18%</td><td>£640</td></tr>
-                  <tr><td>Instagram</td><td>860</td><td>11%</td><td>£310</td></tr>
-                  <tr><td>Website</td><td>275</td><td>26%</td><td>£420</td></tr>
-                </tbody>
-              </table>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="admin" class="view-panel hidden">
-        <div class="container admin-page">
-          <section class="page-intro">
-            <p class="eyebrow">ADMIN PORTAL</p>
-            <h1>Review queue and business operations</h1>
-          </section>
-
-          <div class="admin-toolbar">
-            <button class="btn btn-secondary" type="button">Export CSV</button>
-            <button class="btn btn-primary" type="button">Review applications</button>
-          </div>
-
-          <div class="admin-grid">
-            <article class="admin-card">
-              <h3>Pending verification</h3>
-              <div class="row"><span>Moonlight Tarot Atelier</span><span class="muted">Approved</span></div>
-              <div class="row"><span>Wildflower Witchery</span><span class="muted">Needs docs</span></div>
-              <div class="row"><span>North Star Astrology</span><span class="muted">Awaiting review</span></div>
-            </article>
-
-            <article class="admin-card">
-              <h3>Flagged listings</h3>
-              <div class="row"><span>Velvet Oracle</span><span class="small-btn danger">Flagged</span></div>
-              <div class="row"><span>Solstice Rituals</span><span class="small-btn warn">Review</span></div>
-              <div class="row"><span>Hearthstone Readings</span><span class="muted">Clear</span></div>
-            </article>
-
-            <article class="admin-card wide">
-              <h3>Management queue</h3>
-              <table class="admin-table">
-                <thead>
-                  <tr><th>Business</th><th>Category</th><th>Status</th><th>Action</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Moonlight Tarot Atelier</td><td>Tarot Reader</td><td>Verified</td><td><span class="small-btn success">Active</span></td></tr>
-                  <tr><td>Wildflower Witchery</td><td>Witchcraft</td><td>Pending</td><td><span class="small-btn warn">Review</span></td></tr>
-                  <tr><td>North Star Astrology</td><td>Astrology</td><td>New</td><td><span class="small-btn">Queue</span></td></tr>
-                </tbody>
-              </table>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="login" class="view-panel hidden">
-        <div class="container login-shell">
-          <div class="login-layout">
-            <div class="login-copy">
-              <p class="eyebrow">WELCOME BACK</p>
-              <h1>Access the Moon & Muse portal</h1>
-              <p class="subtext">
-                Sign in to manage your listing, review leads, or moderate the directory as an admin.
-              </p>
-              <div class="info-box">
-                <h3>Demo accounts</h3>
-                <p class="muted">Business owner: owner@moonlighttarot.co</p>
-                <p class="muted">Admin: admin@moonmuse.directory</p>
-              </div>
-            </div>
-
-            <div class="login-card">
-              <form class="login-form" id="loginForm">
-                <div class="login-role-row" role="tablist" aria-label="Account role selector">
-                  <label class="role-option active" data-role-option="owner">
-                    <input type="radio" name="loginRole" value="owner" checked />
-                    <span>Business owner</span>
-                  </label>
-                  <label class="role-option" data-role-option="admin">
-                    <input type="radio" name="loginRole" value="admin" />
-                    <span>Admin</span>
-                  </label>
-                </div>
-
-                <label>
-                  Email
-                  <input type="email" id="loginEmail" placeholder="you@example.com" required />
-                </label>
-
-                <label>
-                  Password
-                  <input type="password" id="loginPassword" placeholder="Enter your password" required />
-                </label>
-
-                <div class="login-meta">
-                  <label class="checkbox-row" style="margin:0;">
-                    <input type="checkbox" id="rememberMe" />
-                    <span>Remember me</span>
-                  </label>
-                  <button type="button" class="link-btn-light" id="forgotPasswordBtn">Forgot password?</button>
-                </div>
-
-                <div class="form-status" id="loginError" aria-live="polite"></div>
-
-                <div class="submit-actions" style="padding-top:0;">
-                  <button class="btn btn-primary" type="submit" id="loginAction">Login</button>
-                  <button class="btn btn-secondary" type="button" data-target="home">Cancel</button>
-                </div>
-
-                <button class="btn btn-secondary guest-btn" type="button" id="guestLoginBtn">Continue as guest</button>
-              </form>
+            <div class="submit-actions">
+              <button class="btn btn-primary" type="button">Edit profile</button>
+              <button class="btn btn-secondary" type="button">Message</button>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div>© 2026 Moon & Muse</div>
-        <div class="footer-links">
-          <button type="button" data-target="home">Home</button>
-          <button type="button" data-target="directory">Directory</button>
-          <button type="button" data-target="pricing">Pricing</button>
-          <button type="button" data-target="submit">Submit</button>
-          <button type="button" data-target="login">Login</button>
-        </div>
-      </div>
-    </footer>
-
-    <div class="checkout-modal" id="checkoutModal" aria-modal="true" role="dialog">
-      <div class="checkout-modal-content business-modal-content">
-        <p class="eyebrow">Secure checkout</p>
-        <h3>Upgrade your listing</h3>
-        <div class="checkout-amount">£39.00</div>
-        <div class="transaction-box">
-          <p>Featured placement for 30 days</p>
-          <p class="muted">Includes premium ranking, verification badge placement, and lead boost.</p>
-        </div>
-        <div class="cta-row">
-          <button class="btn btn-primary" type="button">Pay now</button>
-          <button class="btn btn-secondary" type="button" id="closeCheckout">Close</button>
-        </div>
-      </div>
-    </div>
-
     <script>
-      const state = {
-        loggedIn: false,
-        businessOwner: false,
-        sidebarOpen: false,
-        currentView: 'home'
-      };
+      const sidebarMenu = document.getElementById('sidebarMenu');
+      const sidebarOverlay = document.getElementById('sidebarOverlay');
+      const menuToggle = document.getElementById('menuToggle');
+      const closeSidebar = document.getElementById('closeSidebar');
+      const loginButton = document.getElementById('loginButton');
+      const requireAuthButtons = [...document.querySelectorAll('.require-auth')];
+      const viewPanels = [...document.querySelectorAll('.view-panel')];
+      const navButtons = [...document.querySelectorAll('[data-target]')];
 
-      const validAccounts = {
-        owner: {
-          email: 'owner@moonlighttarot.co',
-          password: 'moonlight-owner-2026',
-          role: 'owner'
-        },
-        admin: {
-          email: 'admin@moonmuse.directory',
-          password: 'moonmuse-admin-2026',
-          role: 'admin'
-        }
-      };
+      const getStoredLoginState = () => localStorage.getItem('moonMuseLoggedIn') === 'true';
+      let isLoggedIn = getStoredLoginState();
 
-      const viewIds = ['home', 'directory', 'pricing', 'submit', 'verify', 'profile', 'settings', 'dashboard', 'admin', 'login'];
-
-      function showView(target) {
-        viewIds.forEach((id) => {
-          const el = document.getElementById(id);
-          if (el) el.classList.toggle('hidden', id !== target);
-        });
-        state.currentView = target;
-        closeSidebar();
+      function setMenuState(open) {
+        sidebarMenu.classList.toggle('open', open);
+        sidebarOverlay.classList.toggle('open', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
       }
 
-      function renderAuthState() {
-        const ownerEls = document.querySelectorAll('.owner-only');
-        const verifyEls = document.querySelectorAll('.verify-only');
-        const adminEls = document.querySelectorAll('.admin-only');
-
-        const isOwner = state.loggedIn && state.businessOwner;
-        const isAdmin = state.loggedIn && !state.businessOwner;
-
-        ownerEls.forEach((el) => el.classList.toggle('hidden', !isOwner));
-        verifyEls.forEach((el) => el.classList.toggle('hidden', !isOwner));
-        adminEls.forEach((el) => el.classList.toggle('hidden', !isAdmin));
-
-        const loginButtonText = state.loggedIn ? (isOwner ? 'Owner' : 'Admin') : 'Login';
-        document.querySelectorAll('#loginNavButton, #loginSidebarButton').forEach((button) => {
-          button.textContent = loginButtonText;
+      function showPanel(panelId) {
+        viewPanels.forEach(panel => {
+          panel.classList.toggle('active', panel.id === panelId);
         });
       }
 
-      function setLoggedIn(role) {
-        state.loggedIn = true;
-        state.businessOwner = role === 'owner';
-        renderAuthState();
-        if (role === 'owner') showView('dashboard');
-        if (role === 'admin') showView('admin');
-      }
-
-      function handleLogin(role, email, password) {
-        const account = validAccounts[role];
-        const errorNode = document.getElementById('loginError');
-
-        if (!account) {
-          errorNode.textContent = 'Unknown account type.';
-          return;
-        }
-
-        if (email !== account.email || password !== account.password) {
-          errorNode.textContent = 'That email/password combination is not valid for this role.';
-          return;
-        }
-
-        errorNode.textContent = '';
-        setLoggedIn(role);
-      }
-
-      document.querySelectorAll('[data-target]').forEach((button) => {
-        const target = button.getAttribute('data-target');
-        if (target === 'login') {
-          button.addEventListener('click', () => {
-            if (!state.loggedIn) {
-              showView('login');
-              return;
-            }
-            state.loggedIn = false;
-            state.businessOwner = false;
-            renderAuthState();
-            showView('home');
-          });
-          return;
-        }
-
-        if (target === 'verify' || target === 'dashboard' || target === 'settings') {
-          button.addEventListener('click', () => {
-            if (!state.loggedIn || !state.businessOwner) {
-              showView('login');
-              return;
-            }
-            showView(target);
-          });
-          return;
-        }
-
-        if (target === 'admin') {
-          button.addEventListener('click', () => {
-            if (!state.loggedIn || state.businessOwner) {
-              showView('login');
-              return;
-            }
-            showView('admin');
-          });
-          return;
-        }
-
-        button.addEventListener('click', () => showView(target));
-      });
-
-      document.querySelectorAll('.role-option').forEach((option) => {
-        option.addEventListener('click', () => {
-          document.querySelectorAll('.role-option').forEach((el) => el.classList.remove('active'));
-          option.classList.add('active');
-          const input = option.querySelector('input');
-          input.checked = true;
-          document.getElementById('loginError').textContent = '';
+      function updateAuthUi() {
+        requireAuthButtons.forEach(button => {
+          button.classList.toggle('hidden', !isLoggedIn);
         });
-      });
 
-      document.getElementById('forgotPasswordBtn').addEventListener('click', () => {
-        document.getElementById('loginError').textContent = 'Password reset links are available after you contact support.';
-      });
+        const loginLabel = isLoggedIn ? 'Log out' : 'Login';
+        loginButton.textContent = loginLabel;
 
-      document.getElementById('guestLoginBtn').addEventListener('click', () => {
-        state.loggedIn = false;
-        state.businessOwner = false;
-        renderAuthState();
-        showView('home');
-      });
-
-      document.getElementById('loginForm').addEventListener('submit', (event) => {
-        event.preventDefault();
-        const role = document.querySelector('input[name="loginRole"]:checked').value;
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value;
-        handleLogin(role, email, password);
-      });
-
-      document.querySelector('.menu-toggle').addEventListener('click', () => {
-        state.sidebarOpen = true;
-        document.getElementById('sidebarMenu').classList.add('open');
-        document.getElementById('sidebarOverlay').classList.add('open');
-      });
-
-      function closeSidebar() {
-        state.sidebarOpen = false;
-        document.getElementById('sidebarMenu').classList.remove('open');
-        document.getElementById('sidebarOverlay').classList.remove('open');
+        if (!isLoggedIn) {
+          document.querySelector('.profile-item')?.classList.add('hidden');
+        }
       }
 
-      document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
-      document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+      menuToggle.addEventListener('click', () => {
+        const isOpen = sidebarMenu.classList.contains('open');
+        setMenuState(!isOpen);
+      });
 
-      document.querySelectorAll('.compliment-btn').forEach((button) => {
+      closeSidebar.addEventListener('click', () => setMenuState(false));
+      sidebarOverlay.addEventListener('click', () => setMenuState(false));
+
+      navButtons.forEach(button => {
         button.addEventListener('click', () => {
-          button.classList.toggle('selected');
-        });
-      });
+          const target = button.dataset.target;
+          if (target) {
+            if (button.classList.contains('auth-toggle')) {
+              isLoggedIn = !isLoggedIn;
+              localStorage.setItem('moonMuseLoggedIn', String(isLoggedIn));
+              updateAuthUi();
 
-      document.getElementById('submitBusinessForm').addEventListener('submit', (event) => {
-        event.preventDefault();
-        document.getElementById('submitStatus').textContent = 'Listing submitted successfully.';
-      });
-
-      document.getElementById('businessSettingsForm').addEventListener('submit', (event) => {
-        event.preventDefault();
-        document.getElementById('settingsStatus').textContent = 'Settings saved successfully.';
-      });
-
-      document.getElementById('verificationForm').addEventListener('submit', (event) => {
-        event.preventDefault();
-        document.getElementById('formStatus').textContent = 'Submission sent for manual review.';
-      });
-
-      document.getElementById('prevBtn').addEventListener('click', () => {
-        const steps = [...document.querySelectorAll('.form-step')];
-        const activeIndex = steps.findIndex((step) => step.classList.contains('is-active'));
-        if (activeIndex > 0) {
-          steps[activeIndex].classList.remove('is-active');
-          steps[activeIndex - 1].classList.add('is-active');
-        }
-      });
-
-      document.getElementById('nextBtn').addEventListener('click', () => {
-        const steps = [...document.querySelectorAll('.form-step')];
-        const activeIndex = steps.findIndex((step) => step.classList.contains('is-active'));
-        if (activeIndex < steps.length - 1) {
-          steps[activeIndex].classList.remove('is-active');
-          steps[activeIndex + 1].classList.add('is-active');
-        }
-      });
-
-      document.querySelector('.comment-submit').addEventListener('click', () => {
-        document.querySelector('.comment-submit').textContent = 'Comment posted';
-      });
-
-      document.querySelectorAll('.btn-primary[data-target="submit"]').forEach((button) => {
-        button.addEventListener('click', () => {
-          if (button.classList.contains('full-width')) {
-            document.getElementById('checkoutModal').classList.add('active');
+              if (!isLoggedIn && target === 'home') {
+                showPanel('home');
+              }
+            } else {
+              showPanel(target);
+            }
           }
-          showView('submit');
+
+          if (button.closest('.menu-panel')) {
+            setMenuState(false);
+          }
         });
       });
 
-      document.getElementById('closeCheckout').addEventListener('click', () => {
-        document.getElementById('checkoutModal').classList.remove('active');
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          setMenuState(false);
+        }
       });
 
-      renderAuthState();
-      showView('home');
+      updateAuthUi();
+      showPanel('home');
     </script>
   </body>
 </html>
