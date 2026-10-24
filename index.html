@@ -85,7 +85,9 @@
       .menu-toggle,
       .brand,
       .btn,
-      .link-btn {
+      .link-btn,
+      .dashboard-btn,
+      .verify-link {
         transition: all 0.2s ease;
       }
       .nav-link {
@@ -150,7 +152,10 @@
       .menu-cta:focus-visible,
       .brand:focus-visible,
       .btn:focus-visible,
-      .nav-link:focus-visible {
+      .nav-link:focus-visible,
+      .dashboard-btn:focus-visible,
+      .verify-link:focus-visible,
+      .login-submit:focus-visible {
         outline: 2px solid var(--primary-bright);
         outline-offset: 2px;
       }
@@ -208,6 +213,7 @@
         display: grid;
         gap: 10px;
         padding: 18px;
+        overflow-y: auto;
       }
       .menu-item {
         width: 100%;
@@ -250,6 +256,59 @@
         background: linear-gradient(135deg, var(--primary), var(--primary-deep));
         color: var(--bg-deep);
         box-shadow: var(--shadow);
+      }
+
+      .login-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.6);
+        z-index: 110;
+      }
+      .login-modal.open { display: flex; }
+      .login-card {
+        width: min(440px, calc(100% - 32px));
+        background: rgba(13, 13, 18, 0.98);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        padding: 24px;
+      }
+      .login-card h3 { margin-bottom: 12px; }
+      .login-form {
+        display: grid;
+        gap: 14px;
+      }
+      .login-form label {
+        display: grid;
+        gap: 8px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .login-form input {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+        padding: 0.9rem 1rem;
+      }
+      .login-submit {
+        margin-top: 6px;
+        border: none;
+        border-radius: 14px;
+        padding: 0.95rem 1.2rem;
+        font-weight: 800;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+        color: var(--bg-deep);
+      }
+      .login-message {
+        min-height: 20px;
+        color: var(--danger);
+        font-size: 0.92rem;
       }
 
       main { min-height: 80vh; }
@@ -345,7 +404,8 @@
       .section-heading { margin-bottom: 24px; }
       .feature-grid,
       .pricing-grid,
-      .directory-grid {
+      .directory-grid,
+      .dashboard-grid {
         display: grid;
         gap: 22px;
       }
@@ -355,7 +415,9 @@
       .listing-card,
       .form-card,
       .profile-card,
-      .payment-card {
+      .payment-card,
+      .dashboard-card,
+      .verification-card {
         background: var(--panel);
         border: 1px solid var(--line);
         border-radius: 22px;
@@ -401,7 +463,10 @@
       .submit-form textarea,
       .submit-form select,
       .payment-form input,
-      .payment-form select {
+      .payment-form select,
+      .verification-form input,
+      .verification-form textarea,
+      .verification-form select {
         width: 100%;
         border-radius: 12px;
         border: 1px solid var(--line);
@@ -475,39 +540,48 @@
 
       .form-wrap,
       .profile-wrap,
-      .payment-wrap {
+      .payment-wrap,
+      .dashboard-wrap,
+      .verification-wrap {
         max-width: 960px;
         margin: 0 auto;
       }
       .submit-form,
-      .payment-form {
+      .payment-form,
+      .verification-form {
         display: grid;
         gap: 18px;
       }
-      .form-grid {
+      .form-grid,
+      .dashboard-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 22px;
       }
       .form-card,
-      .payment-card {
+      .payment-card,
+      .dashboard-card,
+      .verification-card {
         padding: 22px;
         display: grid;
         gap: 16px;
       }
       .submit-form label,
-      .payment-form label {
+      .payment-form label,
+      .verification-form label {
         display: grid;
         gap: 8px;
         font-weight: 600;
       }
       .submit-actions,
-      .payment-actions {
+      .payment-actions,
+      .dashboard-actions {
         display: flex;
         gap: 14px;
         align-items: center;
         margin-top: 6px;
       }
+      .dashboard-actions { flex-wrap: wrap; }
 
       .payment-summary {
         display: grid;
@@ -561,13 +635,38 @@
         gap: 10px;
         color: var(--muted);
       }
+      .stat-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+        color: var(--muted);
+      }
+      .dashboard-btn,
+      .verify-link {
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+        padding: 0.75rem 1rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .dashboard-btn.primary,
+      .verify-link.primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+        color: var(--bg-deep);
+        border: none;
+      }
 
       @media (max-width: 980px) {
         .hero-inner,
         .feature-grid,
         .pricing-grid,
         .directory-grid,
-        .form-grid {
+        .form-grid,
+        .dashboard-grid {
           grid-template-columns: 1fr;
         }
         .filter-bar {
@@ -581,7 +680,7 @@
         .cta-row { flex-direction: column; align-items: stretch; }
         .btn { width: 100%; }
         .profile-header { flex-direction: column; align-items: flex-start; }
-        .submit-actions, .payment-actions { flex-direction: column; align-items: stretch; }
+        .submit-actions, .payment-actions, .dashboard-actions { flex-direction: column; align-items: stretch; }
       }
     </style>
   </head>
@@ -619,19 +718,35 @@
         <button class="menu-item" type="button" data-target="home">Home</button>
         <button class="menu-item" type="button" data-target="directory">Directory</button>
         <button class="menu-item" type="button" data-target="pricing">Pricing</button>
-        <button class="menu-item" type="button" data-target="submit">Submit your business</button>
+        <button class="menu-item" type="button" data-target="submit">List your business</button>
         <button class="menu-item profile-item require-auth hidden" type="button" data-target="profile">Profile</button>
         <button class="menu-item require-auth hidden" type="button" data-target="dashboard">Dashboard</button>
-        <button class="menu-item require-auth hidden" type="button" data-target="verify">Verification</button>
-        <button class="menu-item require-auth hidden" type="button" data-target="admin">Admin</button>
         <button class="menu-item" type="button" data-target="settings">Settings</button>
         <button class="menu-item auth-toggle" id="sidebarLoginButton" type="button">Login</button>
       </div>
 
       <div class="menu-footer">
-        <button class="menu-cta primary" type="button" data-target="submit">Submit your business</button>
+        <button class="menu-cta primary" type="button" data-target="submit">List your business</button>
       </div>
     </aside>
+
+    <div class="login-modal" id="loginModal" aria-modal="true" role="dialog">
+      <div class="login-card">
+        <h3>Login</h3>
+        <form class="login-form" id="loginForm">
+          <label>
+            Email
+            <input type="email" id="loginEmail" required placeholder="you@example.com" />
+          </label>
+          <label>
+            Password
+            <input type="password" id="loginPassword" required placeholder="Your password" />
+          </label>
+          <button class="login-submit" type="submit">Sign in</button>
+          <div class="login-message" id="loginMessage"></div>
+        </form>
+      </div>
+    </div>
 
     <main>
       <section id="home" class="view-panel active">
@@ -646,7 +761,7 @@
               </p>
               <div class="cta-row">
                 <button class="btn btn-primary" type="button" data-target="directory">Browse Directory</button>
-                <button class="btn btn-secondary" type="button" data-target="submit">Submit your business</button>
+                <button class="btn btn-primary" type="button" data-target="submit">List your business</button>
               </div>
             </div>
 
@@ -902,7 +1017,7 @@
         <div class="container section form-wrap">
           <div class="section-heading">
             <p class="eyebrow">Join the directory</p>
-            <h2>Submit your spiritual business</h2>
+            <h2>List your business</h2>
           </div>
 
           <form class="submit-form" id="submitForm">
@@ -961,10 +1076,47 @@
             </div>
 
             <div class="submit-actions">
-              <button class="btn btn-primary" type="submit">Submit listing</button>
+              <button class="btn btn-primary" type="submit">List business</button>
               <button class="btn btn-secondary" type="button" data-target="directory">Cancel</button>
             </div>
           </form>
+        </div>
+      </section>
+
+      <section id="dashboard" class="view-panel">
+        <div class="container section dashboard-wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Dashboard</p>
+            <h2>Your business dashboard</h2>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="dashboard-card">
+              <h3>Profile overview</h3>
+              <ul class="stat-list">
+                <li>Business: Velvet Moon Tarot</li>
+                <li>Status: Featured</li>
+                <li>Location: London, United Kingdom</li>
+                <li>Email: hello@velvetmoontarot.com</li>
+              </ul>
+              <div class="dashboard-actions">
+                <button class="dashboard-btn primary" type="button" data-target="profile">View profile</button>
+                <button class="dashboard-btn" type="button" data-target="submit">Edit listing</button>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <h3>Verification</h3>
+              <ul class="stat-list">
+                <li>Review status: In progress</li>
+                <li>Documents: 2 of 3 uploaded</li>
+                <li>Next step: Business ownership confirmation</li>
+              </ul>
+              <div class="dashboard-actions">
+                <button class="verify-link primary" type="button" data-target="verification">Open verification</button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -990,9 +1142,42 @@
             </ul>
 
             <div class="submit-actions">
-              <button class="btn btn-primary" type="button">Edit profile</button>
-              <button class="btn btn-secondary" type="button">Message</button>
+              <button class="btn btn-primary" type="button" data-target="dashboard">Back to dashboard</button>
+              <button class="btn btn-secondary" type="button" data-target="submit">Edit listing</button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="verification" class="view-panel">
+        <div class="container section verification-wrap">
+          <div class="verification-card">
+            <div class="section-heading">
+              <p class="eyebrow">Verification</p>
+              <h2>Confirm your business details</h2>
+            </div>
+
+            <form class="verification-form">
+              <label>
+                Business registration name
+                <input type="text" value="Velvet Moon Tarot" required />
+              </label>
+
+              <label>
+                Proof of business ownership
+                <textarea rows="4" placeholder="Upload or describe your documents"></textarea>
+              </label>
+
+              <label>
+                Review notes
+                <textarea rows="3" placeholder="Optional admin notes"></textarea>
+              </label>
+
+              <div class="dashboard-actions">
+                <button class="btn btn-primary" type="submit">Submit verification</button>
+                <button class="btn btn-secondary" type="button" data-target="dashboard">Return to dashboard</button>
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -1003,6 +1188,11 @@
       const sidebarOverlay = document.getElementById('sidebarOverlay');
       const menuToggle = document.getElementById('menuToggle');
       const closeSidebar = document.getElementById('closeSidebar');
+      const loginModal = document.getElementById('loginModal');
+      const loginForm = document.getElementById('loginForm');
+      const loginMessage = document.getElementById('loginMessage');
+      const loginEmail = document.getElementById('loginEmail');
+      const loginPassword = document.getElementById('loginPassword');
       const loginButtons = document.querySelectorAll('.auth-toggle');
       const requireAuthButtons = [...document.querySelectorAll('.require-auth')];
       const viewPanels = [...document.querySelectorAll('.view-panel')];
@@ -1012,6 +1202,7 @@
       const paymentPlanLabel = document.getElementById('paymentPlanLabel');
       const paymentAmount = document.getElementById('paymentAmount');
       const paymentForm = document.querySelector('.payment-form');
+      const verificationForm = document.querySelector('.verification-form');
 
       const planDetails = {
         free: { label: 'Free plan', amount: '£0', active: false },
@@ -1020,8 +1211,9 @@
       };
 
       const getStoredLoginState = () => localStorage.getItem('moonMuseLoggedIn') === 'true';
-      const getStoredSelectedPlan = () => localStorage.getItem('moonMuseSelectedPlan') || 'free';
+      const getStoredSelectedPlan = () => localStorage.getItem('moonMuseSelectedPlan') || 'featured';
       const getPaymentCompleteState = () => localStorage.getItem('moonMusePaymentComplete') === 'true';
+      const getStoredUser = () => JSON.parse(localStorage.getItem('moonMuseUser') || '{}');
 
       let isLoggedIn = getStoredLoginState();
       let selectedPlan = getStoredSelectedPlan();
@@ -1040,14 +1232,26 @@
 
       function syncSelectedPlanUI() {
         if (!listingPlanSelect) return;
-        const validValue = ['free', 'featured', 'luxury'].includes(selectedPlan) ? selectedPlan : 'free';
+        const validValue = ['free', 'featured', 'luxury'].includes(selectedPlan) ? selectedPlan : 'featured';
         listingPlanSelect.value = validValue;
 
         if (paymentPlanLabel && paymentAmount) {
-          const currentPlan = planDetails[validValue] || planDetails.free;
+          const currentPlan = planDetails[validValue] || planDetails.featured;
           paymentPlanLabel.textContent = currentPlan.label;
           paymentAmount.textContent = currentPlan.amount;
         }
+      }
+
+      function openLoginModal() {
+        loginModal.classList.add('open');
+        loginEmail.focus();
+        loginMessage.textContent = '';
+      }
+
+      function closeLoginModal() {
+        loginModal.classList.remove('open');
+        loginForm.reset();
+        loginMessage.textContent = '';
       }
 
       function updateAuthUi() {
@@ -1068,13 +1272,15 @@
       }
 
       function handleAuthToggle() {
-        isLoggedIn = !isLoggedIn;
-        localStorage.setItem('moonMuseLoggedIn', String(isLoggedIn));
-        updateAuthUi();
-
-        if (!isLoggedIn) {
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          localStorage.setItem('moonMuseLoggedIn', 'false');
           showPanel('home');
+          updateAuthUi();
+          return;
         }
+
+        openLoginModal();
       }
 
       menuToggle.addEventListener('click', () => {
@@ -1084,10 +1290,39 @@
 
       closeSidebar.addEventListener('click', () => setMenuState(false));
       sidebarOverlay.addEventListener('click', () => setMenuState(false));
+      loginModal.addEventListener('click', (event) => {
+        if (event.target === loginModal) closeLoginModal();
+      });
+
+      loginForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const email = loginEmail.value.trim();
+        const password = loginPassword.value.trim();
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          loginMessage.textContent = 'Please enter a valid email address.';
+          return;
+        }
+
+        if (!password || password.length < 6) {
+          loginMessage.textContent = 'Password must be at least 6 characters.';
+          return;
+        }
+
+        localStorage.setItem('moonMuseUser', JSON.stringify({ email, password }));
+        localStorage.setItem('moonMuseLoggedIn', 'true');
+        isLoggedIn = true;
+        updateAuthUi();
+        closeLoginModal();
+        showPanel('dashboard');
+      });
 
       loginButtons.forEach(button => {
         button.addEventListener('click', () => {
-          handleAuthToggle();
+          if (button.classList.contains('auth-toggle')) {
+            handleAuthToggle();
+          }
           setMenuState(false);
         });
       });
@@ -1122,7 +1357,6 @@
             showPanel('submit');
             return;
           }
-
           goToPaidPlan(plan);
         });
       });
@@ -1147,7 +1381,7 @@
 
         localStorage.setItem('moonMusePaymentComplete', 'true');
         alert('Listing submitted successfully.');
-        showPanel('directory');
+        showPanel('dashboard');
       });
 
       paymentForm.addEventListener('submit', event => {
@@ -1157,9 +1391,16 @@
         alert('Payment complete. Your listing can now be submitted.');
       });
 
+      verificationForm.addEventListener('submit', event => {
+        event.preventDefault();
+        alert('Verification submitted for review.');
+        showPanel('dashboard');
+      });
+
       document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
           setMenuState(false);
+          closeLoginModal();
         }
       });
 
