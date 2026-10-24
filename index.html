@@ -49,26 +49,28 @@
       h1 { font-size: clamp(2.7rem, 5vw, 4.5rem); line-height: 0.95; letter-spacing: -0.04em; }
       h2 { font-size: clamp(2.3rem, 3vw, 3.4rem); }
       h3 { font-size: 1.6rem; }
+      p { margin: 0; }
 
       .container { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
       .hidden { display: none !important; }
       .muted { color: var(--muted); }
+      .full-width { width: 100%; }
 
       .site-header {
         background: rgba(15, 15, 20, 0.8);
         border-bottom: 1px solid var(--line);
         position: sticky;
         top: 0;
-        z-index: 50;
+        z-index: 40;
         backdrop-filter: blur(12px);
       }
 
       .nav {
-        min-height: 82px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 18px;
+        min-height: 82px;
       }
 
       .brand {
@@ -78,6 +80,11 @@
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        background: none;
+        border: none;
+        color: var(--ink);
+        cursor: pointer;
+        padding: 0;
       }
 
       .brand-mark {
@@ -94,17 +101,28 @@
       .nav-list {
         display: flex;
         gap: 22px;
+        align-items: center;
         color: var(--muted);
         font-weight: 500;
       }
 
-      .nav-list button {
+      .nav-list button, .menu-panel button, .sidebar button, .secondary-link, .ghost-btn {
         background: none;
         border: none;
         color: inherit;
         font: inherit;
         cursor: pointer;
-        padding: 0;
+      }
+
+      .menu-toggle {
+        display: none;
+        width: 46px;
+        height: 46px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        border-radius: 12px;
+        color: var(--ink);
+        font-size: 1.5rem;
       }
 
       .btn {
@@ -118,7 +136,6 @@
         transition: 0.2s ease;
         cursor: pointer;
       }
-
       .btn:hover { transform: translateY(-1px); }
       .btn-primary {
         background: linear-gradient(135deg, var(--primary), var(--primary-deep));
@@ -134,6 +151,66 @@
         background: rgba(255,138,138,0.12);
         color: var(--danger);
         border: 1px solid rgba(255,138,138,0.2);
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(7, 7, 10, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 80;
+      }
+      .sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .menu-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(320px, 86vw);
+        height: 100vh;
+        background: rgba(13, 13, 18, 0.96);
+        border-left: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        transform: translateX(105%);
+        transition: transform 0.25s ease;
+        z-index: 90;
+        display: flex;
+        flex-direction: column;
+      }
+      .menu-panel.open { transform: translateX(0); }
+      .menu-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .menu-panel .menu-body {
+        padding: 18px;
+        display: grid;
+        gap: 10px;
+      }
+      .menu-panel .menu-body button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+      .menu-panel .menu-footer {
+        margin-top: auto;
+        padding: 18px;
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 10px;
       }
 
       .hero { padding: 88px 0 64px; }
@@ -191,11 +268,7 @@
         border-bottom: 1px solid var(--line);
       }
       .section-heading { margin-bottom: 28px; }
-      .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 24px;
-      }
+      .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
       .feature-card {
         background: var(--panel);
         border: 1px solid var(--line);
@@ -239,6 +312,7 @@
       .filter-bar input, .filter-bar select,
       .verify-form input, .verify-form textarea, .verify-form select,
       .submission-form input, .submission-form textarea, .submission-form select,
+      .comment-box,
       #leadForm input, #leadForm textarea, #reviewForm input, #reviewForm textarea, #reviewForm select {
         width: 100%;
         padding: 0.9rem 1rem;
@@ -312,16 +386,14 @@
         cursor: pointer;
       }
 
-      .verify-shell, .form-page, .profile-page, .admin-page { padding: 72px 0 80px; }
+      .verify-shell, .form-page, .profile-page, .admin-page, .pricing-page, .dashboard-page { padding: 72px 0 80px; }
       .verify-layout { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 36px; align-items: start; }
-      .verify-copy, .verify-form-wrap, .profile-card, .admin-card, .dashboard-box, .business-modal-content {
+      .verify-copy, .verify-form-wrap, .profile-card, .admin-card, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel {
         background: rgba(20,21,29,0.95);
         border: 1px solid var(--line);
         box-shadow: var(--shadow);
       }
-      .verify-copy, .verify-form-wrap, .dashboard-box, .business-modal-content {
-        border-radius: 26px;
-      }
+      .verify-copy, .verify-form-wrap, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel { border-radius: 26px; }
       .verify-copy { padding: 28px; }
       .info-box {
         background: rgba(220, 177, 255, 0.06);
@@ -338,7 +410,7 @@
       .form-step.is-active { display: grid; }
       .verify-form label, .submission-form label { display: grid; gap: 8px; font-weight: 600; }
       .form-navigation { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; }
-      .payment-box { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: rgba(255,255,255,0.02); font-weight: 700; }
+      .payment-box { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: rgba(255,255,255,0.02); }
       .form-status { min-height: 22px; font-size: 0.95rem; color: var(--muted); }
 
       .profile-header {
@@ -369,11 +441,7 @@
         color: var(--primary-bright);
         border: 1px solid rgba(220,177,255,0.2);
       }
-      .profile-layout {
-        display: grid;
-        grid-template-columns: 1.5fr 0.8fr;
-        gap: 24px;
-      }
+      .profile-layout { display: grid; grid-template-columns: 1.5fr 0.8fr; gap: 24px; }
       .profile-card { border-radius: 22px; padding: 24px; }
       .profile-main, .profile-sidebar { display: grid; gap: 22px; }
       .detail-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; color: var(--muted); }
@@ -382,13 +450,28 @@
       .review-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
       #leadForm, #reviewForm, .submission-form { display: grid; gap: 14px; }
 
+      .comment-card {
+        padding: 22px;
+      }
+      .compliment-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+      .compliment-btn {
+        background: rgba(255,255,255,0.03);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+      }
+      .comment-box {
+        min-height: 110px;
+        resize: vertical;
+        margin-top: 14px;
+      }
+      .comment-submit { margin-top: 14px; }
+
       .page-intro { margin-bottom: 28px; }
       .page-intro.narrow { max-width: 700px; }
-      .form-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 22px;
-      }
+      .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
       .form-card {
         background: rgba(255,255,255,0.02);
         border: 1px solid var(--line);
@@ -414,18 +497,33 @@
       .submit-actions { display: flex; align-items: center; gap: 16px; padding-top: 10px; }
       .field-row { display: grid; gap: 8px; margin-bottom: 18px; }
 
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 30px;
+      }
+      .pricing-card {
+        padding: 24px;
+        display: grid;
+        gap: 18px;
+      }
+      .pricing-card.featured {
+        border-color: rgba(220,177,255,0.4);
+        background: linear-gradient(180deg, rgba(20,21,29,1), rgba(35,26,46,1));
+      }
+      .price-tag {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary-bright);
+      }
+      .price-features { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; color: var(--muted); }
+
       .admin-header { margin-bottom: 18px; }
       .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
       .admin-card { border-radius: 22px; padding: 22px; }
       .admin-card.wide { grid-column: 1 / -1; }
-      .row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 0;
-        border-bottom: 1px solid var(--line);
-      }
+      .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
       .row:last-child { border-bottom: none; }
       .row-group { display: grid; gap: 8px; }
       .action-row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -440,9 +538,7 @@
       .small-btn.success { border-color: rgba(125,225,184,0.2); color: var(--success); }
       .small-btn.warn { border-color: rgba(245,216,142,0.2); color: var(--gold); }
       .small-btn.danger { border-color: rgba(255,138,138,0.2); color: var(--danger); }
-      .admin-toolbar {
-        display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;
-      }
+      .admin-toolbar { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
       .admin-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
       .admin-table th, .admin-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
       .admin-table thead th {
@@ -468,6 +564,28 @@
         border-bottom: 1px solid var(--line);
       }
       .feature-upgrade:last-child { border-bottom: none; }
+
+      .owner-panel {
+        padding: 24px;
+        display: grid;
+        gap: 20px;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .stat-card {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+      }
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-bright);
+      }
 
       .checkout-modal {
         position: fixed;
@@ -503,17 +621,18 @@
         color: var(--muted);
       }
       .footer-links { display: flex; gap: 18px; }
-      .full-width { width: 100%; }
 
       @media (max-width: 980px) {
-        .hero-inner, .verify-layout, .profile-layout, .admin-grid, .form-grid { grid-template-columns: 1fr; }
+        .hero-inner, .verify-layout, .profile-layout, .admin-grid, .form-grid, .pricing-grid { grid-template-columns: 1fr; }
         .feature-grid, .directory-grid { grid-template-columns: 1fr 1fr; }
         .filter-bar { grid-template-columns: 1fr 1fr; }
+        .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
 
       @media (max-width: 640px) {
         .nav-list { display: none; }
-        .feature-grid, .directory-grid, .filter-bar { grid-template-columns: 1fr; }
+        .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+        .feature-grid, .directory-grid, .filter-bar, .stats-grid { grid-template-columns: 1fr; }
         .cta-row { flex-direction: column; align-items: stretch; }
         .btn { width: 100%; }
         .profile-header { flex-direction: column; align-items: flex-start; }
@@ -525,23 +644,53 @@
   <body>
     <header class="site-header">
       <div class="container nav">
+        <button class="brand" type="button" data-target="home" aria-label="Home">
+          <span class="brand-mark">✦</span>
+          <span>Moon & Muse</span>
+        </button>
+
+        <nav class="nav-list" aria-label="Main navigation">
+          <button type="button" data-target="home">Home</button>
+          <button type="button" data-target="directory">Directory</button>
+          <button type="button" data-target="pricing">Pricing</button>
+          <button type="button" data-target="submit">Submit</button>
+          <button type="button" data-target="profile">Profile</button>
+          <button type="button" data-target="dashboard" class="owner-only hidden">Dashboard</button>
+          <button type="button" data-target="admin" class="admin-only hidden">Admin</button>
+          <button type="button" data-target="verify" class="verify-only hidden">Verify</button>
+          <button type="button" data-target="login" id="loginNavButton">Login</button>
+        </nav>
+
+        <button class="menu-toggle" type="button" aria-label="Open menu">☰</button>
+      </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="menu-panel" id="sidebarMenu" aria-label="Sidebar menu">
+      <div class="menu-header">
         <div class="brand">
           <span class="brand-mark">✦</span>
           <span>Moon & Muse</span>
         </div>
-
-        <nav class="nav-list">
-          <button type="button" data-target="home">Home</button>
-          <button type="button" data-target="directory">Directory</button>
-          <button type="button" data-target="submit">Submit</button>
-          <button type="button" data-target="verify">Verify</button>
-          <button type="button" data-target="settings">Settings</button>
-          <button type="button" data-target="admin">Admin</button>
-        </nav>
-
-        <button class="btn btn-primary" type="button" data-target="directory">Browse Directory</button>
+        <button type="button" id="closeSidebar" aria-label="Close menu">✕</button>
       </div>
-    </header>
+      <div class="menu-body">
+        <button type="button" data-target="home">Home</button>
+        <button type="button" data-target="directory">Directory</button>
+        <button type="button" data-target="pricing">Pricing</button>
+        <button type="button" data-target="submit">Submit your business</button>
+        <button type="button" data-target="profile">Business Profile</button>
+        <button type="button" data-target="dashboard" class="owner-only hidden">Business Owner Dashboard</button>
+        <button type="button" data-target="admin" class="admin-only hidden">Admin Portal</button>
+        <button type="button" data-target="verify" class="verify-only hidden">Verification</button>
+        <button type="button" data-target="settings">Settings</button>
+        <button type="button" data-target="login" id="loginSidebarButton">Login</button>
+      </div>
+      <div class="menu-footer">
+        <button class="btn btn-primary" type="button" data-target="submit">Submit your business</button>
+        <button class="btn btn-secondary" type="button" data-target="directory">Browse Directory</button>
+      </div>
+    </aside>
 
     <main>
       <section id="home" class="view-panel">
@@ -557,7 +706,8 @@
 
               <div class="cta-row">
                 <button class="btn btn-primary" type="button" data-target="directory">Browse Directory</button>
-                <button class="btn btn-secondary" type="button" data-target="verify">Apply for Verification</button>
+                <button class="btn btn-secondary submit-btn" type="button" data-target="submit">Submit your business</button>
+                <button class="btn btn-secondary verify-only hidden" type="button" data-target="verify">Apply for Verification</button>
               </div>
             </div>
 
@@ -668,6 +818,63 @@
             <div id="directoryGrid" class="directory-grid"></div>
           </div>
         </section>
+      </section>
+
+      <section id="pricing" class="view-panel hidden">
+        <div class="container pricing-page">
+          <section class="page-intro narrow">
+            <p class="eyebrow">PRICING</p>
+            <h1>Simple plans for growing your spiritual business</h1>
+            <p class="muted">Choose a free setup or upgrade for premium placement, automation, and measured visibility.</p>
+          </section>
+
+          <div class="pricing-grid">
+            <article class="pricing-card">
+              <div>
+                <p class="eyebrow">Free</p>
+                <div class="price-tag">£0</div>
+              </div>
+              <p class="muted">Perfect for new businesses getting listed quickly.</p>
+              <ul class="price-features">
+                <li>✓ Basic profile
+                <li>✓ Directory listing</li>
+                <li>✓ Public contact details</li>
+                <li>✓ Email inquiry form</li>
+              </ul>
+              <button class="btn btn-secondary full-width" type="button" data-target="submit">Get started</button>
+            </article>
+
+            <article class="pricing-card featured">
+              <div>
+                <p class="eyebrow">Featured</p>
+                <div class="price-tag">£39</div>
+              </div>
+              <p class="muted">For businesses that want premium visibility and stronger trust signals.</p>
+              <ul class="price-features">
+                <li>✓ Everything in Free</li>
+                <li>✓ Featured placement</li>
+                <li>✓ Priority ranking</li>
+                <li>✓ Displayed verification badge</li>
+              </ul>
+              <button class="btn btn-primary full-width" type="button" data-target="submit">Choose featured</button>
+            </article>
+
+            <article class="pricing-card">
+              <div>
+                <p class="eyebrow">Luxury</p>
+                <div class="price-tag">£89</div>
+              </div>
+              <p class="muted">For premium, multi-service, or high-touch spiritual practices.</p>
+              <ul class="price-features">
+                <li>✓ Everything in Featured</li>
+                <li>✓ Concierge review setup</li>
+                <li>✓ Lead heatmap insights</li>
+                <li>✓ Top-of-page exposure</li>
+              </ul>
+              <button class="btn btn-secondary full-width" type="button" data-target="submit">Upgrade</button>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section id="submit" class="view-panel hidden">
@@ -945,6 +1152,80 @@
         </main>
       </section>
 
+      <section id="profile" class="view-panel hidden">
+        <div class="container profile-page">
+          <section class="profile-header">
+            <div>
+              <p class="eyebrow">BUSINESS PROFILE</p>
+              <h1>Moonlight Tarot Atelier</h1>
+            </div>
+            <div class="profile-badges">
+              <span class="badge verified">Verified</span>
+              <span class="badge featured">Featured</span>
+            </div>
+          </section>
+
+          <div class="profile-layout">
+            <div class="profile-main">
+              <article class="profile-card">
+                <h3>About</h3>
+                <p class="muted">Intuitive tarot consultations, ritual guidance, and holistic spiritual coaching for modern life transitions.</p>
+                <ul class="detail-list">
+                  <li>📍 Online worldwide</li>
+                  <li>💬 Responds within 24 hours</li>
+                  <li>⭐ 4.9 average rating</li>
+                  <li>💸 From £35 per reading</li>
+                </ul>
+              </article>
+
+              <article class="profile-card">
+                <h3>Client reviews</h3>
+                <div class="review">
+                  <div class="review-head">
+                    <strong>Jasmine P.</strong>
+                    <span class="rating">★★★★★</span>
+                  </div>
+                  <p class="muted">Clear, compassionate and deeply intuitive — I felt truly seen during my reading.</p>
+                </div>
+                <div class="review">
+                  <div class="review-head">
+                    <strong>Emmett R.</strong>
+                    <span class="rating">★★★★★</span>
+                  </div>
+                  <p class="muted">The ritual guidance helped me move through a difficult transition with calm clarity.</p>
+                </div>
+              </article>
+            </div>
+
+            <aside class="profile-sidebar">
+              <article class="profile-card">
+                <h3>Contact</h3>
+                <ul class="detail-list">
+                  <li>hello@moonlighttarot.co</li>
+                  <li>@moonlight.tarot</li>
+                  <li>https://moonlighttarot.co</li>
+                </ul>
+                <div class="cta-row">
+                  <button class="btn btn-primary" type="button">Book a reading</button>
+                  <button class="btn btn-secondary verify-only hidden" type="button" data-target="verify">Verification</button>
+                </div>
+              </article>
+
+              <article class="comment-card">
+                <h3>Compliments</h3>
+                <div class="compliment-actions">
+                  <button type="button" class="compliment-btn">✨ Insightful</button>
+                  <button type="button" class="compliment-btn">💜 Warm</button>
+                  <button type="button" class="compliment-btn">🕯️ Reassuring</button>
+                </div>
+                <textarea class="comment-box" placeholder="Leave a thoughtful comment for this business..."></textarea>
+                <button class="btn btn-primary comment-submit" type="button">Post comment</button>
+              </article>
+            </aside>
+          </div>
+        </div>
+      </section>
+
       <section id="settings" class="view-panel hidden">
         <div class="container form-page">
           <section class="page-intro">
@@ -998,37 +1279,25 @@
                   <h3>Visibility & trust</h3>
 
                   <label>
-                    City
+                    Choose your city
                     <input type="text" id="settingsCity" />
                   </label>
 
                   <label>
-                    Country
-                    <input type="text" id="settingsCountry" />
-                  </label>
-
-                  <label>
-                    Service region
-                    <input type="text" id="settingsServiceRegion" />
-                  </label>
-
-                  <label class="checkbox-row">
-                    <input type="checkbox" id="settingsShowLocation" />
-                    <span>Display my city/location publicly</span>
-                  </label>
-
-                  <label>
-                    Response target
-                    <select id="settingsResponseTime">
-                      <option value="24">Within 24 hours</option>
-                      <option value="48">Within 48 hours</option>
-                      <option value="72">Within 72 hours</option>
+                    Display on public listing
+                    <select id="settingsDisplayLocation">
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
                     </select>
                   </label>
 
                   <label>
-                    Lead fee (£)
-                    <input type="number" id="settingsLeadFee" min="0" step="0.01" />
+                    Response target
+                    <select id="settingsResponseTarget">
+                      <option value="24">Within 24 hours</option>
+                      <option value="48">Within 48 hours</option>
+                      <option value="72">Within 72 hours</option>
+                    </select>
                   </label>
 
                   <label class="checkbox-row">
@@ -1038,26 +1307,13 @@
 
                   <label class="checkbox-row">
                     <input type="checkbox" id="settingsVerified" />
-                    <span>Mark as verified</span>
+                    <span>Public verification badge</span>
                   </label>
                 </div>
               </div>
 
-              <div class="form-card wide">
-                <h3>Categories</h3>
-                <div class="category-picker">
-                  <label class="chip"><input type="checkbox" value="tarot-reader" class="settingsCategory" /><span>Tarot Reader</span></label>
-                  <label class="chip"><input type="checkbox" value="psychic-medium" class="settingsCategory" /><span>Psychic Medium</span></label>
-                  <label class="chip"><input type="checkbox" value="witchcraft" class="settingsCategory" /><span>Witchcraft</span></label>
-                  <label class="chip"><input type="checkbox" value="astrology" class="settingsCategory" /><span>Astrology</span></label>
-                  <label class="chip"><input type="checkbox" value="crystal-healing" class="settingsCategory" /><span>Crystal Healing</span></label>
-                  <label class="chip"><input type="checkbox" value="energy-healing" class="settingsCategory" /><span>Energy Healing</span></label>
-                  <label class="chip"><input type="checkbox" value="spiritual-coaching" class="settingsCategory" /><span>Spiritual Coaching</span></label>
-                </div>
-              </div>
-
               <div class="submit-actions">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary">Save settings</button>
                 <div id="settingsStatus" class="form-status"></div>
               </div>
             </form>
@@ -1065,56 +1321,132 @@
         </div>
       </section>
 
-      <section id="admin" class="view-panel hidden">
-        <div class="container admin-page">
-          <div id="adminLoginBox" class="dashboard-box small">
-            <section class="page-intro narrow">
-              <p class="eyebrow">ADMIN ACCESS</p>
-              <h1>Login</h1>
-            </section>
+      <section id="dashboard" class="view-panel hidden">
+        <div class="container dashboard-page">
+          <section class="page-intro">
+            <p class="eyebrow">BUSINESS OWNER DASHBOARD</p>
+            <h1>Welcome back, Moonlight Tarot Atelier</h1>
+          </section>
 
-            <form id="adminLoginForm" class="submission-form">
-              <label>
-                Admin password
-                <input type="password" id="adminPassword" required />
-              </label>
-
-              <button type="submit" class="btn btn-primary full-width">Enter Admin Dashboard</button>
-              <div id="loginStatus" class="form-status"></div>
-            </form>
-          </div>
-
-          <div id="adminDashboard" class="hidden">
-            <div class="admin-toolbar">
-              <button id="exportDataBtn" class="small-btn">Export data</button>
-              <button id="importDataBtn" class="small-btn">Import data</button>
-              <input type="file" id="importFileInput" accept=".json" hidden />
-              <button id="logoutBtn" class="small-btn danger">Logout</button>
+          <div class="owner-panel">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <p class="muted">Profile views</p>
+                <div class="stat-number">2,480</div>
+              </div>
+              <div class="stat-card">
+                <p class="muted">New leads</p>
+                <div class="stat-number">76</div>
+              </div>
+              <div class="stat-card">
+                <p class="muted">Response rate</p>
+                <div class="stat-number">89%</div>
+              </div>
+              <div class="stat-card">
+                <p class="muted">Avg. rating</p>
+                <div class="stat-number">4.9</div>
+              </div>
             </div>
 
-            <section class="admin-header">
-              <div>
-                <p class="eyebrow">ADMIN DASHBOARD</p>
-                <h1>Review queue and listing management</h1>
-              </div>
-            </section>
+            <div class="admin-grid">
+              <article class="admin-card">
+                <h3>Recent lead activity</h3>
+                <div class="row"><span>New inquiry — Tarot reading</span><span class="muted">2m ago</span></div>
+                <div class="row"><span>Follow-up request — Ritual support</span><span class="muted">19m ago</span></div>
+                <div class="row"><span>Website booking click</span><span class="muted">1h ago</span></div>
+              </article>
 
-            <section class="admin-grid">
-              <div class="admin-card">
-                <h3>Pending businesses</h3>
-                <div id="pendingBusinesses"></div>
-              </div>
+              <article class="admin-card">
+                <h3>Listing health</h3>
+                <div class="row"><span>Featured placement</span><span class="muted">Active</span></div>
+                <div class="row"><span>Verification status</span><span class="muted">Approved</span></div>
+                <div class="row"><span>Lead inquiry fee</span><span class="muted">£8</span></div>
+              </article>
+            </div>
 
-              <div class="admin-card">
-                <h3>Pending reviews</h3>
-                <div id="pendingReviews"></div>
-              </div>
+            <article class="admin-card wide">
+              <h3>Performance overview</h3>
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Channel</th><th>Visits</th><th>Conversion</th><th>Revenue</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Directory</td><td>1,345</td><td>18%</td><td>£640</td></tr>
+                  <tr><td>Instagram</td><td>860</td><td>11%</td><td>£310</td></tr>
+                  <tr><td>Website</td><td>275</td><td>26%</td><td>£420</td></tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+        </div>
+      </section>
 
-              <div class="admin-card wide">
-                <h3>Directory profile controls</h3>
-                <div id="businessTable"></div>
+      <section id="admin" class="view-panel hidden">
+        <div class="container admin-page">
+          <section class="page-intro">
+            <p class="eyebrow">ADMIN PORTAL</p>
+            <h1>Review queue and business operations</h1>
+          </section>
+
+          <div class="admin-toolbar">
+            <button class="btn btn-secondary" type="button">Export CSV</button>
+            <button class="btn btn-primary" type="button">Review applications</button>
+          </div>
+
+          <div class="admin-grid">
+            <article class="admin-card">
+              <h3>Pending verification</h3>
+              <div class="row"><span>Moonlight Tarot Atelier</span><span class="muted">Approved</span></div>
+              <div class="row"><span>Wildflower Witchery</span><span class="muted">Needs docs</span></div>
+              <div class="row"><span>North Star Astrology</span><span class="muted">Awaiting review</span></div>
+            </article>
+
+            <article class="admin-card">
+              <h3>Flagged listings</h3>
+              <div class="row"><span>Velvet Oracle</span><span class="small-btn danger">Flagged</span></div>
+              <div class="row"><span>Solstice Rituals</span><span class="small-btn warn">Review</span></div>
+              <div class="row"><span>Hearthstone Readings</span><span class="muted">Clear</span></div>
+            </article>
+
+            <article class="admin-card wide">
+              <h3>Management queue</h3>
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Business</th><th>Category</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Moonlight Tarot Atelier</td><td>Tarot Reader</td><td>Verified</td><td><span class="small-btn success">Active</span></td></tr>
+                  <tr><td>Wildflower Witchery</td><td>Witchcraft</td><td>Pending</td><td><span class="small-btn warn">Review</span></td></tr>
+                  <tr><td>North Star Astrology</td><td>Astrology</td><td>New</td><td><span class="small-btn">Queue</span></td></tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="login" class="view-panel hidden">
+        <div class="container form-page">
+          <div class="page-intro narrow">
+            <p class="eyebrow">LOGIN</p>
+            <h1>Access your directory account</h1>
+          </div>
+
+          <div class="dashboard-box">
+            <form class="submission-form">
+              <label>
+                Email
+                <input type="email" value="owner@moonlighttarot.co" />
+              </label>
+              <label>
+                Password
+                <input type="password" value="password123" />
+              </label>
+              <div class="submit-actions">
+                <button class="btn btn-primary" type="button" id="loginAction">Login</button>
+                <button class="btn btn-secondary" type="button" data-target="home">Cancel</button>
               </div>
-            </section>
+            </form>
           </div>
         </div>
       </section>
@@ -1122,1009 +1454,197 @@
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© 2026 Moon & Muse</p>
+        <div>© 2026 Moon & Muse</div>
         <div class="footer-links">
-          <button class="link-btn" type="button" data-target="directory">Directory</button>
-          <button class="link-btn" type="button" data-target="verify">Verification</button>
-          <button class="link-btn" type="button" data-target="admin">Admin</button>
+          <button type="button" data-target="home">Home</button>
+          <button type="button" data-target="directory">Directory</button>
+          <button type="button" data-target="pricing">Pricing</button>
+          <button type="button" data-target="submit">Submit</button>
+          <button type="button" data-target="login">Login</button>
         </div>
       </div>
     </footer>
 
-    <div id="checkoutModal" class="checkout-modal">
-      <div class="checkout-modal-content">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <h3 id="checkoutTitle">Premium listing</h3>
-          <button id="closeCheckoutModal" class="small-btn">Close</button>
+    <div class="checkout-modal" id="checkoutModal" aria-modal="true" role="dialog">
+      <div class="checkout-modal-content business-modal-content">
+        <p class="eyebrow">Secure checkout</p>
+        <h3>Upgrade your listing</h3>
+        <div class="checkout-amount">£39.00</div>
+        <div class="transaction-box">
+          <p>Featured placement for 30 days</p>
+          <p class="muted">Includes premium ranking, verification badge placement, and lead boost.</p>
         </div>
-
-        <div class="checkout-amount" id="checkoutAmount">£49.00</div>
-        <p class="muted">This is a static front-end demo of a premium purchase flow.</p>
-
-        <div class="form-grid">
-          <div class="form-card">
-            <label>
-              Cardholder name
-              <input type="text" placeholder="Name on card" />
-            </label>
-            <label>
-              Card number
-              <input type="text" placeholder="4242 4242 4242 4242" />
-            </label>
-            <label>
-              Expiry
-              <input type="text" placeholder="MM / YY" />
-            </label>
-            <label>
-              CVC
-              <input type="text" placeholder="123" />
-            </label>
-          </div>
-        </div>
-
-        <div class="submit-actions">
-          <button class="btn btn-primary full-width" id="payNowBtn">Pay now</button>
+        <div class="cta-row">
+          <button class="btn btn-primary" type="button">Pay now</button>
+          <button class="btn btn-secondary" type="button" id="closeCheckout">Close</button>
         </div>
       </div>
     </div>
 
     <script>
-      const STORAGE_KEYS = {
-        businesses: "moon_muse_businesses",
-        reviews: "moon_muse_reviews",
-        verificationRequests: "moon_muse_verification_requests"
+      const state = {
+        loggedIn: false,
+        businessOwner: false,
+        sidebarOpen: false,
+        currentView: 'home'
       };
 
-      const categoryMap = {
-        "tarot-reader": "Tarot Reader",
-        "psychic-medium": "Psychic Medium",
-        "witchcraft": "Witchcraft",
-        astrology: "Astrology",
-        "crystal-healing": "Crystal Healing",
-        "energy-healing": "Energy Healing",
-        "spiritual-coaching": "Spiritual Coaching"
-      };
+      const viewIds = ['home', 'directory', 'pricing', 'submit', 'verify', 'profile', 'settings', 'dashboard', 'admin', 'login'];
 
-      function getStored(key, fallback) {
-        const raw = localStorage.getItem(key);
-        if (!raw) return fallback;
-        try { return JSON.parse(raw); } catch (error) { return fallback; }
+      function showView(target) {
+        viewIds.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.classList.toggle('hidden', id !== target);
+        });
+        state.currentView = target;
+        closeSidebar();
       }
 
-      function setStored(key, value) {
-        localStorage.setItem(key, JSON.stringify(value));
+      function renderAuthState() {
+        const ownerEls = document.querySelectorAll('.owner-only');
+        const verifyEls = document.querySelectorAll('.verify-only');
+        const adminEls = document.querySelectorAll('.admin-only');
+
+        const isOwner = state.loggedIn && state.businessOwner;
+        const isAdmin = state.loggedIn && !state.businessOwner;
+
+        ownerEls.forEach((el) => el.classList.toggle('hidden', !isOwner));
+        verifyEls.forEach((el) => el.classList.toggle('hidden', !isOwner));
+        adminEls.forEach((el) => el.classList.toggle('hidden', !isAdmin));
+
+        const loginButtonText = state.loggedIn ? (isOwner ? 'Owner' : 'Admin') : 'Login';
+        document.querySelectorAll('#loginNavButton, #loginSidebarButton').forEach((button) => {
+          button.textContent = loginButtonText;
+        });
       }
 
-      function getDefaultBusinesses() {
-        return [
-          {
-            id: "biz-1",
-            name: "Selene Tarot",
-            slug: "selene-tarot",
-            tagline: "Intuitive guidance and spiritual clarity sessions.",
-            bio: "Selene Tarot offers online intuitive readings focused on emotional clarity, relationship guidance, and spiritual direction.",
-            email: "selene@example.com",
-            website: "https://example.com",
-            instagram: "@selenetarot",
-            city: "London",
-            country: "United Kingdom",
-            showLocation: true,
-            serviceRegion: "London / UK",
-            serviceMode: "online",
-            responseTimeHours: 24,
-            leadFeeCents: 800,
-            featured: true,
-            verified: true,
-            approved: true,
-            rating: 4.9,
-            reviewCount: 24,
-            categories: ["tarot-reader"]
-          },
-          {
-            id: "biz-2",
-            name: "Moon Witch Collective",
-            slug: "moon-witch-collective",
-            tagline: "Witchcraft rituals, spell guidance, and spiritual practice support.",
-            bio: "Moon Witch Collective provides ritual guidance, spell support, and spiritual coaching for clients seeking deeper connection and intention setting.",
-            email: "moonwitch@example.com",
-            website: "https://example.com",
-            instagram: "@moonwitchcollective",
-            city: "Manchester",
-            country: "United Kingdom",
-            showLocation: false,
-            serviceRegion: "Online worldwide",
-            serviceMode: "online",
-            responseTimeHours: 48,
-            leadFeeCents: 900,
-            featured: false,
-            verified: true,
-            approved: true,
-            rating: 4.8,
-            reviewCount: 16,
-            categories: ["witchcraft"]
-          },
-          {
-            id: "biz-3",
-            name: "Starlight Oracle",
-            slug: "starlight-oracle",
-            tagline: "Divination, tarot insight, and intuitive coaching.",
-            bio: "Starlight Oracle blends tarot and astrology for thoughtful, grounded spiritual guidance and intuitive reflection.",
-            email: "starlight@example.com",
-            website: "https://example.com",
-            instagram: "@starlightoracle",
-            city: "Paris",
-            country: "France",
-            showLocation: true,
-            serviceRegion: "Paris / Europe",
-            serviceMode: "online",
-            responseTimeHours: 72,
-            leadFeeCents: 700,
-            featured: false,
-            verified: false,
-            approved: true,
-            rating: 4.7,
-            reviewCount: 11,
-            categories: ["tarot-reader", "astrology"]
-          },
-          {
-            id: "biz-4",
-            name: "Raven & Rose",
-            slug: "raven-and-rose",
-            tagline: "Energy healing and emotional support sessions.",
-            bio: "Raven & Rose blends energy healing and spiritual coaching to help clients feel calmer, clearer, and more centered.",
-            email: "ravenrose@example.com",
-            website: "https://example.com",
-            instagram: "@ravenandrose",
-            city: "Bristol",
-            country: "United Kingdom",
-            showLocation: false,
-            serviceRegion: "Online worldwide",
-            serviceMode: "online",
-            responseTimeHours: 24,
-            leadFeeCents: 850,
-            featured: true,
-            verified: true,
-            approved: true,
-            rating: 5.0,
-            reviewCount: 18,
-            categories: ["energy-healing", "spiritual-coaching"]
-          }
-        ];
+      function setLoggedIn(mode) {
+        state.loggedIn = true;
+        state.businessOwner = mode === 'owner';
+        renderAuthState();
+        if (mode === 'owner') showView('dashboard');
+        if (mode === 'admin') showView('admin');
       }
 
-      function getBusinesses() {
-        return getStored(STORAGE_KEYS.businesses, getDefaultBusinesses());
-      }
-      function saveBusinesses(data) { setStored(STORAGE_KEYS.businesses, data); }
-      function getReviews() { return getStored(STORAGE_KEYS.reviews, []); }
-      function saveReviews(data) { setStored(STORAGE_KEYS.reviews, data); }
-      function getVerificationRequests() { return getStored(STORAGE_KEYS.verificationRequests, []); }
-      function saveVerificationRequests(data) { setStored(STORAGE_KEYS.verificationRequests, data); }
-
-      function ensureAdminPassword() {
-        if (!localStorage.getItem("moon_muse_admin_password")) {
-          localStorage.setItem("moon_muse_admin_password", "moonmuseadmin");
-        }
-      }
-
-      function adminIsLoggedIn() {
-        return localStorage.getItem("moon_muse_admin_authed") === "true";
-      }
-
-      function setAdminLoggedIn(value) {
-        localStorage.setItem("moon_muse_admin_authed", value ? "true" : "false");
-      }
-
-      function buildSlug(value) {
-        return (value || "")
-          .toLowerCase()
-          .trim()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-+|-+$/g, "");
-      }
-
-      function getNextBusinessId() {
-        const businesses = getBusinesses();
-        const max = businesses.reduce((highest, business) => {
-          const digits = Number(String(business.id).replace(/\D/g, "")) || 0;
-          return Math.max(highest, digits);
-        }, 0);
-        return `biz-${max + 1}`;
-      }
-
-      function createReviewEntry({ businessId, reviewerName, rating, comment }) {
-        return {
-          id: `review-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-          businessId,
-          reviewerName,
-          rating: Number(rating),
-          comment,
-          approved: false,
-          status: "pending",
-          createdAt: new Date().toISOString()
-        };
-      }
-
-      function initDefaultData() {
-        if (!localStorage.getItem(STORAGE_KEYS.businesses)) saveBusinesses(getDefaultBusinesses());
-        if (!localStorage.getItem(STORAGE_KEYS.reviews)) {
-          saveReviews([
-            {
-              id: "r-1",
-              businessId: "biz-1",
-              reviewerName: "Rina M.",
-              rating: 5,
-              comment: "Beautiful, warm, and deeply insightful.",
-              approved: true,
-              status: "approved",
-              createdAt: new Date().toISOString()
-            },
-            {
-              id: "r-2",
-              businessId: "biz-2",
-              reviewerName: "Sophie D.",
-              rating: 4,
-              comment: "Supportive and grounding. Felt deeply seen.",
-              approved: true,
-              status: "approved",
-              createdAt: new Date().toISOString()
+      document.querySelectorAll('[data-target]').forEach((button) => {
+        const target = button.getAttribute('data-target');
+        if (target === 'login') {
+          button.addEventListener('click', () => {
+            if (!state.loggedIn) {
+              showView('login');
+              return;
             }
-          ]);
-        }
-        if (!localStorage.getItem(STORAGE_KEYS.verificationRequests)) saveVerificationRequests([]);
-      }
-
-      function showSection(targetId) {
-        document.querySelectorAll(".view-panel").forEach((panel) => {
-          panel.classList.toggle("hidden", panel.id !== targetId);
-        });
-      }
-
-      function bindNavButtons() {
-        document.querySelectorAll("[data-target]").forEach((button) => {
-          button.addEventListener("click", () => {
-            const target = button.dataset.target;
-            if (target === "admin") {
-              const dashboard = document.getElementById("adminDashboard");
-              const loginBox = document.getElementById("adminLoginBox");
-              if (adminIsLoggedIn()) {
-                loginBox.classList.add("hidden");
-                dashboard.classList.remove("hidden");
-              } else {
-                loginBox.classList.remove("hidden");
-                dashboard.classList.add("hidden");
-              }
-            }
-            if (target === "directory") renderDirectory();
-            if (target === "settings") populateBusinessSettingsSelect();
-            showSection(target);
+            state.loggedIn = false;
+            state.businessOwner = false;
+            renderAuthState();
+            showView('home');
           });
-        });
-      }
-
-      function renderDirectory() {
-        const directoryGrid = document.getElementById("directoryGrid");
-        if (!directoryGrid) return;
-
-        const businesses = getBusinesses();
-        const searchInput = document.getElementById("searchInput");
-        const categoryFilter = document.getElementById("categoryFilter");
-        const locationSearch = document.getElementById("locationSearch");
-        const responseFilter = document.getElementById("responseFilter");
-        const featuredOnly = document.getElementById("featuredOnly");
-        const verifiedOnly = document.getElementById("verifiedOnly");
-
-        const searchTerm = (searchInput?.value || "").trim().toLowerCase();
-        const categoryValue = categoryFilter?.value || "all";
-        const locationTerm = (locationSearch?.value || "").trim().toLowerCase();
-        const responseLimit = Number(responseFilter?.value || 9999);
-        const featured = featuredOnly?.checked || false;
-        const verified = verifiedOnly?.checked || false;
-
-        const filtered = businesses.filter((business) => {
-          if (!business.approved) return false;
-
-          const matchesSearch =
-            !searchTerm ||
-            business.name.toLowerCase().includes(searchTerm) ||
-            (business.tagline || "").toLowerCase().includes(searchTerm) ||
-            (business.bio || "").toLowerCase().includes(searchTerm);
-
-          const matchesCategory = categoryValue === "all" || (business.categories || []).includes(categoryValue);
-
-          const locationText = [business.city || "", business.country || "", business.serviceRegion || ""].join(" ").toLowerCase();
-          const matchesLocation = !locationTerm || locationText.includes(locationTerm);
-
-          const matchesResponse = Number(business.responseTimeHours || 9999) <= responseLimit;
-          const matchesFeatured = !featured || business.featured;
-          const matchesVerified = !verified || business.verified;
-
-          return matchesSearch && matchesCategory && matchesLocation && matchesResponse && matchesFeatured && matchesVerified;
-        });
-
-        const sorted = [...filtered].sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return Number(a.responseTimeHours || 9999) - Number(b.responseTimeHours || 9999);
-        });
-
-        directoryGrid.innerHTML = sorted.map((business) => {
-          const categoryLabels = (business.categories || []).map((cat) => categoryMap[cat] || cat).join(" • ");
-          const locationLine = business.showLocation ? `${business.city || "Remote"}, ${business.country || "Online"}` : "Location hidden by practitioner";
-
-          return `
-            <article class="listing-card ${business.featured ? "featured" : ""}">
-              <div class="listing-top">
-                <div>
-                  <h3>${business.name}</h3>
-                  <p class="tagline">${business.tagline || ""}</p>
-                </div>
-                ${business.featured ? '<span class="pill">Featured</span>' : ""}
-              </div>
-
-              <ul class="meta-list">
-                <li>Location: ${locationLine}</li>
-                <li>Service: ${business.serviceRegion || "Online worldwide"}</li>
-                <li>Response: within ${business.responseTimeHours || 24}h</li>
-                <li>Categories: ${categoryLabels || "General"}</li>
-              </ul>
-
-              <div class="listing-footer">
-                <span class="rating">★ ${business.rating || "New"}</span>
-                <span>${business.reviewCount || 0} reviews</span>
-              </div>
-
-              <div class="listing-footer">
-                ${business.verified ? '<span class="pill">Verified</span>' : '<span class="pill">Pending</span>'}
-                <button class="link-btn" type="button" data-business-view="${business.slug}">View profile</button>
-              </div>
-            </article>
-          `;
-        }).join("");
-
-        if (!sorted.length) {
-          directoryGrid.innerHTML = `
-            <div class="listing-card">
-              <h3>No businesses match your filters.</h3>
-              <p class="tagline">Try broadening your search or clearing a filter.</p>
-            </div>
-          `;
-        }
-
-        document.querySelectorAll("[data-business-view]").forEach((button) => {
-          button.addEventListener("click", () => {
-            const slug = button.dataset.businessView;
-            openBusinessModal(slug);
-          });
-        });
-      }
-
-      function bindDirectoryFilters() {
-        [
-          document.getElementById("searchInput"),
-          document.getElementById("categoryFilter"),
-          document.getElementById("locationSearch"),
-          document.getElementById("responseFilter"),
-          document.getElementById("featuredOnly"),
-          document.getElementById("verifiedOnly")
-        ].forEach((el) => {
-          if (!el) return;
-          el.addEventListener("input", renderDirectory);
-          el.addEventListener("change", renderDirectory);
-        });
-      }
-
-      function openBusinessModal(slug) {
-        const business = getBusinesses().find((item) => item.slug === slug) || getBusinesses()[0];
-        if (!business) return;
-
-        const modal = document.getElementById("businessModal");
-        if (!modal) {
-          const box = document.createElement("div");
-          box.className = "checkout-modal active";
-          box.id = "businessModal";
-          box.innerHTML = `
-            <div class="business-modal-content">
-              <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-                <h3>${business.name}</h3>
-                <button class="small-btn" type="button" data-close-business-modal>Close</button>
-              </div>
-              <div class="muted">${business.tagline || ""}</div>
-              <div style="margin-top:16px;">
-                <p>${business.bio || ""}</p>
-                <ul class="detail-list">
-                  <li>Location: ${business.showLocation ? `${business.city || "Remote"}, ${business.country || "Online"}` : "Location hidden by practitioner"}</li>
-                  <li>Service: ${business.serviceRegion || "Online worldwide"}</li>
-                  <li>Response: within ${business.responseTimeHours || 24}h</li>
-                  <li>Lead fee: £${((business.leadFeeCents || 800) / 100).toFixed(2)}</li>
-                </ul>
-              </div>
-            </div>
-          `;
-          document.body.appendChild(box);
-
-          box.querySelector("[data-close-business-modal]").addEventListener("click", () => box.remove());
           return;
         }
 
-        modal.innerHTML = `
-          <div class="business-modal-content">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-              <h3>${business.name}</h3>
-              <button class="small-btn" type="button" data-close-business-modal>Close</button>
-            </div>
-            <div class="muted">${business.tagline || ""}</div>
-            <div style="margin-top:16px;">
-              <p>${business.bio || ""}</p>
-              <ul class="detail-list">
-                <li>Location: ${business.showLocation ? `${business.city || "Remote"}, ${business.country || "Online"}` : "Location hidden by practitioner"}</li>
-                <li>Service: ${business.serviceRegion || "Online worldwide"}</li>
-                <li>Response: within ${business.responseTimeHours || 24}h</li>
-                <li>Lead fee: £${((business.leadFeeCents || 800) / 100).toFixed(2)}</li>
-              </ul>
-            </div>
-          </div>
-        `;
-        modal.classList.add("active");
-        modal.querySelector("[data-close-business-modal]").addEventListener("click", () => modal.classList.remove("active"));
-      }
-
-      function initSubmitBusinessForm() {
-        const form = document.getElementById("submitBusinessForm");
-        if (!form) return;
-
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const name = document.getElementById("listingName").value.trim();
-          const bio = document.getElementById("listingBio").value.trim();
-          const email = document.getElementById("listingEmail").value.trim();
-
-          if (!name || !bio || !email) {
-            document.getElementById("submitStatus").textContent = "Please complete the required fields.";
-            document.getElementById("submitStatus").style.color = "#ff8a8a";
-            return;
-          }
-
-          const newBusiness = {
-            id: getNextBusinessId(),
-            name,
-            slug: buildSlug(name) || `business-${Date.now()}`,
-            tagline: document.getElementById("listingTagline").value.trim(),
-            bio,
-            email,
-            website: document.getElementById("listingWebsite").value.trim(),
-            instagram: document.getElementById("listingInstagram").value.trim(),
-            city: document.getElementById("listingCity").value.trim(),
-            country: document.getElementById("listingCountry").value.trim(),
-            serviceRegion: document.getElementById("listingServiceRegion").value.trim() || "Online worldwide",
-            serviceMode: document.getElementById("listingServiceMode").value,
-            showLocation: document.getElementById("listingShowLocation").checked,
-            responseTimeHours: Number(document.getElementById("listingResponseTime").value || 24),
-            leadFeeCents: Math.round((Number(document.getElementById("listingLeadFee").value || 8) * 100)),
-            featured: document.getElementById("listingFeaturedRequest").checked,
-            verified: document.getElementById("listingVerifiedRequest").checked,
-            approved: false,
-            rating: 0,
-            reviewCount: 0,
-            categories: Array.from(document.querySelectorAll("#categoryPicker input[type='checkbox']:checked")).map((box) => box.value),
-            createdAt: new Date().toISOString()
-          };
-
-          const businesses = getBusinesses();
-          businesses.unshift(newBusiness);
-          saveBusinesses(businesses);
-
-          document.getElementById("submitStatus").textContent = "Submitted for review. It will appear after approval.";
-          document.getElementById("submitStatus").style.color = "#7de1b8";
-          form.reset();
-        });
-      }
-
-      function initVerificationForm() {
-        const form = document.getElementById("verificationForm");
-        if (!form) return;
-
-        const nextBtn = document.getElementById("nextBtn");
-        const prevBtn = document.getElementById("prevBtn");
-        const steps = Array.from(document.querySelectorAll(".form-step"));
-        const statusEl = document.getElementById("formStatus");
-        let activeStep = 0;
-
-        function showStep(index) {
-          steps.forEach((step, i) => step.classList.toggle("is-active", i === index));
-          prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
-          nextBtn.textContent = index === steps.length - 1 ? "Review" : "Next";
-        }
-
-        nextBtn.addEventListener("click", () => {
-          const currentStep = steps[activeStep];
-          const requiredInputs = currentStep.querySelectorAll("[required]");
-          const valid = Array.from(requiredInputs).every((input) => input.type === "checkbox" ? input.checked : input.value.trim() !== "");
-          if (!valid) {
-            statusEl.textContent = "Please complete the required fields before moving on.";
-            statusEl.style.color = "#ff8a8a";
-            return;
-          }
-          if (activeStep < steps.length - 1) {
-            activeStep += 1;
-            showStep(activeStep);
-            statusEl.textContent = "";
-          }
-        });
-
-        prevBtn.addEventListener("click", () => {
-          if (activeStep > 0) {
-            activeStep -= 1;
-            showStep(activeStep);
-            statusEl.textContent = "";
-          }
-        });
-
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-
-          const businessName = document.getElementById("businessName").value.trim();
-          const businessEmail = document.getElementById("businessEmail").value.trim();
-          if (!businessName || !businessEmail || !document.getElementById("agreeTerms").checked) {
-            statusEl.textContent = "Please complete all required fields and agree to the terms.";
-            statusEl.style.color = "#ff8a8a";
-            return;
-          }
-
-          const requests = getVerificationRequests();
-          requests.unshift({
-            id: `verification-${Date.now()}`,
-            businessName,
-            businessEmail,
-            city: document.getElementById("city").value.trim(),
-            country: document.getElementById("country").value.trim(),
-            serviceModel: document.getElementById("serviceModel").value,
-            showLocation: document.getElementById("showLocation").checked,
-            yotiReference: document.getElementById("yotiReference").value.trim(),
-            yotiLink: document.getElementById("yotiLink").value.trim(),
-            workProof: document.getElementById("workProof").value.trim(),
-            professionalLinks: document.getElementById("professionalLinks").value.trim(),
-            clientReviews: document.getElementById("clientReviews").value.trim(),
-            additionalProof: document.getElementById("additionalProof").value.trim(),
-            reviewNotes: document.getElementById("reviewNotes").value.trim(),
-            status: "pending",
-            createdAt: new Date().toISOString()
+        if (target === 'verify' || target === 'dashboard' || target === 'settings') {
+          button.addEventListener('click', () => {
+            if (!state.loggedIn || !state.businessOwner) {
+              showView('login');
+              return;
+            }
+            showView(target);
           });
-
-          saveVerificationRequests(requests);
-          statusEl.textContent = "Your verification application has been submitted for manual review.";
-          statusEl.style.color = "#7de1b8";
-          form.reset();
-          activeStep = 0;
-          showStep(activeStep);
-        });
-
-        showStep(activeStep);
-        prevBtn.style.visibility = "hidden";
-      }
-
-      function populateBusinessSettingsSelect() {
-        const select = document.getElementById("settingsBusinessSelect");
-        if (!select) return;
-        const businesses = getBusinesses();
-        select.innerHTML = businesses.map((business) => `<option value="${business.id}">${business.name}</option>`).join("");
-        populateSettingsForm(select.value);
-      }
-
-      function populateSettingsForm(businessId) {
-        const business = getBusinesses().find((item) => item.id === businessId);
-        if (!business) return;
-
-        document.getElementById("settingsName").value = business.name || "";
-        document.getElementById("settingsTagline").value = business.tagline || "";
-        document.getElementById("settingsBio").value = business.bio || "";
-        document.getElementById("settingsEmail").value = business.email || "";
-        document.getElementById("settingsWebsite").value = business.website || "";
-        document.getElementById("settingsInstagram").value = business.instagram || "";
-        document.getElementById("settingsCity").value = business.city || "";
-        document.getElementById("settingsCountry").value = business.country || "";
-        document.getElementById("settingsServiceRegion").value = business.serviceRegion || "";
-        document.getElementById("settingsShowLocation").checked = !!business.showLocation;
-        document.getElementById("settingsResponseTime").value = String(business.responseTimeHours || 24);
-        document.getElementById("settingsLeadFee").value = ((business.leadFeeCents || 800) / 100).toFixed(2);
-        document.getElementById("settingsFeatured").checked = !!business.featured;
-        document.getElementById("settingsVerified").checked = !!business.verified;
-
-        document.querySelectorAll(".settingsCategory").forEach((box) => {
-          box.checked = (business.categories || []).includes(box.value);
-        });
-      }
-
-      function initBusinessSettingsForm() {
-        const form = document.getElementById("businessSettingsForm");
-        if (!form) return;
-
-        const select = document.getElementById("settingsBusinessSelect");
-        if (select) {
-          select.addEventListener("change", (event) => populateSettingsForm(event.target.value));
-          populateBusinessSettingsSelect();
-        }
-
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const businesses = getBusinesses();
-          const selectedId = document.getElementById("settingsBusinessSelect").value;
-          const index = businesses.findIndex((item) => item.id === selectedId);
-          if (index < 0) return;
-
-          businesses[index] = {
-            ...businesses[index],
-            name: document.getElementById("settingsName").value.trim(),
-            tagline: document.getElementById("settingsTagline").value.trim(),
-            bio: document.getElementById("settingsBio").value.trim(),
-            email: document.getElementById("settingsEmail").value.trim(),
-            website: document.getElementById("settingsWebsite").value.trim(),
-            instagram: document.getElementById("settingsInstagram").value.trim(),
-            city: document.getElementById("settingsCity").value.trim(),
-            country: document.getElementById("settingsCountry").value.trim(),
-            serviceRegion: document.getElementById("settingsServiceRegion").value.trim() || "Online worldwide",
-            showLocation: document.getElementById("settingsShowLocation").checked,
-            responseTimeHours: Number(document.getElementById("settingsResponseTime").value || 24),
-            leadFeeCents: Math.round((Number(document.getElementById("settingsLeadFee").value || 8) * 100)),
-            featured: document.getElementById("settingsFeatured").checked,
-            verified: document.getElementById("settingsVerified").checked,
-            categories: Array.from(document.querySelectorAll(".settingsCategory:checked")).map((box) => box.value),
-            slug: buildSlug(document.getElementById("settingsName").value.trim()) || businesses[index].slug
-          };
-
-          saveBusinesses(businesses);
-          document.getElementById("settingsStatus").textContent = "Profile updated successfully.";
-          document.getElementById("settingsStatus").style.color = "#7de1b8";
-          renderDirectory();
-        });
-      }
-
-      function renderAdminDashboard() {
-        const dashboard = document.getElementById("adminDashboard");
-        const loginBox = document.getElementById("adminLoginBox");
-        if (!dashboard) return;
-
-        if (!adminIsLoggedIn()) {
-          loginBox.classList.remove("hidden");
-          dashboard.classList.add("hidden");
           return;
         }
 
-        loginBox.classList.add("hidden");
-        dashboard.classList.remove("hidden");
-
-        const businesses = getBusinesses();
-        const pendingBusinessList = businesses.filter((business) => !business.approved || !business.verified);
-        const reviewQueue = getReviews().filter((review) => !review.approved);
-
-        document.getElementById("pendingBusinesses").innerHTML = pendingBusinessList.length
-          ? pendingBusinessList.map((business) => `
-              <div class="row">
-                <div class="row-group">
-                  <strong>${business.name}</strong>
-                  <span class="muted">${business.approved ? "Pending verification" : "Pending approval"}</span>
-                </div>
-                <div class="action-row">
-                  <button class="small-btn success" data-action="approve-business" data-id="${business.id}">Approve</button>
-                  <button class="small-btn danger" data-action="reject-business" data-id="${business.id}">Reject</button>
-                  <button class="small-btn warn" data-action="toggle-featured" data-id="${business.id}">${business.featured ? "Unfeature" : "Feature"}</button>
-                  <button class="small-btn warn" data-action="toggle-verified" data-id="${business.id}">${business.verified ? "Unverify" : "Verify"}</button>
-                </div>
-              </div>
-            `).join("")
-          : '<div class="row"><span class="muted">No pending businesses.</span></div>';
-
-        document.getElementById("pendingReviews").innerHTML = reviewQueue.length
-          ? reviewQueue.map((review) => `
-              <div class="row">
-                <div class="row-group">
-                  <strong>${review.reviewerName}</strong>
-                  <span class="muted">${"★".repeat(Number(review.rating))} • ${review.comment.slice(0, 90)}</span>
-                </div>
-                <div class="action-row">
-                  <button class="small-btn success" data-action="approve-review" data-id="${review.id}">Approve</button>
-                  <button class="small-btn danger" data-action="reject-review" data-id="${review.id}">Reject</button>
-                </div>
-              </div>
-            `).join("")
-          : '<div class="row"><span class="muted">No pending reviews.</span></div>';
-
-        document.getElementById("businessTable").innerHTML = `
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Business</th>
-                <th>Location visible</th>
-                <th>Verified</th>
-                <th>Featured</th>
-                <th>Approved</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${businesses.map((business) => `
-                <tr>
-                  <td>${business.name}</td>
-                  <td>
-                    <label class="checkbox-row">
-                      <input type="checkbox" data-action="toggle-location" data-id="${business.id}" ${business.showLocation ? "checked" : ""} />
-                      <span>Show</span>
-                    </label>
-                  </td>
-                  <td>${business.verified ? "Yes" : "No"}</td>
-                  <td>${business.featured ? "Yes" : "No"}</td>
-                  <td>${business.approved ? "Yes" : "No"}</td>
-                  <td>
-                    <button class="small-btn" data-action="toggle-business-approval" data-id="${business.id}">
-                      ${business.approved ? "Unapprove" : "Approve"}
-                    </button>
-                  </td>
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
-        `;
-
-        document.querySelectorAll("[data-action]").forEach((button) => {
-          button.addEventListener("click", () => {
-            const action = button.dataset.action;
-            const id = button.dataset.id;
-            if (action === "approve-business") approveBusiness(id);
-            if (action === "reject-business") rejectBusiness(id);
-            if (action === "toggle-featured") toggleFeatured(id);
-            if (action === "toggle-verified") toggleVerified(id);
-            if (action === "approve-review") approveReview(id);
-            if (action === "reject-review") rejectReview(id);
-            if (action === "toggle-business-approval") toggleBusinessApproval(id);
+        if (target === 'admin') {
+          button.addEventListener('click', () => {
+            if (!state.loggedIn || state.businessOwner) {
+              showView('login');
+              return;
+            }
+            showView('admin');
           });
+          return;
+        }
+
+        button.addEventListener('click', () => showView(target));
+      });
+
+      document.getElementById('loginAction').addEventListener('click', () => {
+        setLoggedIn('owner');
+      });
+
+      document.querySelector('.menu-toggle').addEventListener('click', () => {
+        state.sidebarOpen = true;
+        document.getElementById('sidebarMenu').classList.add('open');
+        document.getElementById('sidebarOverlay').classList.add('open');
+      });
+
+      function closeSidebar() {
+        state.sidebarOpen = false;
+        document.getElementById('sidebarMenu').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('open');
+      }
+
+      document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
+      document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+
+      document.querySelectorAll('.compliment-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+          button.classList.toggle('selected');
+          button.style.borderColor = 'rgba(220,177,255,0.5)';
         });
+      });
 
-        document.querySelectorAll("[data-action='toggle-location']").forEach((checkbox) => {
-          checkbox.addEventListener("change", (event) => {
-            toggleLocationVisibility(event.target.dataset.id, event.target.checked);
-          });
-        });
+      document.getElementById('submitBusinessForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.getElementById('submitStatus').textContent = 'Listing submitted successfully.';
+      });
 
-        const upgradeBox = document.getElementById("pendingBusinesses");
-        if (upgradeBox && !upgradeBox.innerHTML.includes("feature-upgrade")) {
-          upgradeBox.insertAdjacentHTML("beforeend", `
-            <div class="transaction-box">
-              <div class="feature-upgrade">
-                <div>
-                  <strong>Featured listing</strong>
-                  <p class="muted">Raised placement in the directory</p>
-                </div>
-                <button class="btn btn-primary" type="button" data-premium="featured">Pay £49</button>
-              </div>
-              <div class="feature-upgrade">
-                <div>
-                  <strong>Verification review</strong>
-                  <p class="muted">Manual trust check and professional approval</p>
-                </div>
-                <button class="btn btn-secondary" type="button" data-premium="verification">Pay £25</button>
-              </div>
-              <div class="feature-upgrade">
-                <div>
-                  <strong>Priority placement</strong>
-                  <p class="muted">Higher ranking for faster response times</p>
-                </div>
-                <button class="btn btn-secondary" type="button" data-premium="priority">Pay £39</button>
-              </div>
-            </div>
-          `);
+      document.getElementById('businessSettingsForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.getElementById('settingsStatus').textContent = 'Settings saved successfully.';
+      });
 
-          document.querySelectorAll("[data-premium]").forEach((btn) => {
-            btn.addEventListener("click", () => openCheckoutModal(btn.dataset.premium));
-          });
+      document.getElementById('verificationForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.getElementById('formStatus').textContent = 'Submission sent for manual review.';
+      });
+
+      document.getElementById('prevBtn').addEventListener('click', () => {
+        const steps = [...document.querySelectorAll('.form-step')];
+        const activeIndex = steps.findIndex((step) => step.classList.contains('is-active'));
+        if (activeIndex > 0) {
+          steps[activeIndex].classList.remove('is-active');
+          steps[activeIndex - 1].classList.add('is-active');
         }
-      }
+      });
 
-      function openCheckoutModal(type) {
-        const modal = document.getElementById("checkoutModal");
-        const title = document.getElementById("checkoutTitle");
-        const amount = document.getElementById("checkoutAmount");
-        const label = type === "featured" ? "Featured listing" : type === "verification" ? "Verification review" : "Priority placement";
-        const money = type === "featured" ? "£49.00" : type === "verification" ? "£25.00" : "£39.00";
-        title.textContent = label;
-        amount.textContent = money;
-        modal.classList.add("active");
-      }
-
-      function attachCheckoutModalHandlers() {
-        const modal = document.getElementById("checkoutModal");
-        document.getElementById("closeCheckoutModal").addEventListener("click", () => modal.classList.remove("active"));
-        document.getElementById("payNowBtn").addEventListener("click", () => {
-          alert("This is a demo checkout flow. Replace with Stripe or real payment processing in production.");
-          modal.classList.remove("active");
-        });
-      }
-
-      function approveBusiness(id) {
-        const businesses = getBusinesses();
-        const index = businesses.findIndex((item) => item.id === id);
-        if (index >= 0) {
-          businesses[index].approved = true;
-          businesses[index].verified = true;
-          saveBusinesses(businesses);
-          renderAdminDashboard();
-          renderDirectory();
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        const steps = [...document.querySelectorAll('.form-step')];
+        const activeIndex = steps.findIndex((step) => step.classList.contains('is-active'));
+        if (activeIndex < steps.length - 1) {
+          steps[activeIndex].classList.remove('is-active');
+          steps[activeIndex + 1].classList.add('is-active');
         }
-      }
+      });
 
-      function rejectBusiness(id) {
-        const businesses = getBusinesses();
-        const index = businesses.findIndex((item) => item.id === id);
-        if (index >= 0) {
-          businesses[index].approved = false;
-          businesses[index].verified = false;
-          saveBusinesses(businesses);
-          renderAdminDashboard();
-          renderDirectory();
-        }
-      }
+      document.querySelector('.comment-submit').addEventListener('click', () => {
+        document.querySelector('.comment-submit').textContent = 'Comment posted';
+      });
 
-      function toggleBusinessApproval(id) {
-        const businesses = getBusinesses();
-        const index = businesses.findIndex((item) => item.id === id);
-        if (index >= 0) {
-          businesses[index].approved = !businesses[index].approved;
-          saveBusinesses(businesses);
-          renderAdminDashboard();
-          renderDirectory();
-        }
-      }
-
-      function toggleFeatured(id) {
-        const businesses = getBusinesses();
-        const index = businesses.findIndex((item) => item.id === id);
-        if (index >= 0) {
-          businesses[index].featured = !businesses[index].featured;
-          saveBusinesses(businesses);
-          renderAdminDashboard();
-          renderDirectory();
-        }
-      }
-
-      function toggleVerified(id) {
-        const businesses = getBusinesses();
-        const index = businesses.findIndex((item) => item.id === id);
-        if (index >= 0) {
-          businesses[index].verified = !businesses[index].verified;
-          saveBusinesses(businesses);
-          renderAdminDashboard();
-          renderDirectory();
-        }
-      }
-
-      function toggleLocationVisibility(id, checked) {
-        const businesses = getBusinesses();
-        const index = businesses.findIndex((item) => item.id === id);
-        if (index >= 0) {
-          businesses[index].showLocation = !!checked;
-          saveBusinesses(businesses);
-          renderAdminDashboard();
-          renderDirectory();
-        }
-      }
-
-      function approveReview(id) {
-        const reviews = getReviews();
-        const index = reviews.findIndex((item) => item.id === id);
-        if (index >= 0) {
-          reviews[index].approved = true;
-          reviews[index].status = "approved";
-          saveReviews(reviews);
-
-          const businesses = getBusinesses();
-          const business = businesses.find((item) => item.id === reviews[index].businessId);
-          if (business) {
-            const approvedReviews = reviews.filter((review) => review.businessId === business.id && review.approved);
-            const total = approvedReviews.reduce((sum, review) => sum + Number(review.rating), 0);
-            business.rating = approvedReviews.length ? Number((total / approvedReviews.length).toFixed(1)) : 0;
-            business.reviewCount = approvedReviews.length;
-            saveBusinesses(businesses);
+      document.querySelectorAll('.btn-primary[data-target="submit"]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (button.classList.contains('full-width')) {
+            document.getElementById('checkoutModal').classList.add('active');
           }
-
-          renderAdminDashboard();
-          renderDirectory();
-        }
-      }
-
-      function rejectReview(id) {
-        const reviews = getReviews();
-        saveReviews(reviews.filter((item) => item.id !== id));
-        renderAdminDashboard();
-      }
-
-      function exportData() {
-        const payload = {
-          businesses: getBusinesses(),
-          reviews: getReviews(),
-          verificationRequests: getVerificationRequests()
-        };
-        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "moon-muse-export.json";
-        link.click();
-        URL.revokeObjectURL(url);
-      }
-
-      function importData(file) {
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          try {
-            const data = JSON.parse(event.target.result);
-            if (data.businesses) saveBusinesses(data.businesses);
-            if (data.reviews) saveReviews(data.reviews);
-            if (data.verificationRequests) saveVerificationRequests(data.verificationRequests);
-            renderAdminDashboard();
-            renderDirectory();
-            alert("Import complete.");
-          } catch (error) {
-            alert("Import failed.");
-          }
-        };
-        reader.readAsText(file);
-      }
-
-      function initAdminPage() {
-        const adminDashboard = document.getElementById("adminDashboard");
-        const loginBox = document.getElementById("adminLoginBox");
-        if (!adminDashboard) return;
-
-        ensureAdminPassword();
-
-        const loginForm = document.getElementById("adminLoginForm");
-        loginForm.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const password = document.getElementById("adminPassword").value;
-          const expected = localStorage.getItem("moon_muse_admin_password") || "moonmuseadmin";
-          if (password === expected) {
-            setAdminLoggedIn(true);
-            loginBox.classList.add("hidden");
-            adminDashboard.classList.remove("hidden");
-            renderAdminDashboard();
-            return;
-          }
-          document.getElementById("loginStatus").textContent = "Incorrect password.";
-          document.getElementById("loginStatus").style.color = "#ff8a8a";
+          showView('submit');
         });
+      });
 
-        document.getElementById("logoutBtn").addEventListener("click", () => {
-          setAdminLoggedIn(false);
-          loginBox.classList.remove("hidden");
-          adminDashboard.classList.add("hidden");
-        });
+      document.getElementById('closeCheckout').addEventListener('click', () => {
+        document.getElementById('checkoutModal').classList.remove('active');
+      });
 
-        document.getElementById("exportDataBtn").addEventListener("click", exportData);
-        document.getElementById("importDataBtn").addEventListener("click", () => document.getElementById("importFileInput").click());
-        document.getElementById("importFileInput").addEventListener("change", (event) => importData(event.target.files[0]));
-
-        if (adminIsLoggedIn()) {
-          loginBox.classList.add("hidden");
-          adminDashboard.classList.remove("hidden");
-        }
-
-        renderAdminDashboard();
-      }
-
-      function init() {
-        initDefaultData();
-        bindNavButtons();
-        bindDirectoryFilters();
-        initSubmitBusinessForm();
-        initVerificationForm();
-        initBusinessSettingsForm();
-        initAdminPage();
-        renderDirectory();
-        attachCheckoutModalHandlers();
-        showSection("home");
-      }
-
-      document.addEventListener("DOMContentLoaded", init);
+      renderAuthState();
+      showView('home');
     </script>
   </body>
 </html>
