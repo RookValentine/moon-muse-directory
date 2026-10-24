@@ -2,20 +2,33 @@
 
 Moon & Muse is a creator-first directory concept for independent adult professionals and online creators. The repository is centered on a front-end prototype that demonstrates discovery, creator profiles, private favorites, token-based unlock flows, and a lightweight dashboard.
 
-## Active project
+## Repository structure
 
-The current working site lives in `index.html`.
+```text
+moon-muse-directory/
+├── .github/
+├── app/
+│   └── README.md
+├── archive/
+│   └── README.md
+├── docs/
+│   └── PROJECT_STRUCTURE.md
+├── .gitignore
+├── README.md
+├── index.html
+└── LICENSE (add before public release)
+```
 
-## Repository cleanup notes
+## Project folders
 
-- `index.html` is the active prototype and the canonical front-end entry point.
-- `V1` and `backend` were moved to the archive/legacy path conceptually and trimmed to short notices to reduce noise.
-- Backup chunks (`moon-backup-part-*.txt`) are archival artifacts and are no longer part of active development.
-- The project remains a prototype and should not be treated as a production system.
+- `app/` - active prototype work and app-level notes
+- `archive/` - historical or legacy snapshots kept for reference
+- `docs/` - project documentation and structural notes
+- `index.html` - current static prototype entry point
 
 ## Current status
 
-This repo is still a prototype, not a live marketplace. It is intended to explore UX, discovery flows, creator controls, and privacy-first directory design.
+This repo remains a prototype rather than a production marketplace. It is intended for UX exploration, privacy-first design, creator controls, and discovery flows.
 
 ## License
 
