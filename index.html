@@ -237,7 +237,9 @@
         background: rgba(220, 177, 255, 0.08);
         transform: translateX(1px);
       }
-      .menu-item.require-auth.hidden,
+      .menu-item.auth-required.hidden,
+      .menu-item.sidebar-logged-in-only.hidden,
+      .menu-item.sidebar-hidden-when-logged-in.hidden,
       .menu-item.profile-item.hidden,
       .menu-item.settings-item.hidden,
       .menu-cta.hidden {
@@ -756,6 +758,8 @@
 
       <div class="menu-body">
         <button class="menu-item" type="button" data-target="home">Home</button>
+        <button class="menu-item" type="button" data-target="directory">Directory</button>
+        <button class="menu-item sidebar-hidden-when-logged-in" type="button" data-target="pricing">Pricing</button>
         <button class="menu-item auth-required hidden" type="button" data-target="dashboard">Dashboard</button>
         <button class="menu-item auth-toggle" id="sidebarLoginButton" type="button">Login</button>
       </div>
@@ -1271,13 +1275,13 @@
       }
 
       function updateAuthVisibility() {
-        const requireAuth = document.querySelectorAll('.auth-required');
-        requireAuth.forEach(el => {
-          el.classList.toggle('hidden', !state.loggedIn);
+        const loggedInOnlyButtons = document.querySelectorAll('.auth-required, .sidebar-hidden-when-logged-in');
+        loggedInOnlyButtons.forEach(el => {
+          const hideWhenLoggedIn = el.classList.contains('sidebar-hidden-when-logged-in') || el.classList.contains('auth-required');
+          el.classList.toggle('hidden', state.loggedIn && hideWhenLoggedIn);
         });
 
-        const authToggles = document.querySelectorAll('.auth-toggle');
-        authToggles.forEach(el => {
+        document.querySelectorAll('.auth-toggle').forEach(el => {
           el.textContent = state.loggedIn ? 'Logout' : 'Login';
         });
       }
