@@ -836,7 +836,7 @@
               </div>
               <p class="muted">Perfect for new businesses getting listed quickly.</p>
               <ul class="price-features">
-                <li>✓ Basic profile
+                <li>✓ Basic profile</li>
                 <li>✓ Directory listing</li>
                 <li>✓ Public contact details</li>
                 <li>✓ Email inquiry form</li>
@@ -1433,17 +1433,25 @@
           </div>
 
           <div class="dashboard-box">
-            <form class="submission-form">
+            <form class="submission-form" id="loginForm">
+              <label>
+                Login as
+                <select id="loginRole">
+                  <option value="owner">Business owner</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </label>
               <label>
                 Email
-                <input type="email" value="owner@moonlighttarot.co" />
+                <input type="email" id="loginEmail" placeholder="you@example.com" required />
               </label>
               <label>
                 Password
-                <input type="password" value="password123" />
+                <input type="password" id="loginPassword" placeholder="Enter your password" required />
               </label>
+              <div class="form-status" id="loginError" aria-live="polite"></div>
               <div class="submit-actions">
-                <button class="btn btn-primary" type="button" id="loginAction">Login</button>
+                <button class="btn btn-primary" type="submit" id="loginAction">Login</button>
                 <button class="btn btn-secondary" type="button" data-target="home">Cancel</button>
               </div>
             </form>
@@ -1489,6 +1497,19 @@
         currentView: 'home'
       };
 
+      const validAccounts = {
+        owner: {
+          email: 'owner@moonlighttarot.co',
+          password: 'moonlight-owner-2026',
+          role: 'owner'
+        },
+        admin: {
+          email: 'admin@moonmuse.directory',
+          password: 'moonmuse-admin-2026',
+          role: 'admin'
+        }
+      };
+
       const viewIds = ['home', 'directory', 'pricing', 'submit', 'verify', 'profile', 'settings', 'dashboard', 'admin', 'login'];
 
       function showView(target) {
@@ -1518,12 +1539,12 @@
         });
       }
 
-      function setLoggedIn(mode) {
+      function setLoggedIn(role) {
         state.loggedIn = true;
-        state.businessOwner = mode === 'owner';
+        state.businessOwner = role === 'owner';
         renderAuthState();
-        if (mode === 'owner') showView('dashboard');
-        if (mode === 'admin') showView('admin');
+        if (role === 'owner') showView('dashboard');
+        if (role === 'admin') showView('admin');
       }
 
       document.querySelectorAll('[data-target]').forEach((button) => {
@@ -1567,8 +1588,26 @@
         button.addEventListener('click', () => showView(target));
       });
 
-      document.getElementById('loginAction').addEventListener('click', () => {
-        setLoggedIn('owner');
+      document.getElementById('loginForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const role = document.getElementById('loginRole').value;
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        const errorNode = document.getElementById('loginError');
+
+        const account = validAccounts[role];
+        if (!account) {
+          errorNode.textContent = 'Unknown account type.';
+          return;
+        }
+
+        if (email !== account.email || password !== account.password) {
+          errorNode.textContent = 'That email/password combination is not valid for this role.';
+          return;
+        }
+
+        errorNode.textContent = '';
+        setLoggedIn(role);
       });
 
       document.querySelector('.menu-toggle').addEventListener('click', () => {
