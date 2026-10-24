@@ -34,6 +34,7 @@
         background: radial-gradient(circle at top, rgba(143, 94, 224, 0.22), transparent 30%), var(--bg);
         color: var(--ink);
         line-height: 1.6;
+        overflow-x: hidden;
       }
 
       a { color: inherit; text-decoration: none; }
@@ -87,7 +88,9 @@
       .btn,
       .link-btn,
       .dashboard-btn,
-      .verify-link {
+      .verify-link,
+      .analytics-button,
+      .settings-button {
         transition: all 0.2s ease;
       }
       .nav-link {
@@ -155,7 +158,9 @@
       .nav-link:focus-visible,
       .dashboard-btn:focus-visible,
       .verify-link:focus-visible,
-      .login-submit:focus-visible {
+      .login-submit:focus-visible,
+      .analytics-button:focus-visible,
+      .settings-button:focus-visible {
         outline: 2px solid var(--primary-bright);
         outline-offset: 2px;
       }
@@ -232,8 +237,11 @@
         background: rgba(220, 177, 255, 0.08);
         transform: translateX(1px);
       }
-      .menu-item.profile-item {
-        background: rgba(220, 177, 255, 0.06);
+      .menu-item.require-auth.hidden,
+      .menu-item.profile-item.hidden,
+      .menu-item.settings-item.hidden,
+      .menu-cta.hidden {
+        display: none !important;
       }
 
       .menu-footer {
@@ -627,14 +635,7 @@
         border: 1px solid rgba(220,177,255,0.2);
         color: var(--primary-bright);
       }
-      .detail-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 10px;
-        color: var(--muted);
-      }
+      .detail-list,
       .stat-list {
         list-style: none;
         padding: 0;
@@ -644,7 +645,9 @@
         color: var(--muted);
       }
       .dashboard-btn,
-      .verify-link {
+      .verify-link,
+      .analytics-button,
+      .settings-button {
         border-radius: 12px;
         border: 1px solid var(--line);
         background: rgba(255,255,255,0.02);
@@ -654,10 +657,46 @@
         cursor: pointer;
       }
       .dashboard-btn.primary,
-      .verify-link.primary {
+      .verify-link.primary,
+      .analytics-button.primary,
+      .settings-button.primary {
         background: linear-gradient(135deg, var(--primary), var(--primary-deep));
         color: var(--bg-deep);
         border: none;
+      }
+
+      .dashboard-summary {
+        display: grid;
+        gap: 12px;
+      }
+      .dashboard-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .stat-box {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .stat-box strong {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--primary-bright);
+      }
+
+      .analytics-box {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+      }
+      .analytics-line {
+        height: 8px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--primary), var(--primary-deep));
+        margin-top: 10px;
       }
 
       @media (max-width: 980px) {
@@ -666,7 +705,8 @@
         .pricing-grid,
         .directory-grid,
         .form-grid,
-        .dashboard-grid {
+        .dashboard-grid,
+        .dashboard-stat-grid {
           grid-template-columns: 1fr;
         }
         .filter-bar {
@@ -716,12 +756,7 @@
 
       <div class="menu-body">
         <button class="menu-item" type="button" data-target="home">Home</button>
-        <button class="menu-item" type="button" data-target="directory">Directory</button>
-        <button class="menu-item" type="button" data-target="pricing">Pricing</button>
-        <button class="menu-item" type="button" data-target="submit">List your business</button>
-        <button class="menu-item profile-item require-auth hidden" type="button" data-target="profile">Profile</button>
-        <button class="menu-item require-auth hidden" type="button" data-target="dashboard">Dashboard</button>
-        <button class="menu-item" type="button" data-target="settings">Settings</button>
+        <button class="menu-item auth-required hidden" type="button" data-target="dashboard">Dashboard</button>
         <button class="menu-item auth-toggle" id="sidebarLoginButton" type="button">Login</button>
       </div>
 
@@ -733,14 +768,14 @@
     <div class="login-modal" id="loginModal" aria-modal="true" role="dialog">
       <div class="login-card">
         <h3>Login</h3>
-        <form class="login-form" id="loginForm">
+        <form class="login-form" id="loginForm" novalidate>
           <label>
             Email
-            <input type="email" id="loginEmail" required placeholder="you@example.com" />
+            <input type="email" id="loginEmail" placeholder="you@example.com" />
           </label>
           <label>
             Password
-            <input type="password" id="loginPassword" required placeholder="Your password" />
+            <input type="password" id="loginPassword" placeholder="Your password" />
           </label>
           <button class="login-submit" type="submit">Sign in</button>
           <div class="login-message" id="loginMessage"></div>
@@ -977,7 +1012,7 @@
             <h2>Complete your selected plan</h2>
           </div>
 
-          <form class="payment-form">
+          <form class="payment-form" id="paymentForm">
             <div class="payment-card">
               <div class="payment-summary">
                 <div id="paymentPlanLabel">Featured plan</div>
@@ -1005,8 +1040,7 @@
               </label>
 
               <div class="payment-actions">
-                <button class="btn btn-primary" type="submit">Pay now</button>
-                <button class="btn btn-secondary" type="button" data-target="submit">Back to listing</button>
+                <button class="btn btn-primary full-width" type="submit">Complete payment</button>
               </div>
             </div>
           </form>
@@ -1016,68 +1050,51 @@
       <section id="submit" class="view-panel">
         <div class="container section form-wrap">
           <div class="section-heading">
-            <p class="eyebrow">Join the directory</p>
-            <h2>List your business</h2>
+            <p class="eyebrow">List your business</p>
+            <h2>Tell us about your practice</h2>
           </div>
 
           <form class="submit-form" id="submitForm">
             <div class="form-grid">
               <div class="form-card">
-                <h3>Profile basics</h3>
-
                 <label>
                   Business name
-                  <input type="text" required />
+                  <input type="text" placeholder="Moon & Muse" required />
                 </label>
-
                 <label>
-                  Tagline
-                  <input type="text" placeholder="Short memorable summary" />
+                  Category
+                  <select required>
+                    <option value="">Choose category</option>
+                    <option>Tarot Reader</option>
+                    <option>Astrology</option>
+                    <option>Witchcraft</option>
+                    <option>Crystal Healing</option>
+                  </select>
                 </label>
-
                 <label>
-                  Bio
-                  <textarea rows="5" required></textarea>
+                  City
+                  <input type="text" placeholder="London" required />
                 </label>
               </div>
 
               <div class="form-card">
-                <h3>Contact & visibility</h3>
-
                 <label>
-                  Email
-                  <input type="email" required />
+                  Contact email
+                  <input type="email" placeholder="hello@moonmuse.com" required />
                 </label>
-
                 <label>
                   Website
-                  <input type="url" placeholder="https://..." />
+                  <input type="url" placeholder="https://example.com" />
                 </label>
-
                 <label>
-                  Instagram
-                  <input type="text" placeholder="@handle" />
-                </label>
-
-                <label>
-                  City
-                  <input type="text" placeholder="London" />
-                </label>
-
-                <label>
-                  Plan
-                  <select id="listingPlan">
-                    <option value="free">Free</option>
-                    <option value="featured">Featured (£39)</option>
-                    <option value="luxury">Luxury (£89)</option>
-                  </select>
+                  Bio
+                  <textarea rows="5" placeholder="Tell us about your services and experience." required></textarea>
                 </label>
               </div>
             </div>
 
             <div class="submit-actions">
-              <button class="btn btn-primary" type="submit">List business</button>
-              <button class="btn btn-secondary" type="button" data-target="directory">Cancel</button>
+              <button class="btn btn-primary" type="submit">Submit listing</button>
             </div>
           </form>
         </div>
@@ -1087,46 +1104,58 @@
         <div class="container section dashboard-wrap">
           <div class="section-heading">
             <p class="eyebrow">Dashboard</p>
-            <h2>Your business dashboard</h2>
+            <h2>Business performance</h2>
           </div>
 
           <div class="dashboard-grid">
             <div class="dashboard-card">
-              <h3>Profile overview</h3>
-              <ul class="stat-list">
-                <li>Business: Velvet Moon Tarot</li>
-                <li>Status: Featured</li>
-                <li>Location: London, United Kingdom</li>
-                <li>Email: hello@velvetmoontarot.com</li>
-              </ul>
+              <div class="dashboard-summary">
+                <h3>Overview</h3>
+                <div class="dashboard-stat-grid">
+                  <div class="stat-box">
+                    <span>Views</span>
+                    <strong>1.4k</strong>
+                  </div>
+                  <div class="stat-box">
+                    <span>Leads</span>
+                    <strong>83</strong>
+                  </div>
+                  <div class="stat-box">
+                    <span>Conversion</span>
+                    <strong>6.1%</strong>
+                  </div>
+                </div>
+              </div>
               <div class="dashboard-actions">
-                <button class="dashboard-btn primary" type="button" data-target="profile">View profile</button>
-                <button class="dashboard-btn" type="button" data-target="submit">Edit listing</button>
+                <button class="dashboard-btn primary" type="button" data-target="verification">Verification</button>
+                <button class="analytics-button" type="button">Analytics</button>
+                <button class="settings-button" type="button" data-target="settings">Settings</button>
               </div>
             </div>
 
             <div class="dashboard-card">
-              <h3>Verification</h3>
-              <ul class="stat-list">
-                <li>Review status: In progress</li>
-                <li>Documents: 2 of 3 uploaded</li>
-                <li>Next step: Business ownership confirmation</li>
-              </ul>
-              <div class="dashboard-actions">
-                <button class="verify-link primary" type="button" data-target="verification">Open verification</button>
+              <h3>Analytics</h3>
+              <div class="analytics-box">
+                <p class="muted">Profile reach</p>
+                <div class="analytics-line" style="width: 76%;"></div>
+                <p class="muted" style="margin-top: 12px;">Lead quality: strong</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="profile" class="view-panel">
+      <section id="settings" class="view-panel">
         <div class="container section profile-wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Settings</p>
+            <h2>Account controls</h2>
+          </div>
           <div class="profile-card">
             <div class="profile-header">
               <div>
-                <p class="eyebrow">Business profile</p>
-                <h2>Velvet Moon Tarot</h2>
+                <h3>Moon & Muse Studio</h3>
+                <p class="muted">Private practice profile</p>
               </div>
               <div class="profile-badges">
                 <span class="badge verified">Verified</span>
@@ -1135,15 +1164,44 @@
             </div>
 
             <ul class="detail-list">
-              <li>Specialty: Tarot readings, spiritual guidance, ritual support</li>
-              <li>Location: London, United Kingdom</li>
-              <li>Email: hello@velvetmoontarot.com</li>
-              <li>Availability: Tues–Sun, 11am–9pm</li>
+              <li>Email: hello@moonmuse.com</li>
+              <li>Category: Tarot Reader</li>
+              <li>Location: London, UK</li>
             </ul>
 
-            <div class="submit-actions">
-              <button class="btn btn-primary" type="button" data-target="dashboard">Back to dashboard</button>
-              <button class="btn btn-secondary" type="button" data-target="submit">Edit listing</button>
+            <div class="dashboard-actions">
+              <button class="settings-button primary" type="button">Save settings</button>
+              <button class="settings-button" type="button" data-target="dashboard">Back to dashboard</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile" class="view-panel">
+        <div class="container section profile-wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Profile</p>
+            <h2>Your public profile</h2>
+          </div>
+          <div class="profile-card">
+            <div class="profile-header">
+              <div>
+                <h3>Moon & Muse Studio</h3>
+                <p class="muted">Luxury tarot & intuitive guidance</p>
+              </div>
+              <div class="profile-badges">
+                <span class="badge verified">Verified</span>
+              </div>
+            </div>
+
+            <ul class="detail-list">
+              <li>Service area: London & online</li>
+              <li>Response time: within 2 hours</li>
+              <li>Languages: English</li>
+            </ul>
+
+            <div class="dashboard-actions">
+              <button class="dashboard-btn primary" type="button" data-target="dashboard">Go to dashboard</button>
             </div>
           </div>
         </div>
@@ -1151,101 +1209,94 @@
 
       <section id="verification" class="view-panel">
         <div class="container section verification-wrap">
-          <div class="verification-card">
-            <div class="section-heading">
-              <p class="eyebrow">Verification</p>
-              <h2>Confirm your business details</h2>
-            </div>
-
-            <form class="verification-form">
-              <label>
-                Business registration name
-                <input type="text" value="Velvet Moon Tarot" required />
-              </label>
-
-              <label>
-                Proof of business ownership
-                <textarea rows="4" placeholder="Upload or describe your documents"></textarea>
-              </label>
-
-              <label>
-                Review notes
-                <textarea rows="3" placeholder="Optional admin notes"></textarea>
-              </label>
-
-              <div class="dashboard-actions">
-                <button class="btn btn-primary" type="submit">Submit verification</button>
-                <button class="btn btn-secondary" type="button" data-target="dashboard">Return to dashboard</button>
-              </div>
-            </form>
+          <div class="section-heading">
+            <p class="eyebrow">Verification</p>
+            <h2>Verify your business</h2>
           </div>
+
+          <form class="verification-form" id="verificationForm">
+            <div class="verification-card">
+              <label>
+                Business registration number
+                <input type="text" placeholder="MR12345" required />
+              </label>
+              <label>
+                Supporting document
+                <input type="file" />
+              </label>
+              <button class="verify-link primary" type="submit">Submit verification</button>
+            </div>
+          </form>
         </div>
       </section>
     </main>
 
     <script>
-      const sidebarMenu = document.getElementById('sidebarMenu');
-      const sidebarOverlay = document.getElementById('sidebarOverlay');
-      const menuToggle = document.getElementById('menuToggle');
-      const closeSidebar = document.getElementById('closeSidebar');
-      const loginModal = document.getElementById('loginModal');
-      const loginForm = document.getElementById('loginForm');
-      const loginMessage = document.getElementById('loginMessage');
-      const loginEmail = document.getElementById('loginEmail');
-      const loginPassword = document.getElementById('loginPassword');
-      const loginButtons = document.querySelectorAll('.auth-toggle');
-      const requireAuthButtons = [...document.querySelectorAll('.require-auth')];
-      const viewPanels = [...document.querySelectorAll('.view-panel')];
-      const navButtons = [...document.querySelectorAll('[data-target]')];
-      const submitForm = document.getElementById('submitForm');
-      const listingPlanSelect = document.getElementById('listingPlan');
-      const paymentPlanLabel = document.getElementById('paymentPlanLabel');
-      const paymentAmount = document.getElementById('paymentAmount');
-      const paymentForm = document.querySelector('.payment-form');
-      const verificationForm = document.querySelector('.verification-form');
-
-      const planDetails = {
-        free: { label: 'Free plan', amount: '£0', active: false },
-        featured: { label: 'Featured plan', amount: '£39', active: true },
-        luxury: { label: 'Luxury plan', amount: '£89', active: true }
+      const state = {
+        loggedIn: false,
+        selectedPlan: 'featured',
+        paymentCompleted: false,
+        pendingListing: false
       };
 
-      const getStoredLoginState = () => localStorage.getItem('moonMuseLoggedIn') === 'true';
-      const getStoredSelectedPlan = () => localStorage.getItem('moonMuseSelectedPlan') || 'featured';
-      const getPaymentCompleteState = () => localStorage.getItem('moonMusePaymentComplete') === 'true';
-      const getStoredUser = () => JSON.parse(localStorage.getItem('moonMuseUser') || '{}');
+      const viewPanels = Array.from(document.querySelectorAll('.view-panel'));
+      const navButtons = Array.from(document.querySelectorAll('[data-target]'));
+      const loginModal = document.getElementById('loginModal');
+      const sidebarMenu = document.getElementById('sidebarMenu');
+      const sidebarOverlay = document.getElementById('sidebarOverlay');
+      const loginForm = document.getElementById('loginForm');
+      const loginEmail = document.getElementById('loginEmail');
+      const loginPassword = document.getElementById('loginPassword');
+      const loginMessage = document.getElementById('loginMessage');
+      const topLoginButton = document.getElementById('topLoginButton');
+      const sidebarLoginButton = document.getElementById('sidebarLoginButton');
+      const paymentForm = document.getElementById('paymentForm');
+      const submitForm = document.getElementById('submitForm');
+      const verificationForm = document.getElementById('verificationForm');
 
-      let isLoggedIn = getStoredLoginState();
-      let selectedPlan = getStoredSelectedPlan();
-
-      function setMenuState(open) {
-        sidebarMenu.classList.toggle('open', open);
-        sidebarOverlay.classList.toggle('open', open);
-        menuToggle.setAttribute('aria-expanded', String(open));
-      }
-
-      function showPanel(panelId) {
+      function setView(target) {
         viewPanels.forEach(panel => {
-          panel.classList.toggle('active', panel.id === panelId);
+          panel.classList.toggle('active', panel.id === target);
         });
       }
 
-      function syncSelectedPlanUI() {
-        if (!listingPlanSelect) return;
-        const validValue = ['free', 'featured', 'luxury'].includes(selectedPlan) ? selectedPlan : 'featured';
-        listingPlanSelect.value = validValue;
+      function toggleSidebar(open) {
+        sidebarMenu.classList.toggle('open', open);
+        sidebarOverlay.classList.toggle('open', open);
+        document.getElementById('menuToggle').setAttribute('aria-expanded', String(open));
+      }
 
-        if (paymentPlanLabel && paymentAmount) {
-          const currentPlan = planDetails[validValue] || planDetails.featured;
-          paymentPlanLabel.textContent = currentPlan.label;
-          paymentAmount.textContent = currentPlan.amount;
-        }
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      function updateAuthVisibility() {
+        const requireAuth = document.querySelectorAll('.auth-required');
+        requireAuth.forEach(el => {
+          el.classList.toggle('hidden', !state.loggedIn);
+        });
+
+        const authToggles = document.querySelectorAll('.auth-toggle');
+        authToggles.forEach(el => {
+          el.textContent = state.loggedIn ? 'Logout' : 'Login';
+        });
+      }
+
+      function logIn() {
+        state.loggedIn = true;
+        updateAuthVisibility();
+        setView('dashboard');
+        closeLoginModal();
+      }
+
+      function logOut() {
+        state.loggedIn = false;
+        updateAuthVisibility();
+        setView('home');
       }
 
       function openLoginModal() {
         loginModal.classList.add('open');
-        loginEmail.focus();
-        loginMessage.textContent = '';
       }
 
       function closeLoginModal() {
@@ -1254,159 +1305,140 @@
         loginMessage.textContent = '';
       }
 
-      function updateAuthUi() {
-        requireAuthButtons.forEach(button => {
-          button.classList.toggle('hidden', !isLoggedIn);
-        });
-
-        loginButtons.forEach(button => {
-          button.textContent = isLoggedIn ? 'Log out' : 'Login';
-        });
-      }
-
-      function goToPaidPlan(plan) {
-        selectedPlan = plan;
-        localStorage.setItem('moonMuseSelectedPlan', plan);
-        syncSelectedPlanUI();
-        showPanel('payment');
-      }
-
-      function handleAuthToggle() {
-        if (isLoggedIn) {
-          isLoggedIn = false;
-          localStorage.setItem('moonMuseLoggedIn', 'false');
-          showPanel('home');
-          updateAuthUi();
-          return;
-        }
-
-        openLoginModal();
-      }
-
-      menuToggle.addEventListener('click', () => {
-        const isOpen = sidebarMenu.classList.contains('open');
-        setMenuState(!isOpen);
-      });
-
-      closeSidebar.addEventListener('click', () => setMenuState(false));
-      sidebarOverlay.addEventListener('click', () => setMenuState(false));
-      loginModal.addEventListener('click', (event) => {
-        if (event.target === loginModal) closeLoginModal();
-      });
-
-      loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const email = loginEmail.value.trim();
-        const password = loginPassword.value.trim();
-
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          loginMessage.textContent = 'Please enter a valid email address.';
-          return;
-        }
-
-        if (!password || password.length < 6) {
-          loginMessage.textContent = 'Password must be at least 6 characters.';
-          return;
-        }
-
-        localStorage.setItem('moonMuseUser', JSON.stringify({ email, password }));
-        localStorage.setItem('moonMuseLoggedIn', 'true');
-        isLoggedIn = true;
-        updateAuthUi();
-        closeLoginModal();
-        showPanel('dashboard');
-      });
-
-      loginButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          if (button.classList.contains('auth-toggle')) {
-            handleAuthToggle();
-          }
-          setMenuState(false);
-        });
-      });
-
       navButtons.forEach(button => {
         button.addEventListener('click', () => {
           const target = button.dataset.target;
           if (!target) return;
 
           if (button.classList.contains('auth-toggle')) {
-            handleAuthToggle();
-          } else if (button.dataset.plan) {
-            goToPaidPlan(button.dataset.plan);
-          } else {
-            showPanel(target);
+            if (state.loggedIn) {
+              logOut();
+              return;
+            }
+            openLoginModal();
+            return;
           }
 
-          if (button.closest('.menu-panel')) {
-            setMenuState(false);
+          if (target === 'submit') {
+            if (!state.loggedIn) {
+              openLoginModal();
+              return;
+            }
           }
+
+          if (target === 'verification') {
+            if (!state.loggedIn) {
+              openLoginModal();
+              return;
+            }
+            setView('verification');
+            toggleSidebar(false);
+            return;
+          }
+
+          if (target === 'settings') {
+            if (!state.loggedIn) {
+              openLoginModal();
+              return;
+            }
+            setView('settings');
+            toggleSidebar(false);
+            return;
+          }
+
+          setView(target);
+          toggleSidebar(false);
         });
+      });
+
+      document.getElementById('menuToggle').addEventListener('click', () => {
+        const isOpen = sidebarMenu.classList.contains('open');
+        toggleSidebar(!isOpen);
+      });
+
+      document.getElementById('closeSidebar').addEventListener('click', () => toggleSidebar(false));
+      sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+
+      loginForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const email = loginEmail.value.trim();
+        const password = loginPassword.value;
+
+        if (!isValidEmail(email)) {
+          loginMessage.textContent = 'Please enter a valid email address.';
+          return;
+        }
+
+        if (!password || password.length < 6) {
+          loginMessage.textContent = 'Password must be present and at least 6 characters.';
+          return;
+        }
+
+        loginMessage.textContent = '';
+        logIn();
       });
 
       document.querySelectorAll('[data-plan]').forEach(button => {
         button.addEventListener('click', () => {
           const plan = button.dataset.plan;
+          state.selectedPlan = plan;
+          const labels = {
+            free: { label: 'Free plan', amount: '£0' },
+            featured: { label: 'Featured plan', amount: '£39' },
+            luxury: { label: 'Luxury plan', amount: '£89' }
+          };
+
+          document.getElementById('paymentPlanLabel').textContent = labels[plan].label;
+          document.getElementById('paymentAmount').textContent = labels[plan].amount;
+
           if (plan === 'free') {
-            selectedPlan = 'free';
-            localStorage.setItem('moonMuseSelectedPlan', 'free');
-            localStorage.setItem('moonMusePaymentComplete', 'false');
-            syncSelectedPlanUI();
-            showPanel('submit');
+            state.paymentCompleted = true;
+            setView('submit');
             return;
           }
-          goToPaidPlan(plan);
+
+          state.paymentCompleted = false;
+          setView('payment');
         });
       });
 
-      listingPlanSelect.addEventListener('change', event => {
-        selectedPlan = event.target.value;
-        localStorage.setItem('moonMuseSelectedPlan', selectedPlan);
-        syncSelectedPlanUI();
+      paymentForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        state.paymentCompleted = true;
+        setView('submit');
       });
 
-      submitForm.addEventListener('submit', event => {
+      submitForm.addEventListener('submit', (event) => {
         event.preventDefault();
-
-        const chosenPlan = listingPlanSelect.value;
-        if (chosenPlan !== 'free' && !getPaymentCompleteState()) {
-          selectedPlan = chosenPlan;
-          localStorage.setItem('moonMuseSelectedPlan', chosenPlan);
-          syncSelectedPlanUI();
-          showPanel('payment');
+        if (state.selectedPlan === 'free') {
+          state.pendingListing = true;
+          setView('dashboard');
           return;
         }
 
-        localStorage.setItem('moonMusePaymentComplete', 'true');
-        alert('Listing submitted successfully.');
-        showPanel('dashboard');
+        if (!state.paymentCompleted) {
+          setView('payment');
+          return;
+        }
+
+        state.pendingListing = true;
+        setView('dashboard');
       });
 
-      paymentForm.addEventListener('submit', event => {
+      verificationForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        localStorage.setItem('moonMusePaymentComplete', 'true');
-        showPanel('submit');
-        alert('Payment complete. Your listing can now be submitted.');
+        setView('dashboard');
       });
 
-      verificationForm.addEventListener('submit', event => {
-        event.preventDefault();
-        alert('Verification submitted for review.');
-        showPanel('dashboard');
-      });
-
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-          setMenuState(false);
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.classList.contains('login-modal')) {
           closeLoginModal();
         }
       });
 
-      updateAuthUi();
-      syncSelectedPlanUI();
-      showPanel('home');
+      updateAuthVisibility();
+      setView('home');
     </script>
   </body>
 </html>
