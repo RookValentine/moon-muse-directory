@@ -313,7 +313,8 @@
       .verify-form input, .verify-form textarea, .verify-form select,
       .submission-form input, .submission-form textarea, .submission-form select,
       .comment-box,
-      #leadForm input, #leadForm textarea, #reviewForm input, #reviewForm textarea, #reviewForm select {
+      #leadForm input, #leadForm textarea, #reviewForm input, #reviewForm textarea, #reviewForm select,
+      .login-card input, .login-card select {
         width: 100%;
         padding: 0.9rem 1rem;
         border-radius: 12px;
@@ -388,12 +389,12 @@
 
       .verify-shell, .form-page, .profile-page, .admin-page, .pricing-page, .dashboard-page { padding: 72px 0 80px; }
       .verify-layout { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 36px; align-items: start; }
-      .verify-copy, .verify-form-wrap, .profile-card, .admin-card, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel {
+      .verify-copy, .verify-form-wrap, .profile-card, .admin-card, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel, .login-card {
         background: rgba(20,21,29,0.95);
         border: 1px solid var(--line);
         box-shadow: var(--shadow);
       }
-      .verify-copy, .verify-form-wrap, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel { border-radius: 26px; }
+      .verify-copy, .verify-form-wrap, .dashboard-box, .business-modal-content, .pricing-card, .comment-card, .owner-panel, .login-card { border-radius: 26px; }
       .verify-copy { padding: 28px; }
       .info-box {
         background: rgba(220, 177, 255, 0.06);
@@ -408,7 +409,7 @@
       .verify-form { display: grid; gap: 18px; }
       .form-step { display: none; gap: 16px; }
       .form-step.is-active { display: grid; }
-      .verify-form label, .submission-form label { display: grid; gap: 8px; font-weight: 600; }
+      .verify-form label, .submission-form label, .login-card label { display: grid; gap: 8px; font-weight: 600; }
       .form-navigation { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; }
       .payment-box { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: rgba(255,255,255,0.02); }
       .form-status { min-height: 22px; font-size: 0.95rem; color: var(--muted); }
@@ -448,7 +449,7 @@
       .review { padding-top: 16px; border-top: 1px solid var(--line); margin-top: 16px; }
       .review:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
       .review-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-      #leadForm, #reviewForm, .submission-form { display: grid; gap: 14px; }
+      #leadForm, #reviewForm, .submission-form, .login-form { display: grid; gap: 14px; }
 
       .comment-card {
         padding: 22px;
@@ -461,6 +462,10 @@
         border-radius: 999px;
         padding: 0.7rem 1rem;
         cursor: pointer;
+      }
+      .compliment-btn.selected {
+        border-color: rgba(220,177,255,0.5);
+        background: rgba(220,177,255,0.09);
       }
       .comment-box {
         min-height: 110px;
@@ -622,8 +627,63 @@
       }
       .footer-links { display: flex; gap: 18px; }
 
+      .login-shell {
+        padding: 72px 0 80px;
+      }
+      .login-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 30px;
+        align-items: center;
+      }
+      .login-card {
+        padding: 28px;
+      }
+      .login-role-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .role-option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .role-option.active {
+        background: rgba(220,177,255,0.08);
+        border-color: rgba(220,177,255,0.3);
+      }
+      .role-option input {
+        display: none;
+      }
+      .login-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 8px 0 18px;
+      }
+      .link-btn-light {
+        background: none;
+        border: none;
+        color: var(--primary-bright);
+        cursor: pointer;
+        padding: 0;
+      }
+      .guest-btn {
+        margin-top: 10px;
+      }
+
       @media (max-width: 980px) {
-        .hero-inner, .verify-layout, .profile-layout, .admin-grid, .form-grid, .pricing-grid { grid-template-columns: 1fr; }
+        .hero-inner, .verify-layout, .profile-layout, .admin-grid, .form-grid, .pricing-grid, .login-layout { grid-template-columns: 1fr; }
         .feature-grid, .directory-grid { grid-template-columns: 1fr 1fr; }
         .filter-bar { grid-template-columns: 1fr 1fr; }
         .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -638,6 +698,7 @@
         .profile-header { flex-direction: column; align-items: flex-start; }
         .submit-actions { flex-direction: column; align-items: flex-start; }
         .feature-upgrade { flex-direction: column; align-items: flex-start; }
+        .login-role-row { grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -1426,35 +1487,62 @@
       </section>
 
       <section id="login" class="view-panel hidden">
-        <div class="container form-page">
-          <div class="page-intro narrow">
-            <p class="eyebrow">LOGIN</p>
-            <h1>Access your directory account</h1>
-          </div>
-
-          <div class="dashboard-box">
-            <form class="submission-form" id="loginForm">
-              <label>
-                Login as
-                <select id="loginRole">
-                  <option value="owner">Business owner</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </label>
-              <label>
-                Email
-                <input type="email" id="loginEmail" placeholder="you@example.com" required />
-              </label>
-              <label>
-                Password
-                <input type="password" id="loginPassword" placeholder="Enter your password" required />
-              </label>
-              <div class="form-status" id="loginError" aria-live="polite"></div>
-              <div class="submit-actions">
-                <button class="btn btn-primary" type="submit" id="loginAction">Login</button>
-                <button class="btn btn-secondary" type="button" data-target="home">Cancel</button>
+        <div class="container login-shell">
+          <div class="login-layout">
+            <div class="login-copy">
+              <p class="eyebrow">WELCOME BACK</p>
+              <h1>Access the Moon & Muse portal</h1>
+              <p class="subtext">
+                Sign in to manage your listing, review leads, or moderate the directory as an admin.
+              </p>
+              <div class="info-box">
+                <h3>Demo accounts</h3>
+                <p class="muted">Business owner: owner@moonlighttarot.co</p>
+                <p class="muted">Admin: admin@moonmuse.directory</p>
               </div>
-            </form>
+            </div>
+
+            <div class="login-card">
+              <form class="login-form" id="loginForm">
+                <div class="login-role-row" role="tablist" aria-label="Account role selector">
+                  <label class="role-option active" data-role-option="owner">
+                    <input type="radio" name="loginRole" value="owner" checked />
+                    <span>Business owner</span>
+                  </label>
+                  <label class="role-option" data-role-option="admin">
+                    <input type="radio" name="loginRole" value="admin" />
+                    <span>Admin</span>
+                  </label>
+                </div>
+
+                <label>
+                  Email
+                  <input type="email" id="loginEmail" placeholder="you@example.com" required />
+                </label>
+
+                <label>
+                  Password
+                  <input type="password" id="loginPassword" placeholder="Enter your password" required />
+                </label>
+
+                <div class="login-meta">
+                  <label class="checkbox-row" style="margin:0;">
+                    <input type="checkbox" id="rememberMe" />
+                    <span>Remember me</span>
+                  </label>
+                  <button type="button" class="link-btn-light" id="forgotPasswordBtn">Forgot password?</button>
+                </div>
+
+                <div class="form-status" id="loginError" aria-live="polite"></div>
+
+                <div class="submit-actions" style="padding-top:0;">
+                  <button class="btn btn-primary" type="submit" id="loginAction">Login</button>
+                  <button class="btn btn-secondary" type="button" data-target="home">Cancel</button>
+                </div>
+
+                <button class="btn btn-secondary guest-btn" type="button" id="guestLoginBtn">Continue as guest</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -1547,6 +1635,24 @@
         if (role === 'admin') showView('admin');
       }
 
+      function handleLogin(role, email, password) {
+        const account = validAccounts[role];
+        const errorNode = document.getElementById('loginError');
+
+        if (!account) {
+          errorNode.textContent = 'Unknown account type.';
+          return;
+        }
+
+        if (email !== account.email || password !== account.password) {
+          errorNode.textContent = 'That email/password combination is not valid for this role.';
+          return;
+        }
+
+        errorNode.textContent = '';
+        setLoggedIn(role);
+      }
+
       document.querySelectorAll('[data-target]').forEach((button) => {
         const target = button.getAttribute('data-target');
         if (target === 'login') {
@@ -1588,26 +1694,33 @@
         button.addEventListener('click', () => showView(target));
       });
 
+      document.querySelectorAll('.role-option').forEach((option) => {
+        option.addEventListener('click', () => {
+          document.querySelectorAll('.role-option').forEach((el) => el.classList.remove('active'));
+          option.classList.add('active');
+          const input = option.querySelector('input');
+          input.checked = true;
+          document.getElementById('loginError').textContent = '';
+        });
+      });
+
+      document.getElementById('forgotPasswordBtn').addEventListener('click', () => {
+        document.getElementById('loginError').textContent = 'Password reset links are available after you contact support.';
+      });
+
+      document.getElementById('guestLoginBtn').addEventListener('click', () => {
+        state.loggedIn = false;
+        state.businessOwner = false;
+        renderAuthState();
+        showView('home');
+      });
+
       document.getElementById('loginForm').addEventListener('submit', (event) => {
         event.preventDefault();
-        const role = document.getElementById('loginRole').value;
+        const role = document.querySelector('input[name="loginRole"]:checked').value;
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value;
-        const errorNode = document.getElementById('loginError');
-
-        const account = validAccounts[role];
-        if (!account) {
-          errorNode.textContent = 'Unknown account type.';
-          return;
-        }
-
-        if (email !== account.email || password !== account.password) {
-          errorNode.textContent = 'That email/password combination is not valid for this role.';
-          return;
-        }
-
-        errorNode.textContent = '';
-        setLoggedIn(role);
+        handleLogin(role, email, password);
       });
 
       document.querySelector('.menu-toggle').addEventListener('click', () => {
@@ -1628,7 +1741,6 @@
       document.querySelectorAll('.compliment-btn').forEach((button) => {
         button.addEventListener('click', () => {
           button.classList.toggle('selected');
-          button.style.borderColor = 'rgba(220,177,255,0.5)';
         });
       });
 
