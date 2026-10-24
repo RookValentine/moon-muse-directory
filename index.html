@@ -4,16 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Moon & Muse | Luxury Spiritual Directory</title>
-    <meta
-      name="description"
-      content="Luxury spiritual directory for tarot readers, witches, astrologers, and practitioners."
-    />
+    <meta name="description" content="Luxury spiritual directory for tarot readers, witches, astrologers, and practitioners." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
       :root {
         --bg: #0d0d12;
@@ -37,9 +31,7 @@
       body {
         margin: 0;
         font-family: "Inter", sans-serif;
-        background:
-          radial-gradient(circle at top, rgba(143, 94, 224, 0.22), transparent 30%),
-          var(--bg);
+        background: radial-gradient(circle at top, rgba(143, 94, 224, 0.22), transparent 30%), var(--bg);
         color: var(--ink);
         line-height: 1.6;
       }
@@ -78,6 +70,37 @@
         align-items: center;
         justify-content: space-between;
         min-height: 82px;
+        gap: 18px;
+      }
+      .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-left: auto;
+      }
+      .nav-link,
+      .menu-item,
+      .menu-cta,
+      .menu-close,
+      .menu-toggle,
+      .brand,
+      .btn,
+      .link-btn {
+        transition: all 0.2s ease;
+      }
+      .nav-link {
+        padding: 0.6rem 0.9rem;
+        border-radius: 12px;
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .nav-link:hover {
+        border-color: rgba(220, 177, 255, 0.2);
+        background: rgba(220, 177, 255, 0.04);
+        color: var(--ink);
       }
       .brand {
         display: inline-flex;
@@ -116,7 +139,7 @@
         justify-content: center;
         font-size: 1.6rem;
         cursor: pointer;
-        transition: all 0.2s ease;
+        margin-left: 8px;
       }
       .menu-toggle:hover {
         border-color: rgba(220, 177, 255, 0.4);
@@ -126,7 +149,8 @@
       .menu-item:focus-visible,
       .menu-cta:focus-visible,
       .brand:focus-visible,
-      .btn:focus-visible {
+      .btn:focus-visible,
+      .nav-link:focus-visible {
         outline: 2px solid var(--primary-bright);
         outline-offset: 2px;
       }
@@ -196,7 +220,6 @@
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s ease;
       }
       .menu-item:hover {
         border-color: rgba(220, 177, 255, 0.42);
@@ -211,8 +234,6 @@
         margin-top: auto;
         padding: 18px;
         border-top: 1px solid var(--line);
-        display: grid;
-        gap: 12px;
       }
       .menu-cta {
         width: 100%;
@@ -224,18 +245,11 @@
         justify-content: center;
         padding: 0.95rem 1.2rem;
         font-weight: 800;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
-      .menu-cta:hover { transform: translateY(-1px); }
       .menu-cta.primary {
         background: linear-gradient(135deg, var(--primary), var(--primary-deep));
         color: var(--bg-deep);
         box-shadow: var(--shadow);
-      }
-      .menu-cta.secondary {
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.02);
-        color: var(--ink);
       }
 
       main { min-height: 80vh; }
@@ -284,7 +298,6 @@
         padding: 0.95rem 1.35rem;
         cursor: pointer;
         font-weight: 700;
-        transition: transform 0.2s ease;
       }
       .btn:hover { transform: translateY(-1px); }
       .btn-primary {
@@ -341,7 +354,8 @@
       .pricing-card,
       .listing-card,
       .form-card,
-      .profile-card {
+      .profile-card,
+      .payment-card {
         background: var(--panel);
         border: 1px solid var(--line);
         border-radius: 22px;
@@ -385,7 +399,9 @@
       .filter-bar select,
       .submit-form input,
       .submit-form textarea,
-      .submit-form select {
+      .submit-form select,
+      .payment-form input,
+      .payment-form select {
         width: 100%;
         border-radius: 12px;
         border: 1px solid var(--line);
@@ -458,11 +474,13 @@
       }
 
       .form-wrap,
-      .profile-wrap {
+      .profile-wrap,
+      .payment-wrap {
         max-width: 960px;
         margin: 0 auto;
       }
-      .submit-form {
+      .submit-form,
+      .payment-form {
         display: grid;
         gap: 18px;
       }
@@ -471,21 +489,35 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 22px;
       }
-      .form-card {
+      .form-card,
+      .payment-card {
         padding: 22px;
         display: grid;
         gap: 16px;
       }
-      .submit-form label {
+      .submit-form label,
+      .payment-form label {
         display: grid;
         gap: 8px;
         font-weight: 600;
       }
-      .submit-actions {
+      .submit-actions,
+      .payment-actions {
         display: flex;
         gap: 14px;
         align-items: center;
         margin-top: 6px;
+      }
+
+      .payment-summary {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+      }
+      .amount {
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: var(--primary-bright);
       }
 
       .profile-card {
@@ -544,12 +576,12 @@
       }
 
       @media (max-width: 640px) {
-        .menu-footer { display: none; }
+        .nav-list { display: none; }
         .filter-bar { grid-template-columns: 1fr; }
         .cta-row { flex-direction: column; align-items: stretch; }
         .btn { width: 100%; }
         .profile-header { flex-direction: column; align-items: flex-start; }
-        .submit-actions { flex-direction: column; align-items: stretch; }
+        .submit-actions, .payment-actions { flex-direction: column; align-items: stretch; }
       }
     </style>
   </head>
@@ -560,6 +592,12 @@
           <span class="brand-mark">✦</span>
           <span>Moon & Muse</span>
         </button>
+
+        <nav class="nav-list" aria-label="Primary navigation">
+          <button class="nav-link" type="button" data-target="directory">Directory</button>
+          <button class="nav-link" type="button" data-target="pricing">Pricing</button>
+          <button class="nav-link auth-toggle" id="topLoginButton" type="button">Login</button>
+        </nav>
 
         <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
           ☰
@@ -587,12 +625,11 @@
         <button class="menu-item require-auth hidden" type="button" data-target="verify">Verification</button>
         <button class="menu-item require-auth hidden" type="button" data-target="admin">Admin</button>
         <button class="menu-item" type="button" data-target="settings">Settings</button>
-        <button class="menu-item auth-toggle" id="loginButton" type="button">Login</button>
+        <button class="menu-item auth-toggle" id="sidebarLoginButton" type="button">Login</button>
       </div>
 
       <div class="menu-footer">
         <button class="menu-cta primary" type="button" data-target="submit">Submit your business</button>
-        <button class="menu-cta secondary" type="button" data-target="directory">Browse Directory</button>
       </div>
     </aside>
 
@@ -782,7 +819,7 @@
                 <li>✓ Public contact details</li>
                 <li>✓ Email inquiry form</li>
               </ul>
-              <button class="btn btn-secondary full-width" type="button" data-target="submit">Get started</button>
+              <button class="btn btn-secondary full-width" type="button" data-plan="free">Get started</button>
             </article>
 
             <article class="pricing-card featured">
@@ -797,7 +834,7 @@
                 <li>✓ Priority ranking</li>
                 <li>✓ Verification badge</li>
               </ul>
-              <button class="btn btn-primary full-width" type="button" data-target="submit">Choose featured</button>
+              <button class="btn btn-primary full-width" type="button" data-plan="featured">Choose featured</button>
             </article>
 
             <article class="pricing-card">
@@ -812,9 +849,52 @@
                 <li>✓ Lead insights</li>
                 <li>✓ Top-of-page exposure</li>
               </ul>
-              <button class="btn btn-secondary full-width" type="button" data-target="submit">Upgrade</button>
+              <button class="btn btn-secondary full-width" type="button" data-plan="luxury">Upgrade</button>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section id="payment" class="view-panel">
+        <div class="container section payment-wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Secure checkout</p>
+            <h2>Complete your selected plan</h2>
+          </div>
+
+          <form class="payment-form">
+            <div class="payment-card">
+              <div class="payment-summary">
+                <div id="paymentPlanLabel">Featured plan</div>
+                <div class="amount" id="paymentAmount">£39</div>
+              </div>
+
+              <label>
+                Cardholder name
+                <input type="text" placeholder="Your full name" required />
+              </label>
+
+              <label>
+                Card number
+                <input type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" required />
+              </label>
+
+              <label>
+                Expiry date
+                <input type="text" placeholder="MM / YY" required />
+              </label>
+
+              <label>
+                CVC
+                <input type="text" inputmode="numeric" placeholder="123" required />
+              </label>
+
+              <div class="payment-actions">
+                <button class="btn btn-primary" type="submit">Pay now</button>
+                <button class="btn btn-secondary" type="button" data-target="submit">Back to listing</button>
+              </div>
+            </div>
+          </form>
         </div>
       </section>
 
@@ -825,7 +905,7 @@
             <h2>Submit your spiritual business</h2>
           </div>
 
-          <form class="submit-form">
+          <form class="submit-form" id="submitForm">
             <div class="form-grid">
               <div class="form-card">
                 <h3>Profile basics</h3>
@@ -867,6 +947,15 @@
                 <label>
                   City
                   <input type="text" placeholder="London" />
+                </label>
+
+                <label>
+                  Plan
+                  <select id="listingPlan">
+                    <option value="free">Free</option>
+                    <option value="featured">Featured (£39)</option>
+                    <option value="luxury">Luxury (£89)</option>
+                  </select>
                 </label>
               </div>
             </div>
@@ -914,13 +1003,28 @@
       const sidebarOverlay = document.getElementById('sidebarOverlay');
       const menuToggle = document.getElementById('menuToggle');
       const closeSidebar = document.getElementById('closeSidebar');
-      const loginButton = document.getElementById('loginButton');
+      const loginButtons = document.querySelectorAll('.auth-toggle');
       const requireAuthButtons = [...document.querySelectorAll('.require-auth')];
       const viewPanels = [...document.querySelectorAll('.view-panel')];
       const navButtons = [...document.querySelectorAll('[data-target]')];
+      const submitForm = document.getElementById('submitForm');
+      const listingPlanSelect = document.getElementById('listingPlan');
+      const paymentPlanLabel = document.getElementById('paymentPlanLabel');
+      const paymentAmount = document.getElementById('paymentAmount');
+      const paymentForm = document.querySelector('.payment-form');
+
+      const planDetails = {
+        free: { label: 'Free plan', amount: '£0', active: false },
+        featured: { label: 'Featured plan', amount: '£39', active: true },
+        luxury: { label: 'Luxury plan', amount: '£89', active: true }
+      };
 
       const getStoredLoginState = () => localStorage.getItem('moonMuseLoggedIn') === 'true';
+      const getStoredSelectedPlan = () => localStorage.getItem('moonMuseSelectedPlan') || 'free';
+      const getPaymentCompleteState = () => localStorage.getItem('moonMusePaymentComplete') === 'true';
+
       let isLoggedIn = getStoredLoginState();
+      let selectedPlan = getStoredSelectedPlan();
 
       function setMenuState(open) {
         sidebarMenu.classList.toggle('open', open);
@@ -934,16 +1038,42 @@
         });
       }
 
+      function syncSelectedPlanUI() {
+        if (!listingPlanSelect) return;
+        const validValue = ['free', 'featured', 'luxury'].includes(selectedPlan) ? selectedPlan : 'free';
+        listingPlanSelect.value = validValue;
+
+        if (paymentPlanLabel && paymentAmount) {
+          const currentPlan = planDetails[validValue] || planDetails.free;
+          paymentPlanLabel.textContent = currentPlan.label;
+          paymentAmount.textContent = currentPlan.amount;
+        }
+      }
+
       function updateAuthUi() {
         requireAuthButtons.forEach(button => {
           button.classList.toggle('hidden', !isLoggedIn);
         });
 
-        const loginLabel = isLoggedIn ? 'Log out' : 'Login';
-        loginButton.textContent = loginLabel;
+        loginButtons.forEach(button => {
+          button.textContent = isLoggedIn ? 'Log out' : 'Login';
+        });
+      }
+
+      function goToPaidPlan(plan) {
+        selectedPlan = plan;
+        localStorage.setItem('moonMuseSelectedPlan', plan);
+        syncSelectedPlanUI();
+        showPanel('payment');
+      }
+
+      function handleAuthToggle() {
+        isLoggedIn = !isLoggedIn;
+        localStorage.setItem('moonMuseLoggedIn', String(isLoggedIn));
+        updateAuthUi();
 
         if (!isLoggedIn) {
-          document.querySelector('.profile-item')?.classList.add('hidden');
+          showPanel('home');
         }
       }
 
@@ -955,27 +1085,76 @@
       closeSidebar.addEventListener('click', () => setMenuState(false));
       sidebarOverlay.addEventListener('click', () => setMenuState(false));
 
+      loginButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          handleAuthToggle();
+          setMenuState(false);
+        });
+      });
+
       navButtons.forEach(button => {
         button.addEventListener('click', () => {
           const target = button.dataset.target;
-          if (target) {
-            if (button.classList.contains('auth-toggle')) {
-              isLoggedIn = !isLoggedIn;
-              localStorage.setItem('moonMuseLoggedIn', String(isLoggedIn));
-              updateAuthUi();
+          if (!target) return;
 
-              if (!isLoggedIn && target === 'home') {
-                showPanel('home');
-              }
-            } else {
-              showPanel(target);
-            }
+          if (button.classList.contains('auth-toggle')) {
+            handleAuthToggle();
+          } else if (button.dataset.plan) {
+            goToPaidPlan(button.dataset.plan);
+          } else {
+            showPanel(target);
           }
 
           if (button.closest('.menu-panel')) {
             setMenuState(false);
           }
         });
+      });
+
+      document.querySelectorAll('[data-plan]').forEach(button => {
+        button.addEventListener('click', () => {
+          const plan = button.dataset.plan;
+          if (plan === 'free') {
+            selectedPlan = 'free';
+            localStorage.setItem('moonMuseSelectedPlan', 'free');
+            localStorage.setItem('moonMusePaymentComplete', 'false');
+            syncSelectedPlanUI();
+            showPanel('submit');
+            return;
+          }
+
+          goToPaidPlan(plan);
+        });
+      });
+
+      listingPlanSelect.addEventListener('change', event => {
+        selectedPlan = event.target.value;
+        localStorage.setItem('moonMuseSelectedPlan', selectedPlan);
+        syncSelectedPlanUI();
+      });
+
+      submitForm.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const chosenPlan = listingPlanSelect.value;
+        if (chosenPlan !== 'free' && !getPaymentCompleteState()) {
+          selectedPlan = chosenPlan;
+          localStorage.setItem('moonMuseSelectedPlan', chosenPlan);
+          syncSelectedPlanUI();
+          showPanel('payment');
+          return;
+        }
+
+        localStorage.setItem('moonMusePaymentComplete', 'true');
+        alert('Listing submitted successfully.');
+        showPanel('directory');
+      });
+
+      paymentForm.addEventListener('submit', event => {
+        event.preventDefault();
+        localStorage.setItem('moonMusePaymentComplete', 'true');
+        showPanel('submit');
+        alert('Payment complete. Your listing can now be submitted.');
       });
 
       document.addEventListener('keydown', event => {
@@ -985,6 +1164,7 @@
       });
 
       updateAuthUi();
+      syncSelectedPlanUI();
       showPanel('home');
     </script>
   </body>
